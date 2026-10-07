@@ -1,0 +1,7 @@
+name,value,source
+wait_over_300s_rate_proposed,0.059444444444444446,record_level_results.csv.gz
+wait_over_300s_rate_derived_threshold,0.004722222222222222,record_level_results.csv.gz
+severity_train_r2_mean,0.10379513381054509,experiment_manifest.json
+verizon_driving_p5_mbps,0.252,data/traces/provenance.json
+calibration_all_summary_error_rate,0.005600000000000001,PROTOCOL_contested_budget.md
+calibration_fixed_rule_error_rate,0.0044,PROTOCOL_contested_budget.md

@@ -1,0 +1,25 @@
+{
+  "item": "C",
+  "title": "Real-data budgeting with item A class handling",
+  "reviewer_items": ["R2.3"],
+  "conditions": ["normal", "low_bandwidth", "misaligned"],
+  "seeds": [0, 1, 2, 3, 4],
+  "methods": [
+    "Image only", "Transmit all", "Fixed rule", "Confidence gate",
+    "Random within budget", "Greedy by uncertainty", "Greedy, proposed utility",
+    "Proposed (exact knapsack)", "Fixed compression", "Text only"
+  ],
+  "reference_rotation0_current": {
+    "Image only": 420.0,
+    "Transmit all": 435.8,
+    "Fixed rule": 464.2,
+    "Confidence gate": 437.0,
+    "Random within budget": 462.0,
+    "Greedy by uncertainty": 466.8,
+    "Greedy, proposed utility": 447.0,
+    "Proposed (exact knapsack)": 447.0,
+    "Fixed compression": 483.0,
+    "Text only": 494.0
+  },
+  "notes": "Reference values are the normal-connectivity column of the revised manuscript's Table XIII. The current variant must reproduce them before the handled variant is interpreted."
+}

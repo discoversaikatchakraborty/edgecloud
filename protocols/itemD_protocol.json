@@ -1,0 +1,17 @@
+{
+  "item": "D",
+  "title": "Derived constant wait threshold on real data with constructed arrival delays",
+  "reviewer_items": ["R2.1"],
+  "late_fraction": 0.70,
+  "median_delay_s": 900.0,
+  "sigma_delay": 0.4,
+  "sigma_forecast": 0.4,
+  "draw_seed_base": 7000,
+  "seeds": [0, 1, 2, 3, 4],
+  "decision_rule": {
+    "latency": "Derived threshold p95 latency below Wait-if-uncertain p95 in all 7 rotations",
+    "min_rotations_errors_within": 5,
+    "errors": "Derived threshold error count within the paired 95% interval of the Proposed policy in at least 5 of 7 rotations"
+  },
+  "notes": "Delay family matches the synthetic delayed-imagery condition (70% late, median 900 s, forecast error sigma 0.4). sigma_delay is set equal to sigma_forecast because the manuscript did not record the synthetic delay spread separately; confirm against the package configuration and, if different, freeze a new protocol file rather than editing this one."
+}

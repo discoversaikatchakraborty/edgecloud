@@ -1,0 +1,146 @@
+{
+  "item": "E",
+  "title": "Twenty seeds on the five main synthetic conditions",
+  "reviewer_items": [
+    "R2.4"
+  ],
+  "seeds": [
+    101,
+    202,
+    303,
+    404,
+    505,
+    606,
+    707,
+    808,
+    909,
+    1010,
+    1111,
+    1212,
+    1313,
+    1414,
+    1515,
+    1616,
+    1717,
+    1818,
+    1919,
+    2020
+  ],
+  "conditions": {
+    "normal": {
+      "methods": [
+        "Proposed",
+        "Fixed rule",
+        "Transmit all"
+      ],
+      "reference_5seed_errors": {
+        "Proposed": 4.6,
+        "Fixed rule": 4.4,
+        "Transmit all": 4.4
+      },
+      "paired": [
+        [
+          "Proposed",
+          "Fixed rule"
+        ]
+      ]
+    },
+    "low_bandwidth": {
+      "methods": [
+        "Proposed",
+        "Fixed rule",
+        "Transmit all",
+        "Confidence gate",
+        "Fixed compression",
+        "Random within budget",
+        "Image only",
+        "Text only"
+      ],
+      "reference_5seed_errors": {
+        "Proposed": 4.4,
+        "Fixed rule": 4.2,
+        "Transmit all": 4.4
+      },
+      "paired": [
+        [
+          "Proposed",
+          "Fixed rule"
+        ]
+      ]
+    },
+    "delayed_imagery": {
+      "methods": [
+        "Proposed",
+        "Fixed rule",
+        "Transmit all",
+        "Wait if uncertain",
+        "Derived threshold",
+        "Confidence gate",
+        "Fixed compression",
+        "Random within budget"
+      ],
+      "reference_5seed_errors": {
+        "Proposed": 9.2,
+        "Fixed rule": 17.4,
+        "Transmit all": 15.2
+      },
+      "paired": [
+        [
+          "Proposed",
+          "Fixed rule"
+        ],
+        [
+          "Proposed",
+          "Wait if uncertain"
+        ],
+        [
+          "Proposed",
+          "Derived threshold"
+        ]
+      ]
+    },
+    "misaligned": {
+      "methods": [
+        "Proposed",
+        "Fixed rule",
+        "Transmit all",
+        "Fixed rule + admissibility"
+      ],
+      "reference_5seed_errors": {
+        "Proposed": 8.8,
+        "Fixed rule": 20.2,
+        "Transmit all": 18.6
+      },
+      "paired": [
+        [
+          "Proposed",
+          "Fixed rule"
+        ],
+        [
+          "Proposed",
+          "Fixed rule + admissibility"
+        ]
+      ]
+    },
+    "contradictory": {
+      "methods": [
+        "Proposed",
+        "Fixed rule",
+        "Transmit all"
+      ],
+      "reference_5seed_errors": {
+        "Proposed": 12.4,
+        "Fixed rule": 12.4,
+        "Transmit all": 13.0
+      },
+      "paired": [
+        [
+          "Proposed",
+          "Fixed rule"
+        ]
+      ]
+    }
+  },
+  "notes": "Reference values are from the revised manuscript's Table XV (original Table XVII). Seeds 0..4 must reproduce them to 0.05 before seeds 5..19 are interpreted. The generator and all configuration are unchanged; only the seed list grows.",
+  "seed_note": "The first five seeds are the package default that produced the published tables, so the reproduction gate compares like with like. The protocol as delivered listed 0 to 19, which is a different draw and would have failed the gate for that reason alone. Corrected before any run, with the original list recorded here: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]"
+}

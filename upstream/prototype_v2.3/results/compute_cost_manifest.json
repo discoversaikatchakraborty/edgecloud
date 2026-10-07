@@ -1,0 +1,38 @@
+{
+  "experiment": "measured edge-side decision cost",
+  "preregistered": false,
+  "exploratory": true,
+  "measures": "wall-clock time (best of 5) and peak Python allocation",
+  "does_not_measure": "energy; no power figure is inferred from these timings",
+  "host": {
+    "platform": "macOS-26.6.2-arm64-arm-64bit",
+    "machine": "arm64",
+    "processor": "arm",
+    "python": "3.12.14"
+  },
+  "budget_bytes": 1200,
+  "seeds": [
+    101,
+    202,
+    303,
+    404,
+    505
+  ],
+  "group_sizes": [
+    1,
+    2,
+    3,
+    4,
+    6,
+    8,
+    12
+  ],
+  "core_sha256": "1c129077a81be2a4dd454b220f0a67fe20955539931a05b087687f317d2df273",
+  "runner_sha256": "ac25a14251134ea4de0ace71293a5a8d2b9264b7ff5195e8130db5901339bbb8",
+  "runtime": {
+    "numpy": "2.4.4",
+    "pandas": "3.0.2",
+    "scikit-learn": "1.8.0",
+    "scipy": "1.17.1"
+  }
+}

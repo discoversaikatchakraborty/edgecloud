@@ -1,0 +1,39 @@
+cff-version: 1.2.0
+message: "If you use this software or its results, please cite the paper below."
+title: "EdgeCloud Emergency AI Prototype: evidence budgeting for edge AI under degraded connectivity"
+abstract: >-
+  Reference implementation, synthetic generator, real-data pipeline and frozen
+  result files for a validation study of evidence budgeting across concurrent
+  incident windows. Contains the nine-condition synthetic benchmark, the
+  adversarial-metadata sweeps, the packet-loss and measured-capacity experiments,
+  the decentralisation study, the compute-cost measurement, and the CrisisMMD
+  real-data comparison with its split-robustness rotations.
+type: software
+version: 2.6.17
+repository-code: "https://github.com/bdata-arindam/Edge"
+license:
+  - Apache-2.0        # the code; see LICENSE
+  - CC-BY-4.0        # the data and figures; see LICENSE-DATA
+authors:
+  - given-names: "[To be completed before deposit]"
+    family-names: "[To be completed before deposit]"
+    affiliation: "[To be completed before deposit]"
+keywords:
+  - edge AI
+  - degraded connectivity
+  - multimodal fusion
+  - evidence admissibility
+  - conformal prediction
+  - adversarial metadata
+  - real disaster data
+preferred-citation:
+  type: article
+  title: >-
+    Evidence budgeting for edge AI under degraded connectivity: a validation study
+    of adaptivity, admissibility, and adversarial metadata, on synthetic and real
+    disaster data
+  journal: "Ad Hoc Networks"
+  year: 2026
+  authors:
+    - given-names: "[To be completed before submission]"
+      family-names: "[To be completed before submission]"

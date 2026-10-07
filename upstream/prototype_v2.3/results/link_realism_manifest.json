@@ -1,0 +1,117 @@
+{
+  "experiment": "packet loss and measured-capacity replay",
+  "preregistered": false,
+  "exploratory": true,
+  "sweeps": {
+    "packet_loss_low_bandwidth": {
+      "base_scenario": {
+        "name": "low_bandwidth",
+        "bandwidth_bps": 256000,
+        "base_latency_s": 0.18,
+        "budget_bytes": 4000
+      },
+      "outputs": [
+        "link_loss_seed_level.csv",
+        "link_loss_summary.csv"
+      ]
+    },
+    "packet_loss_normal": {
+      "base_scenario": {
+        "name": "normal",
+        "bandwidth_bps": 10000000,
+        "base_latency_s": 0.04,
+        "budget_bytes": 360000
+      },
+      "outputs": [
+        "link_loss_normal_seed_level.csv",
+        "link_loss_normal_summary.csv"
+      ]
+    },
+    "measured_capacity_replay": {
+      "base_scenario": {
+        "name": "low_bandwidth",
+        "bandwidth_bps": 256000,
+        "base_latency_s": 0.18,
+        "budget_bytes": 4000
+      },
+      "outputs": [
+        "link_trace_seed_level.csv",
+        "link_trace_summary.csv"
+      ]
+    }
+  },
+  "loss_rates": [
+    0.0,
+    0.01,
+    0.02,
+    0.05,
+    0.1
+  ],
+  "traces": [
+    "Verizon-LTE-short.up",
+    "Verizon-LTE-driving.up",
+    "TMobile-LTE-driving.up"
+  ],
+  "methods": [
+    "cloud_transmit_all",
+    "fixed_confidence_gate",
+    "fixed_compression",
+    "fixed_rule",
+    "proposed"
+  ],
+  "seeds": [
+    101,
+    202,
+    303,
+    404,
+    505
+  ],
+  "mtu_bytes": 1500,
+  "retransmit_timeout_s": 0.2,
+  "trace_provenance": {
+    "description": "Measured cellular uplink capacity traces. Each line is a millisecond timestamp at which one 1500-byte MTU packet could be delivered.",
+    "source_repository": "https://github.com/ravinet/mahimahi (traces/)",
+    "obtained_from": "https://raw.githubusercontent.com/ravinet/mahimahi/master/traces/",
+    "cite": "R. Netravali, A. Sivaraman, S. Das, A. Goyal, K. Winstein, J. Mickens, H. Balakrishnan, Mahimahi: accurate record-and-replay for HTTP, in: Proc. USENIX ATC, 2015.",
+    "note": "These are third-party measurements, not produced by this work. They are replayed unmodified; only the starting offset into a trace varies by slot.",
+    "traces": {
+      "TMobile-LTE-driving.up": {
+        "sha256": "556620f1c11a61c7766678b08325ef4fc8d1bd774fbc98fb96854ae3d3795b61",
+        "packets": 762370,
+        "duration_s": 474.065,
+        "mean_mbps": 19.298,
+        "per_second_mbps_p5": 2.484,
+        "per_second_mbps_p50": 21.312,
+        "per_second_mbps_p95": 31.272
+      },
+      "Verizon-LTE-driving.up": {
+        "sha256": "669840f626966d7490a27629d4227eb2a866d40f104a6217c53b3f4b5a207d1f",
+        "packets": 708561,
+        "duration_s": 1363.23,
+        "mean_mbps": 6.237,
+        "per_second_mbps_p5": 0.252,
+        "per_second_mbps_p50": 6.48,
+        "per_second_mbps_p95": 12.36
+      },
+      "Verizon-LTE-short.up": {
+        "sha256": "f6cd9049f58d70f12545772a3482ded085b6d50f06a2f4ff4afcfb6fe7976dcc",
+        "packets": 69367,
+        "duration_s": 139.993,
+        "mean_mbps": 5.946,
+        "per_second_mbps_p5": 1.176,
+        "per_second_mbps_p50": 5.736,
+        "per_second_mbps_p95": 11.448
+      }
+    }
+  },
+  "config_sha256": "72a3420d4c734c2235e5a6693b46a2321692bb92b9b60298cc212b8641da646d",
+  "core_sha256": "1c129077a81be2a4dd454b220f0a67fe20955539931a05b087687f317d2df273",
+  "runner_sha256": "214f490f395b2f5ab90c6ca4c43e6e63f67ca3833f5eab0911ff5c1a923c1e1a",
+  "runtime": {
+    "python": "3.12.14",
+    "numpy": "2.4.4",
+    "pandas": "3.0.2",
+    "scikit-learn": "1.8.0",
+    "scipy": "1.17.1"
+  }
+}

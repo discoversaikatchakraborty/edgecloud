@@ -1,0 +1,66 @@
+{
+  "item": "A",
+  "revision": "rev1",
+  "title": "Text-pathway representation and class-imbalance diagnostic",
+  "reviewer_items": ["R2.3", "R1.2"],
+  "supersedes": "itemA_protocol.json",
+  "why_superseded": "The delivered protocol dropped the TF-IDF control with the note that raw text is not shipped and told the implementer to add it through the adapter if the corpus is available locally. It is available: the 3,526 derived records carry image_id and the CrisisMMD v2.0 annotation tables carry image_id and tweet_text, so the text is recoverable for every record. Rerun_Spec section A lists TF-IDF as one of four representations, so the delivered protocol could not have answered the question as specified. This file restores it and fixes the TF-IDF configuration before the run. It also records what the package edge model means when it is applied to a representation other than the shipped eight components, and it names the reference cell that reproduces the deployed edge text pathway exactly.",
+  "expected_n_rotation0": {"train": 2285, "cal": 273, "test": 968},
+  "expected_n_test_rotation0": 968,
+  "representation_source": {
+    "full_dimension": 512,
+    "encoder": "openai/clip-vit-base-patch32",
+    "note": "The shipped text_x0..text_x7 are a projection of the CLIP text embedding to eight components and are not invertible, so the full embedding was recomputed by scripts/build_full_text_embeddings.py through the text branch of the package's own prepare_crisismmd.py encode(). Refitting PCA to eight components on the training events reproduces the shipped columns at absolute correlation 1.0000 on all eight, which is the check that the recomputation is the same representation the paper used.",
+    "cache": "data/crisismmd_text_full.npz",
+    "cache_manifest": "data/crisismmd_text_full_manifest.json"
+  },
+  "representations": ["pca8", "pca32", "full", "tfidf"],
+  "class_handling": ["none", "class_weight", "resample"],
+  "classifiers": ["logreg", "package_edge"],
+  "seeds": [0, 1, 2, 3, 4],
+  "tfidf": {
+    "vectorizer": "sklearn.feature_extraction.text.TfidfVectorizer",
+    "params": {"sublinear_tf": true, "min_df": 2, "max_features": 20000,
+               "strip_accents": "unicode", "stop_words": "english",
+               "lowercase": true, "ngram_range": [1, 1]},
+    "fitted_on": "training rows of the rotation only",
+    "role": "control: the representation the first attempt at this workload used, which the manuscript reports as having failed"
+  },
+  "classifier_definitions": {
+    "logreg": "sklearn StandardScaler then LogisticRegression(max_iter=2000); with_mean=False scaling on the sparse TF-IDF arm so sparsity is preserved. This is the floor.",
+    "package_edge": "The package's own edge model, core.fit_models' local estimator: LogisticRegression(max_iter=700, C=0.75), no feature scaling. It is fitted on the whole representation it is handed, because in this grid the number of dimensions is the representation factor and holding the classifier to a fixed leading-4 truncation would make the representation factor inert for it and confound the two things this diagnostic separates."
+  },
+  "reference_cell": {
+    "representation": "pca8_local4",
+    "class_handling": "none",
+    "classifier": "package_edge_local4",
+    "definition": "The deployed edge text pathway exactly as core.fit_models builds it: the package edge estimator fitted on the leading LOCAL_DIMS['text'] = 4 of the eight shipped components, with no class handling.",
+    "role": "reported in the CSV as the paper's own configuration for comparison; excluded from best-cell selection so the frozen grid alone decides the best cell"
+  },
+  "fitting_discipline": "PCA, the TF-IDF vocabulary and the class weights are fitted on the training rows of each rotation only. No calibration or test row contributes to any fitted quantity.",
+  "rotations": {
+    "grid": [0],
+    "best_cell": [0, 1, 2, 3, 4, 5, 6],
+    "note": "The full grid runs on rotation 0; the best cell then runs on all seven, as Rerun_Spec section A states."
+  },
+  "best_cell_selection": "highest mean macro-F1 over the seed list on rotation 0, among the frozen grid cells",
+  "decision_rule": {
+    "min_accuracy_gain": 0.02,
+    "min_rotations_passing": 5,
+    "statement": "Text is 'informative under some tested representation' if the best cell on rotation 0 beats the majority baseline by more than 0.02 accuracy and has positive macro-F1 gain in at least 5 of 7 rotations.",
+    "as_implemented": "Per rotation, over the seed list, the best cell's mean accuracy gain over the majority baseline on the same records must exceed 0.02 and its mean macro-F1 gain over the majority classifier's macro-F1 must be positive. The outcome is true when at least 5 of the 7 rotations satisfy both."
+  },
+  "decision_rule_secondary": {
+    "statement": "Rerun_Spec section A words the rule as: any cell exceeds the majority baseline by more than 0.02 accuracy AND has macro-F1 above the majority classifier's macro-F1 in at least 5 of 7 rotations. Read that way the accuracy condition is a single rotation-0 test on the best cell and only the macro-F1 condition is counted across rotations.",
+    "role": "reported alongside the primary rule so neither reading is hidden; the primary rule decides"
+  },
+  "majority_baseline": "the most frequent class among the held-out records of that rotation, scored on the same records",
+  "reported_metrics": ["accuracy", "macro_f1", "per-class recall", "majority_accuracy", "majority_macro_f1", "n_classes_predicted"],
+  "outputs": {
+    "grid": "results/representation_diagnostics_rev1.csv",
+    "rotations": "results/representation_diagnostics_rev1_rotations.csv",
+    "decision": "results/itemA_decision_rev1.json",
+    "manifest": "results/itemA_manifest_rev1.json"
+  },
+  "reporting": "The outcome is reported whichever way it falls, as Rerun_Spec requires."
+}

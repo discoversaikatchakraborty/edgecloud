@@ -1,0 +1,63 @@
+{
+  "latency_rotations_passing": 7,
+  "error_rotations_within_interval": 1,
+  "threshold_carries_over": false,
+  "per_rotation": {
+    "0": {
+      "T_star": 178.36455718182953,
+      "latency_ok": true,
+      "errors_within_interval": true,
+      "thr_minus_proposed": 0.0,
+      "lo": 0.0,
+      "hi": 0.0
+    },
+    "1": {
+      "T_star": 180.04613984352187,
+      "latency_ok": true,
+      "errors_within_interval": false,
+      "thr_minus_proposed": -3.4,
+      "lo": -4.080087380658256,
+      "hi": -2.7199126193417444
+    },
+    "2": {
+      "T_star": 180.15741671599767,
+      "latency_ok": true,
+      "errors_within_interval": false,
+      "thr_minus_proposed": -1.0,
+      "lo": -1.0,
+      "hi": -1.0
+    },
+    "3": {
+      "T_star": 186.76048408272885,
+      "latency_ok": true,
+      "errors_within_interval": false,
+      "thr_minus_proposed": 3.2,
+      "lo": 1.581068215291297,
+      "hi": 4.818931784708703
+    },
+    "4": {
+      "T_star": 184.22285213433713,
+      "latency_ok": true,
+      "errors_within_interval": false,
+      "thr_minus_proposed": -3.0,
+      "lo": -3.0,
+      "hi": -3.0
+    },
+    "5": {
+      "T_star": 181.52847857019088,
+      "latency_ok": true,
+      "errors_within_interval": false,
+      "thr_minus_proposed": 4.0,
+      "lo": 4.0,
+      "hi": 4.0
+    },
+    "6": {
+      "T_star": 164.00723697588063,
+      "latency_ok": true,
+      "errors_within_interval": false,
+      "thr_minus_proposed": 8.8,
+      "lo": 8.244710978960441,
+      "hi": 9.35528902103956
+    }
+  }
+}

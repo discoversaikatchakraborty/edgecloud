@@ -1,0 +1,46 @@
+Creative Commons Attribution 4.0 International (CC BY 4.0)
+
+Copyright [year] [copyright holder — to be completed before deposit]
+
+The data in this package is licensed under the Creative Commons Attribution 4.0
+International License. The full legal code is at:
+
+    https://creativecommons.org/licenses/by/4.0/legalcode
+
+A human-readable summary is at:
+
+    https://creativecommons.org/licenses/by/4.0/
+
+You are free to share and adapt this material for any purpose, including
+commercially, provided you give appropriate credit, link to the licence, and
+indicate if changes were made.
+
+
+WHAT THIS COVERS
+
+  results/                      every result file, manifest and digest
+  data/crisismmd/records.csv.gz the derived CrisisMMD records
+  data/crisismmd/provenance.json
+  data/traces/                  the trace provenance and summary statistics
+  figures/, figures_realdata/, figures_submission/
+
+The code in this package is licensed separately under the Apache License 2.0; see
+LICENSE.
+
+
+WHAT THIS DOES NOT COVER, AND CANNOT
+
+  The CrisisMMD v2.0 corpus itself is NOT redistributed here and is NOT covered by
+  this licence. What this package ships is derived from it: eight- and
+  ten-component reductions of CLIP embeddings, byte counts, labels, hazard tags and
+  recovered arrival times. The posts and images themselves are not included.
+
+  CrisisMMD is obtained from its authors at
+  https://crisisnlp.qcri.org/data/crisismmd/ under their terms, and onward use of
+  anything derived from it remains subject to those terms and to the platform terms
+  governing the original posts, in addition to this licence. If those terms and this
+  licence conflict for some use, the corpus authors' terms govern that use.
+
+  data/traces/ contains summary statistics and provenance for measured LTE capacity
+  traces published by the Mahimahi project; the traces themselves are third-party
+  material under their own terms, recorded in data/traces/provenance.json.

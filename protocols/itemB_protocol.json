@@ -1,0 +1,15 @@
+{
+  "item": "B",
+  "title": "Established CrisisMMD task with a published baseline",
+  "reviewer_items": ["R2.3"],
+  "tasks": ["informative_vs_not", "humanitarian_category"],
+  "baseline_reference": "Ofli, Alam and Imran, ISCRAM 2020 (multimodal), with single-modality baselines from the same paper",
+  "official_split": "CrisisMMD v2.0 train/dev/test as released by the dataset authors",
+  "steps": [
+    "1. Reproduce the published single-modality and multimodal baseline numbers on the official split. Record the reproduction gap per task and modality.",
+    "2. Using the class handling chosen by item A, run the budgeting comparison (all methods of itemC_protocol.json) on each task under the three carried-over conditions.",
+    "3. Report both tasks; do not pick the one that favours the optimizer."
+  ],
+  "outputs": ["results/crisismmd_baseline_repro_rev1.csv", "results/crisismmd_humanitarian_rev1.csv", "results/crisismmd_informative_rev1.csv"],
+  "notes": "No runner script is supplied for item B because the official task labels and split files are not part of the shipped derived features; the adapter must load them from the corpus obtained from its authors. Freeze this protocol (its .sha256 sidecar) before any run."
+}

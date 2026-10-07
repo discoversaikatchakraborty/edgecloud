@@ -1,0 +1,16 @@
+{
+  "item": "A",
+  "title": "Text-pathway representation and class-imbalance diagnostic",
+  "reviewer_items": ["R2.3", "R1.2"],
+  "expected_n_test_rotation0": 968,
+  "representations": ["pca8", "pca32", "full"],
+  "class_handling": ["none", "class_weight", "resample"],
+  "classifiers": ["logreg", "package_edge"],
+  "seeds": [0, 1, 2, 3, 4],
+  "decision_rule": {
+    "min_accuracy_gain": 0.02,
+    "min_rotations_passing": 5,
+    "statement": "Text is 'informative under some tested representation' if the best cell on rotation 0 beats the majority baseline by more than 0.02 accuracy and has positive macro-F1 gain in at least 5 of 7 rotations."
+  },
+  "notes": "PCA is fitted on training rows of each rotation only. pca8 reproduces the paper's text pathway. TF-IDF control is omitted because raw text is not shipped; add it via the adapter if the corpus is available locally."
+}

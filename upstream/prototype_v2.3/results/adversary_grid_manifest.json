@@ -1,0 +1,45 @@
+{
+  "experiment": "metadata forgery crossed with content control",
+  "preregistered": false,
+  "exploratory": true,
+  "base_scenario": {
+    "name": "misaligned_evidence",
+    "bandwidth_bps": 2000000,
+    "base_latency_s": 0.1,
+    "budget_bytes": 24000,
+    "misaligned_text": 0.3,
+    "spoofed_metadata": 0.25
+  },
+  "spoof_rates": [
+    0.0,
+    0.25,
+    0.5,
+    1.0
+  ],
+  "hostile_rates": [
+    0.0,
+    0.35
+  ],
+  "methods": [
+    "fixed_rule",
+    "fixed_rule_admissible",
+    "proposed"
+  ],
+  "seeds": [
+    101,
+    202,
+    303,
+    404,
+    505
+  ],
+  "config_sha256": "72a3420d4c734c2235e5a6693b46a2321692bb92b9b60298cc212b8641da646d",
+  "core_sha256": "1c129077a81be2a4dd454b220f0a67fe20955539931a05b087687f317d2df273",
+  "runner_sha256": "2194ba825c0e56b30f07b3215059139c195191bb95bccad5953f92ca8d2bc161",
+  "runtime": {
+    "python": "3.12.14",
+    "numpy": "2.4.4",
+    "pandas": "3.0.2",
+    "scikit-learn": "1.8.0",
+    "scipy": "1.17.1"
+  }
+}

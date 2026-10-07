@@ -1,0 +1,78 @@
+The peer review reports:
+
+Review 1
+
+Relevance to the Conference Themes: Is the paper content appropriate for the ICCA conference themes?
+
+Highly Relevant (5)
+
+Content: How would you rate the quality of the technical/management content of the paper?
+
+Weak Accept (4)
+
+Standard of English: What about the English language of the paper?
+
+Very Good (4)
+
+References: Are the references adequate and correctly cited?
+
+Good (3)
+
+Over all score: Please give an overall score for this paper [10..100]:
+
+[70..80] (7)
+
+Recommendations for Authors: Do you recommend acceptance or rejection of this paper?
+
+Accept (4)
+
+Guidance: Please provide specific recommendations that you would like to suggest to the author for improving the paper.
+
+The paper addresses a relevant problem in edge AI and presents a thoughtful approach to evidence selection under limited communication resources. I particularly appreciated the comparison with simpler baselines that are given the same information as the proposed optimizer. The fact that the optimizer does not consistently outperform these baselines is reported openly, and the real-data experiment further shows that the result depends on the workload. This makes the evaluation more convincing.
+
+My main concern is the gap between the operational motivation and the actual validation. Most of the evaluation still relies on synthetic workloads or simulated communication conditions. Even with CrisisMMD, important parts of the setup, including the network conditions and some modality assumptions, remain simulated. There is no edge hardware or radio testbed, energy measurement, or field deployment. The paper acknowledges these limitations clearly, but the conclusions about practical deployment should remain within those boundaries.
+
+The real-data results also raise an interesting issue with the value function, since a modality can score well according to the proposed criteria while contributing little useful predictive information. I think this deserves more attention because it directly affects the evidence-selection strategy. The reproducibility effort is a strength, although the dataset DOI placeholder should be resolved before the final version. Overall, the paper provides useful technical insight and reports its negative results honestly, but validation on actual edge and communication hardware would significantly strengthen the work.
+
+Review 2
+
+Relevance to the Conference Themes: Is the paper content appropriate for the ICCA conference themes?
+
+Highly Relevant (5)
+
+Content: How would you rate the quality of the technical/management content of the paper?
+
+Accept (5)
+
+Standard of English: What about the English language of the paper?
+
+Good (3)
+
+References: Are the references adequate and correctly cited?
+
+Good (3)
+
+Over all score: Please give an overall score for this paper [10..100]:
+
+[50..60] (5)
+
+Recommendations for Authors: Do you recommend acceptance or rejection of this paper?
+
+Accept (4)
+
+Guidance: Please provide specific recommendations that you would like to suggest to the author for improving the paper.
+
+The paper frames the choice of which disaster evidence (image, text, sensor) to send over a degraded link as a multiple-choice knapsack shared across concurrent incidents. A latency term makes "wait for late evidence" an explicit decision, and an admissibility filter (location/time/hazard) is applied before fusion. The method is compared with simple rules that receive the same information, on nine synthetic conditions and a reduced CrisisMMD setup. On synthetic data, simple rules match or beat the optimizer everywhere. On real data, the optimizer leads the fixed rule in 15 of 21 comparisons, but a greedy heuristic gives identical allocations and image-only beats everything. The authors conclude that the value of the formulation lies in the quantities and threshold it identifies, not in the solver.
+
+The contribution is thin and unclear. By the paper's own results the optimizer adds nothing, and the remaining claim ("names the quantities and supplies the threshold") is modest. The threshold rule, the clearest positive result, is never tested on real data. The authors should state clearly what a reader gains beyond "use simple rules and test them on your own data."
+
+Key formulas are missing. The paper contains no equations for the utility, the knapsack objective or the closed-form delay threshold, even though the threshold is the central contribution. These must be given and derived in the paper.
+
+The real-data experiment is too weak to support conclusions. The text classifier predicts the majority class for every record, which suggests a pipeline or class-imbalance problem rather than "text carries no signal." CrisisMMD text is known to be informative for some tasks. In addition, 82% of the test set is one hurricane, severity is fixed, there is no sensor modality, and only 3 of 9 conditions carry over. The text pipeline should be fixed or justified, an established CrisisMMD task and baseline used, and class imbalance handled.
+
+Statistical weakness and post-hoc analyses. The synthetic data is very easy (below 1% error). Only five seeds and four test events are used, and many intervals include zero. Most of the later experiments were designed after the main results. The number of seeds should be increased and confirmatory claims kept separate from exploratory ones.
+
+The network model is abstract. Latency is modelled, with no real protocol stack, contention or edge hardware. Claims about edge deployment should be scaled back accordingly, or validated with an emulator or testbed.
+
+Presentation. The paper is very long and written as a narrative audit. It contains internal and draft text: references to an "earlier version" and to "this journal's readership," and the placeholder "[A dataset DOI ... to be added before submission]." It should be shortened substantially, the draft and audit text removed, and the results organised around a few clear claims.
+

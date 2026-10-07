@@ -1,0 +1,44 @@
+{
+  "protocol": "itemA_protocol_rev1.json",
+  "protocol_sha256": "d85db896ad1dc3135009d2a68801eb4a9983d7f8d7d9fdc2682b5c02a90a7e3c",
+  "started_utc": "2026-10-07T05:05:55Z",
+  "python": "3.12.14",
+  "numpy": "2.3.5",
+  "argv": [
+    "scripts/item_a_representation_diagnostics.py"
+  ],
+  "sklearn": "1.8.0",
+  "rotation0_sizes": {
+    "train": 2285,
+    "cal": 273,
+    "test": 968
+  },
+  "text_full_dimension": 512,
+  "text_embedding_cache_manifest": {
+    "encoder": "openai/clip-vit-base-patch32",
+    "source_records": "upstream/prototype_v2.3/data/crisismmd/records.csv.gz",
+    "source_records_sha256": "b3e96ca8ad854da867935a871f29ea67a4484d3fc79b3d170498c90364a39588",
+    "annotations_dir": "/Users/arlina/Downloads/all_projects/12_edgewait/data_real/ex/CrisisMMD_v2.0/annotations",
+    "rows": 3526,
+    "dimension": 512,
+    "text_truncation": "str(text)[:300] then CLIP truncation at max_length=77",
+    "pca8_check_abs_correlation_with_shipped": [
+      0.9999999999991248,
+      0.9999999999987415,
+      0.9999999999990041,
+      0.9999999999984721,
+      0.9999999999986117,
+      0.9999999999987381,
+      0.9999999999985537,
+      0.9999999999989866
+    ],
+    "pca8_retained_variance_train_fitted": 0.4447694467334642,
+    "output_sha256": "b5aacbd6b50ef7c0c448ac248a99ee2e70c32200e3619a5da7a5f78f8a903641"
+  },
+  "outputs": {
+    "grid": "results/representation_diagnostics_rev1.csv",
+    "rotations": "results/representation_diagnostics_rev1_rotations.csv",
+    "decision": "results/itemA_decision_rev1.json",
+    "manifest": "results/itemA_manifest_rev1.json"
+  }
+}

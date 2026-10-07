@@ -1,0 +1,11 @@
+{
+  "protocol": "itemE_protocol.json",
+  "protocol_sha256": "7dc76bee61b3ec8bcaa8a236b2215b513321bf704ffb7ce312afbc9a0f4eacea",
+  "started_utc": "2026-10-07T04:35:41Z",
+  "python": "3.12.14",
+  "numpy": "2.3.5",
+  "argv": [
+    "scripts/item_e_more_seeds.py"
+  ],
+  "sklearn": "1.8.0"
+}

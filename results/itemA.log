@@ -1,0 +1,617 @@
+[manifest] /Users/arlina/Downloads/all_projects/25_EDGECLOUD/results/itemA_manifest_rev1.json
+[split] rotation 0 train 2285 cal 273 test 968
+[text]  full embedding (3526, 512)
+rot0 pca8   none         logreg             acc=0.4897 (maj 0.4897) macroF1=0.2191 classes_pred=1 d=8
+rot0 pca8   none         package_edge       acc=0.4897 (maj 0.4897) macroF1=0.2191 classes_pred=1 d=8
+rot0 pca8   class_weight logreg             acc=0.4372 (maj 0.4897) macroF1=0.4122 classes_pred=3 d=8
+rot0 pca8   class_weight package_edge       acc=0.4370 (maj 0.4897) macroF1=0.4119 classes_pred=3 d=8
+rot0 pca8   resample     logreg             acc=0.4345 (maj 0.4897) macroF1=0.4048 classes_pred=3 d=8
+rot0 pca8   resample     package_edge       acc=0.4345 (maj 0.4897) macroF1=0.4048 classes_pred=3 d=8
+rot0 pca32  none         logreg             acc=0.5357 (maj 0.4897) macroF1=0.3484 classes_pred=3 d=32
+rot0 pca32  none         package_edge       acc=0.5357 (maj 0.4897) macroF1=0.3478 classes_pred=3 d=32
+rot0 pca32  class_weight logreg             acc=0.4564 (maj 0.4897) macroF1=0.4431 classes_pred=3 d=32
+rot0 pca32  class_weight package_edge       acc=0.4564 (maj 0.4897) macroF1=0.4432 classes_pred=3 d=32
+rot0 pca32  resample     logreg             acc=0.4587 (maj 0.4897) macroF1=0.4454 classes_pred=3 d=32
+rot0 pca32  resample     package_edge       acc=0.4583 (maj 0.4897) macroF1=0.4449 classes_pred=3 d=32
+rot0 full   none         logreg             acc=0.4917 (maj 0.4897) macroF1=0.4323 classes_pred=3 d=512
+rot0 full   none         package_edge       acc=0.5176 (maj 0.4897) macroF1=0.4131 classes_pred=3 d=512
+rot0 full   class_weight logreg             acc=0.4680 (maj 0.4897) macroF1=0.4389 classes_pred=3 d=512
+rot0 full   class_weight package_edge       acc=0.4700 (maj 0.4897) macroF1=0.4417 classes_pred=3 d=512
+rot0 full   resample     logreg             acc=0.4655 (maj 0.4897) macroF1=0.4354 classes_pred=3 d=512
+rot0 full   resample     package_edge       acc=0.4814 (maj 0.4897) macroF1=0.4520 classes_pred=3 d=512
+rot0 tfidf  none         logreg             acc=0.4287 (maj 0.4897) macroF1=0.3182 classes_pred=3 d=2140
+rot0 tfidf  none         package_edge       acc=0.4907 (maj 0.4897) macroF1=0.2274 classes_pred=2 d=2140
+rot0 tfidf  class_weight logreg             acc=0.4215 (maj 0.4897) macroF1=0.3344 classes_pred=3 d=2140
+rot0 tfidf  class_weight package_edge       acc=0.4287 (maj 0.4897) macroF1=0.3333 classes_pred=3 d=2140
+rot0 tfidf  resample     logreg             acc=0.4074 (maj 0.4897) macroF1=0.3363 classes_pred=3 d=2140
+rot0 tfidf  resample     package_edge       acc=0.4403 (maj 0.4897) macroF1=0.3243 classes_pred=3 d=2140
+rot0 pca8_local4 none         package_edge_local4 acc=0.4897 macroF1=0.2191 classes_pred=1   [paper's own configuration]
+[write] /Users/arlina/Downloads/all_projects/25_EDGECLOUD/results/representation_diagnostics_rev1.csv (125 rows)
+[best cell on rotation 0] ('full', 'resample', 'package_edge') mean macro-F1=0.4520
+[carried to all rotations] best cell ('full', 'resample', 'package_edge'); accuracy-condition candidates [('pca32', 'none', 'logreg'), ('pca32', 'none', 'package_edge'), ('full', 'none', 'package_edge')]
+rot0 full   resample     package_edge       acc=0.4814 (maj 0.4897) macroF1=0.4520 (maj 0.2191) n_test=968
+rot1 full   resample     package_edge       acc=0.5760 (maj 0.6704) macroF1=0.3529 (maj 0.2676) n_test=1065
+rot2 full   resample     package_edge       acc=0.4945 (maj 0.6072) macroF1=0.3193 (maj 0.2519) n_test=1754
+rot3 full   resample     package_edge       acc=0.6224 (maj 0.6992) macroF1=0.3798 (maj 0.2743) n_test=1393
+rot4 full   resample     package_edge       acc=0.7670 (maj 0.8646) macroF1=0.3497 (maj 0.3091) n_test=709
+rot5 full   resample     package_edge       acc=0.5048 (maj 0.7619) macroF1=0.3245 (maj 0.2883) n_test=273
+rot6 full   resample     package_edge       acc=0.4148 (maj 0.4225) macroF1=0.4023 (maj 0.1980) n_test=890
+rot0 pca32  none         logreg             acc=0.5357 (maj 0.4897) macroF1=0.3484 (maj 0.2191) n_test=968
+rot1 pca32  none         logreg             acc=0.6693 (maj 0.6704) macroF1=0.2708 (maj 0.2676) n_test=1065
+rot2 pca32  none         logreg             acc=0.6072 (maj 0.6072) macroF1=0.2519 (maj 0.2519) n_test=1754
+rot3 pca32  none         logreg             acc=0.6890 (maj 0.6992) macroF1=0.3382 (maj 0.2743) n_test=1393
+rot4 pca32  none         logreg             acc=0.8398 (maj 0.8646) macroF1=0.3472 (maj 0.3091) n_test=709
+rot5 pca32  none         logreg             acc=0.7619 (maj 0.7619) macroF1=0.2889 (maj 0.2883) n_test=273
+rot6 pca32  none         logreg             acc=0.4733 (maj 0.4225) macroF1=0.3499 (maj 0.1980) n_test=890
+rot0 pca32  none         package_edge       acc=0.5357 (maj 0.4897) macroF1=0.3478 (maj 0.2191) n_test=968
+rot1 pca32  none         package_edge       acc=0.6699 (maj 0.6704) macroF1=0.2709 (maj 0.2676) n_test=1065
+rot2 pca32  none         package_edge       acc=0.6072 (maj 0.6072) macroF1=0.2519 (maj 0.2519) n_test=1754
+rot3 pca32  none         package_edge       acc=0.6902 (maj 0.6992) macroF1=0.3384 (maj 0.2743) n_test=1393
+rot4 pca32  none         package_edge       acc=0.8415 (maj 0.8646) macroF1=0.3467 (maj 0.3091) n_test=709
+rot5 pca32  none         package_edge       acc=0.7619 (maj 0.7619) macroF1=0.2889 (maj 0.2883) n_test=273
+rot6 pca32  none         package_edge       acc=0.4721 (maj 0.4225) macroF1=0.3474 (maj 0.1980) n_test=890
+rot0 full   none         package_edge       acc=0.5176 (maj 0.4897) macroF1=0.4131 (maj 0.2191) n_test=968
+rot1 full   none         package_edge       acc=0.6300 (maj 0.6704) macroF1=0.3658 (maj 0.2676) n_test=1065
+rot2 full   none         package_edge       acc=0.5684 (maj 0.6072) macroF1=0.3222 (maj 0.2519) n_test=1754
+rot3 full   none         package_edge       acc=0.6454 (maj 0.6992) macroF1=0.3605 (maj 0.2743) n_test=1393
+rot4 full   none         package_edge       acc=0.7856 (maj 0.8646) macroF1=0.3480 (maj 0.3091) n_test=709
+rot5 full   none         package_edge       acc=0.5788 (maj 0.7619) macroF1=0.3007 (maj 0.2883) n_test=273
+rot6 full   none         package_edge       acc=0.4202 (maj 0.4225) macroF1=0.3676 (maj 0.1980) n_test=890
+[write] /Users/arlina/Downloads/all_projects/25_EDGECLOUD/results/representation_diagnostics_rev1_rotations.csv (140 rows)
+{
+  "protocol": "itemA_protocol_rev1.json",
+  "protocol_sha256": "d85db896ad1dc3135009d2a68801eb4a9983d7f8d7d9fdc2682b5c02a90a7e3c",
+  "best_cell": {
+    "representation": "full",
+    "class_handling": "resample",
+    "classifier": "package_edge",
+    "rotation0_mean_macro_f1": 0.451974679222757
+  },
+  "rotations_passing": 0,
+  "required": 5,
+  "text_informative_under_tested_representation": false,
+  "primary_rule": "Per rotation, over the seed list, the best cell's mean accuracy gain over the majority baseline on the same records must exceed 0.02 and its mean macro-F1 gain over the majority classifier's macro-F1 must be positive. The outcome is true when at least 5 of the 7 rotations satisfy both.",
+  "secondary_reading": {
+    "note": "Rerun_Spec section A words the rule as: any cell exceeds the majority baseline by more than 0.02 accuracy AND has macro-F1 above the majority classifier's macro-F1 in at least 5 of 7 rotations. Read that way the accuracy condition is a single rotation-0 test on the best cell and only the macro-F1 condition is counted across rotations.",
+    "cells_satisfying": [
+      "pca32|none|logreg",
+      "pca32|none|package_edge",
+      "full|none|package_edge"
+    ],
+    "outcome": true,
+    "best_cell_rotation0_accuracy_gain": -0.008264462809917328,
+    "best_cell_rotations_with_positive_macro_f1_gain": 7
+  },
+  "carried_cells": {
+    "full|resample|package_edge": {
+      "role": "best_cell",
+      "rotation0_accuracy_gain": -0.008264462809917328,
+      "rotation0_macro_f1": 0.451974679222757,
+      "rotations_passing_both_conditions": 0,
+      "rotations_with_positive_macro_f1_gain": 7,
+      "per_rotation": {
+        "0": {
+          "accuracy": 0.4814049586776859,
+          "majority_accuracy": 0.4896694214876033,
+          "accuracy_gain": -0.008264462809917328,
+          "macro_f1": 0.451974679222757,
+          "majority_macro_f1": 0.21914008321775313,
+          "macro_f1_gain": 0.23283459600500392,
+          "recall_class0": 0.5670886075949367,
+          "recall_class1": 0.3508333333333333,
+          "recall_class2": 0.4448818897637795,
+          "n_test": 968,
+          "n_classes_predicted": 3,
+          "pass": false
+        },
+        "1": {
+          "accuracy": 0.575962441314554,
+          "majority_accuracy": 0.6704225352112676,
+          "accuracy_gain": -0.09446009389671359,
+          "macro_f1": 0.35286417746170495,
+          "majority_macro_f1": 0.26756604834176506,
+          "macro_f1_gain": 0.08529812911993988,
+          "recall_class0": 0.754341736694678,
+          "recall_class1": 0.3038961038961039,
+          "recall_class2": 0.03833333333333333,
+          "n_test": 1065,
+          "n_classes_predicted": 3,
+          "pass": false
+        },
+        "2": {
+          "accuracy": 0.49452679589509696,
+          "majority_accuracy": 0.6071835803876853,
+          "accuracy_gain": -0.11265678449258834,
+          "macro_f1": 0.31928544074355586,
+          "majority_macro_f1": 0.25186236253990774,
+          "macro_f1_gain": 0.06742307820364814,
+          "recall_class0": 0.6662910798122066,
+          "recall_class1": 0.3135902636916835,
+          "recall_class2": 0.0163265306122449,
+          "n_test": 1754,
+          "n_classes_predicted": 3,
+          "pass": false
+        },
+        "3": {
+          "accuracy": 0.6223977027997128,
+          "majority_accuracy": 0.6992103374012921,
+          "accuracy_gain": -0.07681263460157928,
+          "macro_f1": 0.37981484231925566,
+          "majority_macro_f1": 0.27432755949866217,
+          "macro_f1_gain": 0.1054872828205935,
+          "recall_class0": 0.8180698151950718,
+          "recall_class1": 0.15246913580246915,
+          "recall_class2": 0.21894736842105264,
+          "n_test": 1393,
+          "n_classes_predicted": 3,
+          "pass": false
+        },
+        "4": {
+          "accuracy": 0.7669957686882933,
+          "majority_accuracy": 0.8645980253878702,
+          "accuracy_gain": -0.09760225669957687,
+          "macro_f1": 0.34972366971575947,
+          "majority_macro_f1": 0.3091275844679778,
+          "macro_f1_gain": 0.04059608524778171,
+          "recall_class0": 0.8730831973898857,
+          "recall_class1": 0.07894736842105263,
+          "recall_class2": 0.13,
+          "n_test": 709,
+          "n_classes_predicted": 3,
+          "pass": false
+        },
+        "5": {
+          "accuracy": 0.5047619047619047,
+          "majority_accuracy": 0.7619047619047619,
+          "accuracy_gain": -0.2571428571428571,
+          "macro_f1": 0.32451783350224395,
+          "majority_macro_f1": 0.2882882882882883,
+          "macro_f1_gain": 0.03622954521395562,
+          "recall_class0": 0.5846153846153845,
+          "recall_class1": 0.24727272727272726,
+          "recall_class2": 0.25999999999999995,
+          "n_test": 273,
+          "n_classes_predicted": 3,
+          "pass": false
+        },
+        "6": {
+          "accuracy": 0.4148314606741573,
+          "majority_accuracy": 0.42247191011235957,
+          "accuracy_gain": -0.007640449438202279,
+          "macro_f1": 0.40234918885454174,
+          "majority_macro_f1": 0.19799894681411268,
+          "macro_f1_gain": 0.20435024204042906,
+          "recall_class0": 0.48085106382978726,
+          "recall_class1": 0.2872586872586872,
+          "recall_class2": 0.4470588235294118,
+          "n_test": 890,
+          "n_classes_predicted": 3,
+          "pass": false
+        }
+      }
+    },
+    "pca32|none|logreg": {
+      "role": "accuracy_candidate",
+      "rotation0_accuracy_gain": 0.04607438016528931,
+      "rotation0_macro_f1": 0.3483616597065475,
+      "rotations_passing_both_conditions": 2,
+      "rotations_with_positive_macro_f1_gain": 6,
+      "per_rotation": {
+        "0": {
+          "accuracy": 0.5357438016528926,
+          "majority_accuracy": 0.4896694214876033,
+          "accuracy_gain": 0.04607438016528931,
+          "macro_f1": 0.3483616597065475,
+          "majority_macro_f1": 0.21914008321775313,
+          "macro_f1_gain": 0.12922157648879437,
+          "recall_class0": 0.9839662447257383,
+          "recall_class1": 0.11666666666666667,
+          "recall_class2": 0.09527559055118111,
+          "n_test": 968,
+          "n_classes_predicted": 3,
+          "pass": true
+        },
+        "1": {
+          "accuracy": 0.6692957746478874,
+          "majority_accuracy": 0.6704225352112676,
+          "accuracy_gain": -0.0011267605633802802,
+          "macro_f1": 0.2707917193786259,
+          "majority_macro_f1": 0.26756604834176506,
+          "macro_f1_gain": 0.0032256710368608887,
+          "recall_class0": 0.9969187675070028,
+          "recall_class1": 0.004329004329004329,
+          "recall_class2": 0.0,
+          "n_test": 1065,
+          "n_classes_predicted": 2,
+          "pass": false
+        },
+        "2": {
+          "accuracy": 0.6071835803876853,
+          "majority_accuracy": 0.6071835803876853,
+          "accuracy_gain": 0.0,
+          "macro_f1": 0.25186236253990774,
+          "majority_macro_f1": 0.25186236253990774,
+          "macro_f1_gain": 0.0,
+          "recall_class0": 1.0,
+          "recall_class1": 0.0,
+          "recall_class2": 0.0,
+          "n_test": 1754,
+          "n_classes_predicted": 1,
+          "pass": false
+        },
+        "3": {
+          "accuracy": 0.6890165111270639,
+          "majority_accuracy": 0.6992103374012921,
+          "accuracy_gain": -0.010193826274228223,
+          "macro_f1": 0.33818417219234886,
+          "majority_macro_f1": 0.27432755949866217,
+          "macro_f1_gain": 0.06385661269368667,
+          "recall_class0": 0.9523613963039015,
+          "recall_class1": 0.09012345679012344,
+          "recall_class2": 0.031578947368421054,
+          "n_test": 1393,
+          "n_classes_predicted": 3,
+          "pass": false
+        },
+        "4": {
+          "accuracy": 0.8397743300423132,
+          "majority_accuracy": 0.8645980253878702,
+          "accuracy_gain": -0.024823695345557083,
+          "macro_f1": 0.34722198285156336,
+          "majority_macro_f1": 0.3091275844679778,
+          "macro_f1_gain": 0.03809439838358555,
+          "recall_class0": 0.964437194127243,
+          "recall_class1": 0.042105263157894736,
+          "recall_class2": 0.05,
+          "n_test": 709,
+          "n_classes_predicted": 3,
+          "pass": false
+        },
+        "5": {
+          "accuracy": 0.7619047619047619,
+          "majority_accuracy": 0.7619047619047619,
+          "accuracy_gain": 0.0,
+          "macro_f1": 0.2888888888888889,
+          "majority_macro_f1": 0.2882882882882883,
+          "macro_f1_gain": 0.0006006006006006315,
+          "recall_class0": 1.0,
+          "recall_class1": 0.0,
+          "recall_class2": 0.0,
+          "n_test": 273,
+          "n_classes_predicted": 2,
+          "pass": false
+        },
+        "6": {
+          "accuracy": 0.47325842696629217,
+          "majority_accuracy": 0.42247191011235957,
+          "accuracy_gain": 0.05078651685393256,
+          "macro_f1": 0.34993467694807007,
+          "majority_macro_f1": 0.19799894681411268,
+          "macro_f1_gain": 0.1519357301339574,
+          "recall_class0": 0.9356382978723404,
+          "recall_class1": 0.10965250965250965,
+          "recall_class2": 0.1607843137254902,
+          "n_test": 890,
+          "n_classes_predicted": 3,
+          "pass": true
+        }
+      }
+    },
+    "pca32|none|package_edge": {
+      "role": "accuracy_candidate",
+      "rotation0_accuracy_gain": 0.04607438016528931,
+      "rotation0_macro_f1": 0.3477755606522909,
+      "rotations_passing_both_conditions": 2,
+      "rotations_with_positive_macro_f1_gain": 6,
+      "per_rotation": {
+        "0": {
+          "accuracy": 0.5357438016528926,
+          "majority_accuracy": 0.4896694214876033,
+          "accuracy_gain": 0.04607438016528931,
+          "macro_f1": 0.3477755606522909,
+          "majority_macro_f1": 0.21914008321775313,
+          "macro_f1_gain": 0.12863547743453782,
+          "recall_class0": 0.9843881856540084,
+          "recall_class1": 0.12166666666666667,
+          "recall_class2": 0.08976377952755907,
+          "n_test": 968,
+          "n_classes_predicted": 3,
+          "pass": true
+        },
+        "1": {
+          "accuracy": 0.6698591549295775,
+          "majority_accuracy": 0.6704225352112676,
+          "accuracy_gain": -0.0005633802816901401,
+          "macro_f1": 0.27093382705053903,
+          "majority_macro_f1": 0.26756604834176506,
+          "macro_f1_gain": 0.0033677787087740053,
+          "recall_class0": 0.9977591036414566,
+          "recall_class1": 0.004329004329004329,
+          "recall_class2": 0.0,
+          "n_test": 1065,
+          "n_classes_predicted": 2,
+          "pass": false
+        },
+        "2": {
+          "accuracy": 0.6071835803876853,
+          "majority_accuracy": 0.6071835803876853,
+          "accuracy_gain": 0.0,
+          "macro_f1": 0.25186236253990774,
+          "majority_macro_f1": 0.25186236253990774,
+          "macro_f1_gain": 0.0,
+          "recall_class0": 1.0,
+          "recall_class1": 0.0,
+          "recall_class2": 0.0,
+          "n_test": 1754,
+          "n_classes_predicted": 1,
+          "pass": false
+        },
+        "3": {
+          "accuracy": 0.690165111270639,
+          "majority_accuracy": 0.6992103374012921,
+          "accuracy_gain": -0.009045226130653217,
+          "macro_f1": 0.3383728216267917,
+          "majority_macro_f1": 0.27432755949866217,
+          "macro_f1_gain": 0.06404526212812958,
+          "recall_class0": 0.9542094455852157,
+          "recall_class1": 0.08950617283950617,
+          "recall_class2": 0.031578947368421054,
+          "n_test": 1393,
+          "n_classes_predicted": 3,
+          "pass": false
+        },
+        "4": {
+          "accuracy": 0.8414668547249647,
+          "majority_accuracy": 0.8645980253878702,
+          "accuracy_gain": -0.023131170662905466,
+          "macro_f1": 0.3467254840122843,
+          "majority_macro_f1": 0.3091275844679778,
+          "macro_f1_gain": 0.037597899544306514,
+          "recall_class0": 0.966721044045677,
+          "recall_class1": 0.039473684210526314,
+          "recall_class2": 0.05,
+          "n_test": 709,
+          "n_classes_predicted": 3,
+          "pass": false
+        },
+        "5": {
+          "accuracy": 0.7619047619047619,
+          "majority_accuracy": 0.7619047619047619,
+          "accuracy_gain": 0.0,
+          "macro_f1": 0.2888888888888889,
+          "majority_macro_f1": 0.2882882882882883,
+          "macro_f1_gain": 0.0006006006006006315,
+          "recall_class0": 1.0,
+          "recall_class1": 0.0,
+          "recall_class2": 0.0,
+          "n_test": 273,
+          "n_classes_predicted": 2,
+          "pass": false
+        },
+        "6": {
+          "accuracy": 0.47213483146067414,
+          "majority_accuracy": 0.42247191011235957,
+          "accuracy_gain": 0.049662921348314584,
+          "macro_f1": 0.34739718846281326,
+          "majority_macro_f1": 0.19799894681411268,
+          "macro_f1_gain": 0.1493982416487006,
+          "recall_class0": 0.9367021276595745,
+          "recall_class1": 0.11119691119691119,
+          "recall_class2": 0.15372549019607842,
+          "n_test": 890,
+          "n_classes_predicted": 3,
+          "pass": true
+        }
+      }
+    },
+    "full|none|package_edge": {
+      "role": "accuracy_candidate",
+      "rotation0_accuracy_gain": 0.02789256198347112,
+      "rotation0_macro_f1": 0.4130678160101661,
+      "rotations_passing_both_conditions": 1,
+      "rotations_with_positive_macro_f1_gain": 7,
+      "per_rotation": {
+        "0": {
+          "accuracy": 0.5175619834710744,
+          "majority_accuracy": 0.4896694214876033,
+          "accuracy_gain": 0.02789256198347112,
+          "macro_f1": 0.4130678160101661,
+          "majority_macro_f1": 0.21914008321775313,
+          "macro_f1_gain": 0.19392773279241304,
+          "recall_class0": 0.8270042194092827,
+          "recall_class1": 0.2375,
+          "recall_class2": 0.2047244094488189,
+          "n_test": 968,
+          "n_classes_predicted": 3,
+          "pass": true
+        },
+        "1": {
+          "accuracy": 0.6300469483568075,
+          "majority_accuracy": 0.6704225352112676,
+          "accuracy_gain": -0.04037558685446008,
+          "macro_f1": 0.36575447651406406,
+          "majority_macro_f1": 0.26756604834176506,
+          "macro_f1_gain": 0.098188428172299,
+          "recall_class0": 0.8529411764705882,
+          "recall_class1": 0.2554112554112554,
+          "recall_class2": 0.025,
+          "n_test": 1065,
+          "n_classes_predicted": 3,
+          "pass": false
+        },
+        "2": {
+          "accuracy": 0.5684150513112884,
+          "majority_accuracy": 0.6071835803876853,
+          "accuracy_gain": -0.03876852907639683,
+          "macro_f1": 0.3222043475238578,
+          "majority_macro_f1": 0.25186236253990774,
+          "macro_f1_gain": 0.07034198498395006,
+          "recall_class0": 0.8413145539906102,
+          "recall_class1": 0.204868154158215,
+          "recall_class2": 0.0,
+          "n_test": 1754,
+          "n_classes_predicted": 3,
+          "pass": false
+        },
+        "3": {
+          "accuracy": 0.6453697056712132,
+          "majority_accuracy": 0.6992103374012921,
+          "accuracy_gain": -0.053840631730078914,
+          "macro_f1": 0.36045433698343804,
+          "majority_macro_f1": 0.27432755949866217,
+          "macro_f1_gain": 0.08612677748477587,
+          "recall_class0": 0.8747433264887065,
+          "recall_class1": 0.10185185185185183,
+          "recall_class2": 0.14736842105263157,
+          "n_test": 1393,
+          "n_classes_predicted": 3,
+          "pass": false
+        },
+        "4": {
+          "accuracy": 0.7856135401974612,
+          "majority_accuracy": 0.8645980253878702,
+          "accuracy_gain": -0.07898448519040902,
+          "macro_f1": 0.3479842924541628,
+          "majority_macro_f1": 0.3091275844679778,
+          "macro_f1_gain": 0.03885670798618501,
+          "recall_class0": 0.8972267536704731,
+          "recall_class1": 0.05263157894736842,
+          "recall_class2": 0.15,
+          "n_test": 709,
+          "n_classes_predicted": 3,
+          "pass": false
+        },
+        "5": {
+          "accuracy": 0.5787545787545788,
+          "majority_accuracy": 0.7619047619047619,
+          "accuracy_gain": -0.18315018315018305,
+          "macro_f1": 0.3006948599036276,
+          "majority_macro_f1": 0.2882882882882883,
+          "macro_f1_gain": 0.012406571615339312,
+          "recall_class0": 0.7307692307692307,
+          "recall_class1": 0.09090909090909091,
+          "recall_class2": 0.1,
+          "n_test": 273,
+          "n_classes_predicted": 3,
+          "pass": false
+        },
+        "6": {
+          "accuracy": 0.4202247191011236,
+          "majority_accuracy": 0.42247191011235957,
+          "accuracy_gain": -0.002247191011235994,
+          "macro_f1": 0.3676361340908336,
+          "majority_macro_f1": 0.19799894681411268,
+          "macro_f1_gain": 0.16963718727672095,
+          "recall_class0": 0.6888297872340425,
+          "recall_class1": 0.2277992277992278,
+          "recall_class2": 0.21960784313725493,
+          "n_test": 890,
+          "n_classes_predicted": 3,
+          "pass": false
+        }
+      }
+    }
+  },
+  "per_rotation": {
+    "0": {
+      "accuracy": 0.4814049586776859,
+      "majority_accuracy": 0.4896694214876033,
+      "accuracy_gain": -0.008264462809917328,
+      "macro_f1": 0.451974679222757,
+      "majority_macro_f1": 0.21914008321775313,
+      "macro_f1_gain": 0.23283459600500392,
+      "recall_class0": 0.5670886075949367,
+      "recall_class1": 0.3508333333333333,
+      "recall_class2": 0.4448818897637795,
+      "n_test": 968,
+      "n_classes_predicted": 3,
+      "pass": false
+    },
+    "1": {
+      "accuracy": 0.575962441314554,
+      "majority_accuracy": 0.6704225352112676,
+      "accuracy_gain": -0.09446009389671359,
+      "macro_f1": 0.35286417746170495,
+      "majority_macro_f1": 0.26756604834176506,
+      "macro_f1_gain": 0.08529812911993988,
+      "recall_class0": 0.754341736694678,
+      "recall_class1": 0.3038961038961039,
+      "recall_class2": 0.03833333333333333,
+      "n_test": 1065,
+      "n_classes_predicted": 3,
+      "pass": false
+    },
+    "2": {
+      "accuracy": 0.49452679589509696,
+      "majority_accuracy": 0.6071835803876853,
+      "accuracy_gain": -0.11265678449258834,
+      "macro_f1": 0.31928544074355586,
+      "majority_macro_f1": 0.25186236253990774,
+      "macro_f1_gain": 0.06742307820364814,
+      "recall_class0": 0.6662910798122066,
+      "recall_class1": 0.3135902636916835,
+      "recall_class2": 0.0163265306122449,
+      "n_test": 1754,
+      "n_classes_predicted": 3,
+      "pass": false
+    },
+    "3": {
+      "accuracy": 0.6223977027997128,
+      "majority_accuracy": 0.6992103374012921,
+      "accuracy_gain": -0.07681263460157928,
+      "macro_f1": 0.37981484231925566,
+      "majority_macro_f1": 0.27432755949866217,
+      "macro_f1_gain": 0.1054872828205935,
+      "recall_class0": 0.8180698151950718,
+      "recall_class1": 0.15246913580246915,
+      "recall_class2": 0.21894736842105264,
+      "n_test": 1393,
+      "n_classes_predicted": 3,
+      "pass": false
+    },
+    "4": {
+      "accuracy": 0.7669957686882933,
+      "majority_accuracy": 0.8645980253878702,
+      "accuracy_gain": -0.09760225669957687,
+      "macro_f1": 0.34972366971575947,
+      "majority_macro_f1": 0.3091275844679778,
+      "macro_f1_gain": 0.04059608524778171,
+      "recall_class0": 0.8730831973898857,
+      "recall_class1": 0.07894736842105263,
+      "recall_class2": 0.13,
+      "n_test": 709,
+      "n_classes_predicted": 3,
+      "pass": false
+    },
+    "5": {
+      "accuracy": 0.5047619047619047,
+      "majority_accuracy": 0.7619047619047619,
+      "accuracy_gain": -0.2571428571428571,
+      "macro_f1": 0.32451783350224395,
+      "majority_macro_f1": 0.2882882882882883,
+      "macro_f1_gain": 0.03622954521395562,
+      "recall_class0": 0.5846153846153845,
+      "recall_class1": 0.24727272727272726,
+      "recall_class2": 0.25999999999999995,
+      "n_test": 273,
+      "n_classes_predicted": 3,
+      "pass": false
+    },
+    "6": {
+      "accuracy": 0.4148314606741573,
+      "majority_accuracy": 0.42247191011235957,
+      "accuracy_gain": -0.007640449438202279,
+      "macro_f1": 0.40234918885454174,
+      "majority_macro_f1": 0.19799894681411268,
+      "macro_f1_gain": 0.20435024204042906,
+      "recall_class0": 0.48085106382978726,
+      "recall_class1": 0.2872586872586872,
+      "recall_class2": 0.4470588235294118,
+      "n_test": 890,
+      "n_classes_predicted": 3,
+      "pass": false
+    }
+  }
+}
+
+MANUSCRIPT: update Section VIII-A, the abstract sentence on predictive signal, Section IX check 6 and the Conclusion from itemA_decision_rev1.json.

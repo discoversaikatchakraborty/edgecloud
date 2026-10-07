@@ -1,0 +1,668 @@
+\documentclass[conference,a4paper]{IEEEtran}
+\IEEEoverridecommandlockouts
+\usepackage{cite}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{xcolor}
+\usepackage{url}
+\usepackage[hidelinks]{hyperref}
+\usepackage{microtype}
+\def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+\newcommand{\authorcheck}[1]{\textcolor{red}{[AUTHOR CHECK: #1]}}
+\newtheorem{proposition}{Proposition}
+\newtheorem{remark}{Remark}
+
+\begin{document}
+
+\title{Evidence Budgeting for Edge AI under Degraded Connectivity: Information-Matched Validation of Adaptivity, Admissibility and Adversarial Metadata on Synthetic and Real Disaster Data}
+
+\author{
+\IEEEauthorblockN{Sambit Dhar}
+\IEEEauthorblockA{Independent Researcher\\Little Rock, United States\\sammy10692@gmail.com}
+\and
+\IEEEauthorblockN{Arindam Chakraborty}
+\IEEEauthorblockA{Independent Researcher\\Texas, United States\\arindamc.81@gmail.com}
+\and
+\IEEEauthorblockN{Soham Marik}
+\IEEEauthorblockA{Independent Researcher\\Texas, United States\\sohammarik63@gmail.com}
+\and
+\IEEEauthorblockN{Saikat Chakraborty}
+\IEEEauthorblockA{Independent Researcher\\Texas, United States\\discoversaikatchakraborty@gmail.com}
+\and
+\IEEEauthorblockN{Surajit Sinha}
+\IEEEauthorblockA{Independent Researcher\\Texas, United States\\surajitsinha1209@gmail.com}
+}
+
+\maketitle
+
+\begin{abstract}
+Edge AI on degraded field networks must decide what evidence to move and when to stop waiting. We formulate this as evidence budgeting across concurrent incident windows: a multiple-choice knapsack over a shared byte budget whose latency term prices transfer time together with the forecast delay of late evidence, so that waiting becomes an explicit decision with a closed-form threshold. Evidence is fused only when its location, time and hazard tag are admissible; each decision carries a conformal set and a provenance record. We compare the formulation against budget-matched simple rules that receive the same information, across nine synthetic conditions and a reduced CrisisMMD workload. On synthetic data a simple rule matched or beat the optimizer in every condition: a fixed rule under bandwidth limits (4.2 against 4.4 errors), a derived delay threshold that cut 95th-percentile latency from 1,565.0~s to 26.1~s and the admissibility filter rather than the optimizer under misaligned reports (9.4 against 20.2). Forged metadata erases that protection; a reused conformal threshold drops coverage from 0.883 to 0.745; measured LTE traces inflate tail latency by up to 8.7$\times$; six uncoordinated controllers cost the exact knapsack 20.0 errors against 3.9 for a greedy ranking. On real data the ranking reverses: across seven event splits the optimizer leads the fixed rule in 15 of 21 comparisons, while the exact solver and a greedy heuristic on the same utility return identical allocations and a single-modality rule beats both because one modality that scores well on every value-function term contributed no predictive signal under the tested representation. The contribution that survives both workloads is the formulation's role in naming the quantities that matter and supplying a threshold, rather than the solver.
+\end{abstract}
+
+\begin{IEEEkeywords}
+edge AI, degraded connectivity, multimodal fusion, evidence admissibility, conformal prediction, adversarial metadata, disaster data
+\end{IEEEkeywords}
+
+\section{Introduction}
+A flood, a wildfire or an earthquake produces satellite imagery, field photographs, public reports, weather measurements and infrastructure alarms inside the same hour and almost none of it arrives together. The image waits for the next satellite pass. The field report describes the neighbouring valley. The network that would carry the raw upload is the network the event has just damaged. A system that waits for everything can be accurate and useless at once, because the decision it supports was needed an hour ago.
+
+This is an edge problem before it is a machine learning problem: which evidence deserves the remaining bandwidth, whether a late observation is worth waiting for and whether a given report belongs to this incident at all. The three decisions are coupled: waiting for an image consumes the time in which other evidence ages and admitting a report from the wrong event corrupts the fusion the budget was spent to enable.
+
+This paper formulates the three decisions jointly and then measures whether the formulation earns its complexity. We treat the coupled problem as evidence budgeting across concurrent incident windows, solve it exactly and compare the resulting policy with the simple rules a practitioner would otherwise deploy. Those rules receive the same information as the optimizer: the same delay forecast, the same incident metadata and the same byte budget. Much of the apparent value of an adaptive method is the value of the information it is fed and the only way to separate the two is to give a simple rule the same information.
+
+The answer is not the one we set out to demonstrate. In every synthetic condition a simple rule derived from the formulation matched or beat the optimizer the formulation justifies. On real data the picture changes: against that same fixed rule the optimizer leads in 15 of 21 comparisons across seven event splits, while a single-modality baseline that the formulation would never suggest beats both on errors, for a reason no term in the formulation represents. We report each result, identify its mechanism and draw the consequence.
+
+\subsection{What a Reader Gains}
+Because the optimizer does not win, it is fair to ask what this paper offers beyond ``use simple rules and test them on your data''. We claim four things.
+\begin{enumerate}
+\item A formulation whose first-order condition, (\ref{eq:threshold}), is a closed-form delay threshold. Collapsing it to a constant estimated on calibration data gives a wait rule that needs no solver and that, in the delayed-imagery condition, cut tail latency from 1,565.0~s to 26.1~s at no accuracy cost relative to the policy. The threshold is the derivation the formulation contributes; it is not available from the simple rules alone.
+\item A recipe for deriving three candidate rules from the same quantities (a byte-profile fixed rule, the constant threshold and a greedy ranking with a summary floor) and an information-matched protocol for choosing among them on held-out events. Which rule wins changed between our two workloads; the derivation did not.
+\item Evidence about which assumptions fail: the split-conformal guarantee fails across operating conditions and, on real data, within a condition when calibration and test windows come from different disasters; the byte model is contradicted by measured payloads; the value function cannot detect a modality with no predictive signal.
+\item Two failure modes relevant to contested deployments: metadata admissibility degrades linearly to nothing as an adversary's forging capability grows and the exact knapsack loses far more than a greedy rule when controllers cannot coordinate.
+\end{enumerate}
+A reproducible package regenerates every table and figure from frozen result files. The system is restricted to analyst decision support; it does not dispatch, order evacuation or allocate aid.
+
+\section{Related Work and Positioning}
+\textbf{Multimodal disaster intelligence.} xBD supports building-damage assessment from pre- and post-event satellite imagery~\cite{xbd}. FloodNet and Sen1Floods11 support aerial and radar-based flood understanding~\cite{floodnet,sen1floods}. CrisisMMD provides paired text and images from seven natural disasters~\cite{crisismmd} and joint text--image representations improve humanitarian-category prediction~\cite{ofli2020}. These resources define what can be learned from disaster data. None defines what should be transmitted or withheld when the link degrades.
+
+\textbf{Edge--cloud collaboration.} Edge computing moves computation toward the data~\cite{shi2016,satya2017}, collaborative inference partitions it by device and network state~\cite{neurosurgeon} and communication-efficient edge AI treats transmission as a first-order constraint~\cite{shi2020}. Recent multimodal systems select what to transmit adaptively~\cite{dat,cst}; AVERY adapts the split and compression of a vision--language model on aerial vehicles to operator intent and bandwidth~\cite{avery}. These methods optimize a single stream or device; none allocates one budget across concurrent incidents, reasons about whether a late observation is worth waiting for or checks whether the evidence belongs to the incident being decided.
+
+\textbf{Uncertainty, abstention and trust.} Incomplete-modality learning addresses absent inputs~\cite{chen2023}; calibration makes probabilities interpretable~\cite{guo2017}, selective prediction adds a reject option~\cite{selectivenet} and split conformal prediction gives a marginal coverage guarantee under exchangeability~\cite{sadinle,romano} that does not survive distribution shift~\cite{ovadia}, which is why we calibrate per operating condition and measure what reuse costs.
+
+\textbf{What is and is not claimed.} No individual component is new; the combination is (one budget shared across incidents, an explicit wait-or-act decision, admissibility checked before valuation and a status mapping in which severity can raise priority but never confirm). Patent literature narrows the claim further: disaster-response systems reasoning over a disaster-chain knowledge base~\cite{patent1} and edge--cloud schemes combining evidential uncertainty, adaptive modality weights and temporal decay~\cite{patent2} predate this work, so we do not claim the first disaster-specific multimodal edge--cloud framework. The distinctive feature is methodological: the alternatives receive the same information and the outcome is reported when it goes against the proposed method.
+
+\section{System Model and Problem Formulation}
+\label{sec:model}
+Table~\ref{tab:notation} collects the notation.
+
+\begin{table}[t]
+\caption{Notation.}
+\label{tab:notation}
+\centering\footnotesize
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{@{}lp{6.3cm}@{}}
+\toprule
+Symbol & Definition \\
+\midrule
+$i$, $s$ & Incident window; slot of $K$ windows sharing budget and link. \\
+$m$ & Evidence modality: image, text or sensor. \\
+$p_{im}(y)$ & Calibrated class probabilities of the representation sent. \\
+$\hat s_i$ & Edge estimate of incident severity. \\
+$r_{im}$, $q_{im}$ & Estimated source reliability and input quality, in $[0,1]$. \\
+$f_{im}$ & Recency factor, $\exp(-\Delta t_{im}/\tau_m)$. \\
+$u_{im}$, $d_{im}$ & Local uncertainty and disagreement of item $(i,m)$. \\
+$C_{im}(a)$, $L_{im}(a)$ & Serialized byte cost and latency of action $a$. \\
+$\hat D_{im}$ & Forecast arrival delay of evidence not yet at the edge. \\
+$B$, $R$ & Per-window byte budget and link rate. \\
+$\lambda_b$, $\lambda_\ell$ & Byte-cost weight and latency penalty per second. \\
+$\hat{\mathcal C}(x)$, $\hat q$ & Conformal set and threshold at error level $\alpha$. \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Incident Windows and Admissible Evidence}
+An incident window $i$ has a grid cell $c_i$, a decision time $t_i$ and a hazard tag $h_i$. Each evidence item $m$ for that window carries its own cell, observation time and hazard tag and is admissible only when all three are compatible:
+\begin{equation}
+\label{eq:adm}
+\small
+\mathrm{adm}_{im} = \mathbb{1}\big[\|c_{im}-c_i\|_\infty\!\le\! 1\big]\,\mathbb{1}\big[|t_{im}-t_i|\!\le\!\tau^{\mathrm{adm}}_m\big]\,\mathbb{1}\big[h_{im}\!=\!h_i\big].
+\end{equation}
+An inadmissible item may only be held. In the reference configuration $\tau^{\mathrm{adm}}_m$ is 7,200~s for imagery, 1,800~s for text and 600~s for sensor data and the cell tolerance is one grid step. The rule reads metadata only and never touches labels. Missing evidence is represented explicitly and never imputed.
+
+\subsection{Actions, Objective and Why This Is a Knapsack}
+For each admissible item the policy chooses one action $a\in\mathcal A=\{\text{hold},\text{summary},\text{feature},\text{raw}\}$: a summary carries calibrated local probabilities and metadata, a feature carries a quantized embedding and raw carries the observation. Holding is not deletion; the item may remain in a local encrypted queue. The $K$ windows of a slot share one budget $KB$ and one link, so the slot policy solves
+\begin{align}
+\label{eq:knapsack}
+\max_{x}\ & \sum_{i\in s}\sum_{m}\sum_{a\in\mathcal A} x_{ima}\Big[v_{im}(a)-\lambda_b\tfrac{C_{im}(a)}{B}-\lambda_\ell L_{im}(a)\Big] \nonumber\\
+\text{s.t.}\ & \textstyle\sum_{a} x_{ima}=1\ \ \forall (i,m),\quad \sum_{i,m,a} x_{ima}\,C_{im}(a)\le KB, \nonumber\\
+& x_{ima}\in\{0,1\},\quad x_{im,\text{hold}}=1 \text{ if } \mathrm{adm}_{im}=0.
+\end{align}
+The latency of an action counts its transfer time on the shared link and, for an item not yet at the edge, its forecast arrival delay:
+\begin{equation}
+\label{eq:latency}
+L_{im}(a)=\frac{C_{im}(a)}{R}+\hat D_{im}\,\mathbb 1[(i,m)\ \text{pending}],\ \ L_{im}(\text{hold})=0.
+\end{equation}
+Queueing on the shared link is applied to every method at evaluation time and is not part of the per-item objective. Because each item contributes exactly one action and the slot shares a single budget, (\ref{eq:knapsack}) is a multiple-choice knapsack.
+
+Evidence value combines estimated severity, reliability, recency, an action-fidelity multiplier $\phi(a)$, local uncertainty, input quality and disagreement with the other admissible evidence:
+\begin{equation}
+\label{eq:value}
+v_{im}(a)=\phi(a)\,g\!\left(\hat s_i,\ r_{im},\ q_{im},\ f_{im},\ u_{im},\ d_{im}\right),
+\end{equation}
+where $\phi(\text{hold})=0<\phi(\text{summary})<\phi(\text{feature})<\phi(\text{raw})$ and $g$ is non-decreasing in each argument, with the exact functional form fixed in the reference implementation's configuration. \authorcheck{state the exact form of $g$ as implemented, including the weights or cite the configuration key; the manuscript text did not specify it.} The uncertainty term $u_{im}$ is a proxy for information gain rather than an estimate of it. For an image that has not yet arrived no local output exists, so $u_{im}$ borrows the uncertainty of the evidence already present, $q_{im}$ takes the prior mean and $d_{im}=0$. Disagreement is the Jensen--Shannon divergence between an item's local probabilities and the mean of the other admissible evidence in the window,
+\begin{equation}
+\label{eq:js}
+d_{im}=\mathrm{JS}\!\left(p_{im}\,\Big\|\,\tfrac{1}{|M_i|-1}\textstyle\sum_{m'\neq m}p_{im'}\right).
+\end{equation}
+
+\subsection{The Wait-or-Act Decision}
+\label{sec:wait}
+Because a pending item carries its forecast delay inside $L_{im}(a)$, waiting is not a heuristic bolted on beside the allocator. When the slot budget is not binding, (\ref{eq:knapsack}) separates by item and a non-hold action $a$ is selected for a pending item exactly when its net utility is positive:
+\begin{equation}
+v_{im}(a)-\lambda_b\frac{C_{im}(a)}{B}-\lambda_\ell\Big(\frac{C_{im}(a)}{R}+\hat D_{im}\Big)>0.
+\end{equation}
+Rearranging gives a threshold on the forecast delay,
+\begin{equation}
+\label{eq:threshold}
+\hat D_{im}<T_{im}(a)\ \equiv\ \frac{v_{im}(a)-\lambda_b\,C_{im}(a)/B}{\lambda_\ell}-\frac{C_{im}(a)}{R},
+\end{equation}
+and the policy waits for the item when $\max_{a\neq\text{hold}}T_{im}(a)>\hat D_{im}$. The threshold rises with severity, reliability and the uncertainty of the evidence already in hand, all of which enter through $v_{im}(a)$ and falls with byte cost and with $\lambda_\ell$. The coefficient $\lambda_\ell$ therefore states how many seconds of delay one unit of evidence value is worth and sweeping it traces an accuracy--latency frontier. When the budget binds, the knapsack trades waiting against other windows' needs. A decision that waits also ages the evidence it holds, which fusion accounts for through $f_{im}$.
+
+Collapsing the threshold to a constant gives a rule that needs no optimizer: for the image-summary action, take
+\begin{equation}
+\label{eq:tstar}
+T^\ast=\operatorname{median}\{\,T_{im}(\text{summary}): (i,m)\in\mathcal W_{\mathrm{cal}}\,\},
+\end{equation}
+over calibration windows $\mathcal W_{\mathrm{cal}}$ whose image is pending, fix $T^\ast$ before testing and wait for a late image only when $\hat D_{im}<T^\ast$. Across seeds $T^\ast$ was 196--219~s. Section~\ref{sec:delay} compares that rule with the policy it came from.
+
+\subsection{Properties}
+\begin{proposition}[Feasibility and exactness]
+Round each byte cost up to a multiple of $u=KB/2000$ and solve (\ref{eq:knapsack}) by dynamic programming over the rounded budget. Every returned allocation satisfies the true budget, because rounding up can only overstate cost and is optimal for the rounded problem. Each of the $3K$ items loses at most $u$ bytes of capacity to rounding, so the allocation is also optimal for the original problem whenever that problem has an optimum leaving at least $3Ku$ bytes unused, which is 0.9\% of the slot budget at $K=6$.
+\end{proposition}
+
+\begin{proposition}[Coverage within a condition]
+If calibration and test windows are exchangeable within an operating condition, the conformal set of (\ref{eq:conformal}) contains the true class with probability at least $1-\alpha$ for that condition~\cite{sadinle}. No guarantee is claimed across conditions; Section~\ref{sec:coverage} measures what is lost when one threshold is reused and Section~\ref{sec:real} shows the premise failing within a condition on real data, where calibration and test windows come from different disasters.
+\end{proposition}
+
+\begin{remark}[Severity cannot confirm]
+Severity appears only in the rule that routes a case to human review, never in the rule that assigns a confirmed status, so a severe but ambiguous case can be escalated but never confirmed. Severity is the quantity most likely to be correlated with operator anxiety and least likely to be well estimated.
+\end{remark}
+
+\section{Method}
+Each edge node runs a lightweight model producing class probabilities calibrated by temperature scaling on calibration events~\cite{guo2017}. The cloud holds one model per representation: a feature model trained only on the transmitted quantized embedding and a raw model trained on the full observation. No representation is scored with information it did not carry. Severity is estimated at the edge from the local probabilities of the admissible evidence already present.
+
+For each window the 64 action combinations over three modalities are enumerated with their utilities and byte costs; the dynamic program processes windows in turn with a back-pointer at every rounded budget level and the allocation is recovered by backtracking, at $O(K\cdot 64\cdot 2000)$ operations per slot. All-hold is permitted only for a window with no admissible evidence.
+
+Selected posteriors are combined by a weighted logarithmic opinion pool over normalized weights,
+\begin{equation}
+\label{eq:pool}
+p_i(y)\ \propto\ \prod_{m\in S_i} p_{im}(y)^{w_{im}},\qquad \sum_{m\in S_i} w_{im}=1,
+\end{equation}
+where $S_i$ is the set of items transmitted for window $i$. Because the weights are normalized, adding a corroborating modality changes the posterior through its content and not through the number of sources; corroboration is handled in the status rule instead. If a decision waits for an image, the evidence it holds ages by the waiting time before fusion.
+
+The fused posterior becomes a split-conformal set using the least-ambiguous set-valued classifier score~\cite{sadinle}:
+\begin{equation}
+\label{eq:conformal}
+\hat{\mathcal C}(x)=\{\,y: p_i(y)\ge\hat q\,\},
+\end{equation}
+where $\hat q$ is the $\lfloor \alpha(n_{\mathrm{cal}}+1)\rfloor$-th smallest true-class probability $p_j(y_j)$ over the $n_{\mathrm{cal}}$ calibration windows $j$ processed under the same operating condition. When $\hat q$ falls below 0.5 a set can contain at most one class, so a non-singleton set is empty: no class reaches the threshold and the method abstains. Table~\ref{tab:status} maps the set, the fused confidence and the conflict indicator to an operational status.
+
+\begin{table}[t]
+\caption{Operational statuses. Thresholds are configuration parameters, not learned quantities.}
+\label{tab:status}
+\centering\footnotesize
+\begin{tabular}{@{}p{1.6cm}p{2.9cm}p{3.0cm}@{}}
+\toprule
+Status & Rule & System behaviour \\
+\midrule
+Human review required & $\hat s\ge0.70$ and (set size $\ne1$ or conflict) & Escalate with reason codes. \\
+Insufficient evidence & Set size $\ne1$ & Withhold a categorical recommendation; queue to seek evidence. \\
+Conflicting & Maximum pairwise JS divergence $\ge0.15$ & Preserve competing evidence; queue. \\
+Confirmed & Singleton set, confidence $\ge0.90$, at least two modalities & Place high in the analyst queue; no autonomous dispatch. \\
+Likely & Singleton set otherwise & Monitor; present uncertainty. \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Every decision is written to a provenance envelope recording the window, event and slot identifiers, each item's metadata, admissibility, action, bytes, reason code and source digest, the model, policy and calibration versions, the probabilities, the conformal set, the status and the rule that fired, plus a digest of the envelope itself. Completeness is computed by checking those fields for every selected item. A digest links a decision to retained source data; it does not establish that the source is true.
+
+\section{Reference Implementation and Evaluation Protocol}
+\subsection{Implementation and Integrity Tests}
+The implementation is a set of deterministic Python modules called by the accompanying notebook. A configuration file fixes seeds, event splits, conditions, the byte model, recency scales, admissibility tolerances, policy coefficients and thresholds. Five integrity properties are tested rather than assumed: the transmission policy is unchanged when test labels and generating severities are permuted; budget-aware methods never exceed a slot budget; the admissibility rule never rejects aligned evidence; the fixed rule with admissibility never sends an inadmissible item; and the derived wait threshold is computed from calibration events only, is unchanged under label permutation and causes the rule to wait exactly for images whose forecast delay lies below it.
+
+\subsection{Workload and Network Model}
+\label{sec:workload}
+A synthetic generator creates three classes and image, text and sensor feature vectors for 12 event identities with 180 windows each, every event carrying a grid location and a hazard tag; edge models see a prefix of each vector, the raw cloud model all of it and the feature model a quantized principal-component embedding. Byte sizes are assumptions: summaries 184--224 bytes, features 768--2,048 bytes, raw images 220--620~kB, raw text 350--1,800 bytes and raw sensor records 220--900 bytes. Section~\ref{sec:real} measures these against real payloads and finds them wrong. Events D00--D05 train the models, D06--D07 calibrate them and D08--D11 are held out for testing, so no test event contributes to any fitted quantity. The severity estimator's mean training $R^2$ across seeds was 0.10, which is weak and is treated as such throughout.
+
+Connectivity is modelled rather than packet-emulated; this is the most important limitation to keep in view. Windows form slots of $K=6$ by decision time within an event. Each slot shares a budget of $KB$ bytes and one link, served in order of estimated severity, so queueing delay applies to every method including the unconstrained reference. In the delayed-imagery condition 70\% of images arrive after a log-normal delay with a 900~s median and the policy sees only a forecast with multiplicative log-normal error ($\sigma=0.4$). There is no MAC layer, routing or contention model in the base configuration; what it captures is the coupling between byte volume, a shared serving order and decision latency. Section~\ref{sec:link} relaxes two of those assumptions by adding loss with retransmission and capacity replayed from third-party measurements.
+
+\subsection{Questions, Methods and Conditions}
+The confirmatory evaluation (Section~\ref{sec:results}) asks whether adaptive selection beats simple budget-compliant rules when bandwidth is the only constraint, how the wait-or-act decision trades errors against latency, whether admissibility keeps misaligned evidence out of fusion, how calibration and the review queue behave across conditions and whether exact optimization beats simple allocation when the shared budget binds. The waiting and admissibility questions are each answered against a rule that receives the same information as the optimizer. Questions asked after those answers were in hand (metadata forgery, link realism, uncoordinated controllers and a measured workload) are reported as exploratory in Sections~\ref{sec:exploratory} and~\ref{sec:real}.
+
+Each seed provides 720 held-out test windows. We report the mean of five seeds with two-sided 95\% $t$ intervals and paired seed-level differences; these describe benchmark variability rather than population inference; with five seeds several include zero. The main protocol was not pre-registered. The information-matched baselines and the review-rule sensitivity analysis were added after an internal audit of the prototype; the wait threshold was fixed on calibration events and the review settings were left unchanged. The two contested-budget experiments of Section~\ref{sec:contested} were pre-registered with frozen protocol files whose SHA-256 digests are checked at run time. Tables~\ref{tab:methods} and~\ref{tab:conditions} list the methods and conditions.
+
+\begin{table}[t]
+\caption{Methods compared. The derived threshold and the fixed rule with admissibility exist to give a simple rule the same information the optimizer receives.}
+\label{tab:methods}
+\centering\footnotesize
+\setlength{\tabcolsep}{3pt}\begin{tabular}{@{}p{1.9cm}p{4.1cm}p{1.4cm}@{}}
+\toprule
+Method & Description & Budget \\
+\midrule
+Image only / text only & Local summary of one modality. & Compliant \\
+Transmit all & Raw evidence for every available modality. & Reference; ignores budget \\
+Confidence gate & Raw when local confidence $<0.72$, else summary; downgraded until the window fits. & Compliant \\
+Fixed compression & Feature for every available modality. & Compliant \\
+Fixed rule & Image summary, raw text, raw sensor. & Compliant \\
+Random within budget & Uniform choice among feasible action combinations. & Compliant \\
+Wait if uncertain & Fixed rule, but wait for a late image only if text--sensor confidence $<0.90$. & Compliant \\
+Derived threshold & Fixed rule, but wait only if forecast delay $<T^\ast$ of (\ref{eq:tstar}). & Compliant \\
+Fixed rule + admissibility & Fixed rule with the filter of (\ref{eq:adm}). & Compliant \\
+Proposed & Shared-budget knapsack (\ref{eq:knapsack}) with admissibility and forecast delay. & Compliant \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[t]
+\caption{Operating conditions.}
+\label{tab:conditions}
+\centering\footnotesize
+\begin{tabular}{@{}p{2.3cm}p{5.2cm}@{}}
+\toprule
+Condition & Manipulation \\
+\midrule
+Normal & 10~Mbps link; 360~kB per-window budget. \\
+Low bandwidth & 256~kbps; 4,000-byte per-window budget. \\
+Delayed imagery & 2~Mbps; 70\% of images late (median 900~s); forecast only. \\
+Intermittent outage & 512~kbps; 12~s interruption for 35\% of windows. \\
+Image / text missing & Remove all images / all text. \\
+Noisy text & Soften text probabilities for 35\% of windows; imperfect quality indicator. \\
+Contradictory evidence & Point text toward a wrong class for 35\% of windows; imperfect reliability indicator. \\
+Misaligned evidence & Replace 30\% of text items with reports from other events; 25\% of those carry compatible metadata. \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Among the general baselines only the proposed method applies the admissibility rule, so the whole-system comparison under misaligned evidence does not isolate it; the fixed rule with admissibility and the corresponding ablation do. Budget-compliant methods never exceeded a slot budget in any run and provenance completeness was 100\% for every method and condition.
+
+\section{Confirmatory Results on the Synthetic Benchmark}
+\label{sec:results}
+\subsection{When Bandwidth Is the Only Constraint, a Fixed Rule Is Enough}
+Table~\ref{tab:lowbw} gives the low-bandwidth condition. Among budget-compliant methods the policy and the fixed rule made statistically indistinguishable numbers of errors, a paired difference of $+0.2$ $[-2.8, 3.2]$. The policy spent 1,735 more bytes per window $[1{,}715, 1{,}755]$ and added 0.33~s to tail latency, buying image features that do not change the decision under this byte model. Transmit-all reaches 84.2~s at the tail because six windows share one link. The same pattern holds under normal connectivity, outages, missing modalities and noisy or contradictory text (Table~\ref{tab:allcond}). When no decision involves waiting or admissibility, the optimizer adds cost rather than value and Section~\ref{sec:link} shows that the cost grows once the link is modelled with loss and measured variability.
+
+\begin{table}[t]
+\caption{Low bandwidth (256~kbps, 4,000 bytes per window). Errors out of 720, mean of five seeds with 95\% intervals. *Ignores the budget.}
+\label{tab:lowbw}
+\centering\scriptsize\setlength{\tabcolsep}{3pt}
+\begin{tabular}{@{}lrrrr@{}}
+\toprule
+Method & Errors [95\% CI] & Bytes & p95 s & Queue \\
+\midrule
+Image only & 51.8 [38.8, 64.8] & 224 & 0.27 & 5\% \\
+Text only & 87.4 [52.1, 122.7] & 196 & 0.26 & 6\% \\
+Transmit all* & 4.4 [2.3, 6.5] & 422,797 & 84.25 & 31\% \\
+Confidence gate & 5.4 [3.5, 7.3] & 977 & 0.45 & 28\% \\
+Fixed compression & 4.6 [0.8, 8.4] & 3,840 & 0.94 & 29\% \\
+Fixed rule & 4.2 [2.4, 6.0] & 1,854 & 0.59 & 31\% \\
+Random within budget & 20.4 [8.8, 32.0] & 1,725 & 0.61 & 25\% \\
+Proposed & 4.4 [1.3, 7.5] & 3,590 & 0.92 & 30\% \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Waiting for Late Evidence: The Threshold Matters, the Solver Does Not}
+\label{sec:delay}
+Table~\ref{tab:delay} gives the delayed-imagery condition. Methods that always wait paid a median latency near 685.1~s. The policy waited for 37\% of images, those with short forecast delays or uncertain partial evidence as (\ref{eq:threshold}) predicts and held its median latency at 0.19~s. Against the wait-if-uncertain rule, which ignores the forecast, it changed tail latency by $-1{,}210$~s $[-1{,}353, -1{,}068]$. Removing the latency penalty made it wait for every image, which confirms that the term is doing the work.
+
+\begin{table}[t]
+\caption{Delayed imagery. Errors out of 720 with 95\% intervals; median and 95th-percentile modelled latency; share of images sent. *Ignores the budget.}
+\label{tab:delay}
+\centering\scriptsize\setlength{\tabcolsep}{3pt}
+\begin{tabular}{@{}lrrrr@{}}
+\toprule
+Method & Errors [95\% CI] & Median s & p95 s & Image sent \\
+\midrule
+Image only & 51.8 [38.8, 64.8] & 685.06 & 1,878.8 & 100\% \\
+Text only & 87.4 [52.1, 122.7] & 0.15 & 0.1 & 0\% \\
+Transmit all* & 15.2 [10.2, 20.2] & 689.84 & 1,885.0 & 100\% \\
+Confidence gate & 18.8 [15.1, 22.5] & 685.07 & 1,878.8 & 100\% \\
+Fixed compression & 15.2 [9.3, 21.1] & 685.09 & 1,878.9 & 100\% \\
+Fixed rule & 17.4 [12.7, 22.1] & 685.07 & 1,878.9 & 100\% \\
+Random within budget & 26.6 [18.6, 34.6] & 26.67 & 1,685.9 & 68\% \\
+Wait if uncertain & 12.2 [8.9, 15.5] & 74.66 & 1,565.0 & 52\% \\
+Derived threshold $T^\ast$ & 9.4 [6.0, 12.8] & 0.18 & 26.1 & 31\% \\
+Proposed, $\lambda_\ell=0.0004$ & 9.2 [5.3, 13.1] & 0.19 & 354.6 & 37\% \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The latency reduction does not require the optimizer. The derived-threshold rule sends the fixed rule's image summary whenever the forecast delay falls below the calibration-derived constant $T^\ast$. It waited for 31\% of images and made 9.4 errors at 26.1~s tail latency. Relative to it the policy changed errors by $-0.2$ $[-2.4, 2.0]$, tail latency by $+328.5$~s $[252.3, 404.6]$ and bytes by $+683$ $[643, 722]$. The policy's longer tail comes from per-window adaptivity: it waited more than 300~s for 5.9\% of windows against 0.5\% for the constant rule, when uncertain partial evidence raised the value of a late image. Those long waits bought nothing here. Fig.~\ref{fig:frontier} shows that the constant-threshold frontier lies on or slightly below the policy's throughout.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{fig_delay_frontier.png}
+\caption{Delayed imagery: errors against 95th-percentile modelled latency. The solid line traces the policy across latency-penalty values; the dashed line traces the constant-threshold rule across $T$. The star marks $T^\ast$ derived from calibration events, not selected on test data.}
+\label{fig:frontier}
+\end{figure}
+
+The accuracy comparison carries a caveat that changes the conclusion. The policy changed errors by $-8.2$ $[-11.8, -4.6]$ against the fixed rule and by $-3.0$ $[-5.3, -0.7]$ against wait-if-uncertain. Those gains exist because the benchmark decays the weight of text and sensor evidence while a decision waits. With that decay removed, the always-wait baselines return to normal accuracy, 4.4 errors for the fixed rule, 4.4 for transmit-all and 4.8 for wait-if-uncertain, against 8.6 for the policy and 9.6 for the derived threshold (sensitivity rows of the ablation results). Without staleness, both forecast-using rules trade four to five errors for their latency reduction. Whether acting early also improves accuracy therefore depends on how fast real evidence goes stale, which this benchmark assumes rather than measures.
+
+\subsection{Admissibility, Not Optimization, Keeps Foreign Reports Out}
+\label{sec:adm}
+When 30\% of text items came from other events, methods without the admissibility rule fused all of them. The proposed method fused 24\% of misaligned items, exactly those whose metadata had been made compatible and rejected no aligned item. The complete system made 8.8 errors against 20.2 for the fixed rule without admissibility, a paired difference of $-11.4$ $[-21.7, -1.1]$. The fixed rule with the same filter made 9.4 errors; relative to it the proposed method changed errors by $-0.6$ $[-3.8, 2.6]$. The filter accounts for the gain. Within the proposed system, disabling admissibility added $+8.4$ errors $[-0.5, 17.3]$, an interval that includes zero, so even the filter's own effect is imprecisely estimated at five seeds.
+
+This test favours the filter by construction. Aligned evidence shares the window's cell and hazard tag exactly and is at most 60~s old, far inside the tolerances, while misaligned reports that were not spoofed carry the coordinates of another event on a $400\times400$ grid. Zero false rejections follow from the generator, not from the rule's robustness. Real metadata carries positional error, clock skew and missing geotags, none of which is represented here.
+
+\subsection{Conformal Coverage Does Not Survive a Change of Condition}
+\label{sec:coverage}
+Calibrating per condition kept empirical coverage between 0.883 and 0.898 against a nominal 0.90; the shortfall is consistent with having only two calibration events. Reusing the normal-condition threshold is where the trouble starts. Coverage falls to 0.794 under contradictory evidence and to 0.745 with images missing, a loss of 13.8 percentage points in the condition where an operator is most likely to rely on the interval. Proposition~2 should not be stretched across conditions: a deployment that calibrates once at commissioning will be miscalibrated exactly when the network degrades. Section~\ref{sec:real} shows that per-condition recalibration is necessary but not sufficient, because on real data the guarantee also fails across events.
+
+\subsection{The Review Queue Is the Real Operational Cost}
+\label{sec:queue}
+Across all nine conditions, about 30\% of windows entered the combined abstention and review queue under low bandwidth, roughly 61 queued windows per caught error and 53\% under contradictory evidence (the full sensitivity table is in the package). Under low bandwidth 98\% of queued windows were correctly classified, so almost all reviewer effort confirmed a decision the system had already got right. Conformal abstention alone queued about 10\% of windows and still caught every error; the prespecified conflict rule nearly tripled the queue without catching an additional one. Across conditions the conflict rule added 11 to 43 percentage points of queue load for between zero and two additional caught errors per 720 windows. We keep the prespecified settings rather than tune after the fact; the implication is that the conflict threshold is a staffing decision and should be set from reviewer capacity. The severity-based escalation rule was nearly inert, firing on 0.07\% of windows against the 28\% the generating severity would have escalated, because the severity estimator is weak.
+
+\subsection{When the Shared Budget Binds (Pre-registered)}
+\label{sec:contested}
+None of the conditions above makes the shared budget bind, which is the only regime in which the knapsack can differ from a per-window rule. At the reference difficulty it could not have mattered: on calibration events, sending only summaries erred on 0.56\% of windows against 0.44\% for the unconstrained fixed rule. We therefore froze a protocol before running the proposed method on a harder condition, with the protocol file and its SHA-256 digest inside the package. Observation noise was scaled by 1.75, the smallest value in a pre-specified grid at which summaries alone err on at least 8\% of calibration windows. Models were retrained at that difficulty, the link runs at 256~kbps with $K=6$ and per-window budgets range from 700 to 1,900 bytes, with ten seeds. The pre-specified competitor is a shared-budget greedy rule that starts from summaries and upgrades items across the slot in order of local uncertainty; a greedy heuristic on the proposed utility isolates the exact solver. A difference counts only if its paired $t$-test survives Holm adjustment across the five budgets at 0.05.
+
+\begin{table}[t]
+\caption{Contested shared budget (noise scale 1.75, ten seeds): errors out of 720 by per-window byte budget $B$. *Ignores the budget; shown as a ceiling.}
+\label{tab:contested}
+\centering\footnotesize
+\begin{tabular}{@{}lrrrrr@{}}
+\toprule
+Method & 700 & 900 & 1,200 & 1,500 & 1,900 \\
+\midrule
+Summaries only & 78.6 & 78.7 & 78.6 & 78.6 & 78.8 \\
+Fixed rule, per window & 78.6 & 75.1 & 68.9 & 65.6 & 64.0 \\
+Confidence gate & 78.6 & 76.0 & 70.0 & 66.3 & 64.7 \\
+Random within budget & 140.4 & 141.3 & 127.1 & 121.1 & 109.2 \\
+Greedy by uncertainty & 76.0 & 71.2 & 68.9 & 63.3 & 61.9 \\
+Greedy, proposed utility & 96.4 & 72.3 & 64.6 & 60.7 & 57.2 \\
+Proposed (exact knapsack) & 96.8 & 72.6 & 64.9 & 59.7 & 57.1 \\
+Fixed rule, ignores budget* & 57.6 & 57.5 & 57.7 & 57.5 & 57.4 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The optimizer did not beat the pre-specified competitor at any budget (Table~\ref{tab:contested}, Fig.~\ref{fig:contested}). At 700 bytes it was worse by $+20.8$ errors $[15.4, 26.2]$ with Holm $p<0.001$. At the three largest budgets it led by $-4.0$, $-3.6$ and $-4.8$ errors and none survived adjustment (Holm $p$ 0.075 to 0.219). The exact solver matched a greedy solver on the same utility to within one error at every budget. One of those five differences, at $B=1{,}500$ bytes, survived Holm adjustment in the solver's favour ($p=0.042$); it is 1.0 error in 720 (0.14\% of windows). We do not regard that as a benefit worth an exact solver, but the pre-specified decision rule was met once and it would be wrong to say the solver never beat greedy.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{fig_contested.png}
+\caption{Contested shared budget. (a) Errors against the per-window budget; marginal intervals are omitted because between-seed variation dominates them. The pale diamonds are the greedy heuristic on the proposed utility, which tracks the exact knapsack closely enough to be read as a halo around it. Random-within-budget is omitted because it runs from 140.4 to 109.2 errors; it is in Table~\ref{tab:contested}. (b) The paired difference the analysis tests, with 95\% intervals over ten seeds. Only the tight-budget failure survives Holm adjustment.}
+\label{fig:contested}
+\end{figure}
+
+The tight-budget failure has a clean mechanism. At 700 bytes the optimizer sent nothing for the image in 27\% of windows and nothing for the text in 30\% and held at least one modality in 47\%, in order to buy raw sensor records elsewhere in the slot. It did so because the value function prices a held modality at zero rather than at the cost of losing it. Exact optimization does not repair a misspecified objective; it exploits it more efficiently than a greedy rule can.
+
+A variant designed after these results adds a summary floor: every eligible item is sent at least as a summary and the knapsack chooses only upgrades. We froze a second protocol and tested it on ten new seeds. The floor removed the tight-budget failure. Its advantage over greedy-by-uncertainty replicated in direction at the three largest budgets ($-3.0$, $-3.1$ and $-3.4$ errors) but did not survive adjustment (Holm $p$ 0.087 to 0.353) and was absent at the two tightest budgets ($+0.2$ and $-0.9$). The exact solver again matched a greedy solver with the same floor to within one error. The proposed value function may carry a benefit of roughly 0.4\% of windows at moderate budgets; this benchmark does not establish it and the exact solver contributes nothing measurable.
+
+\section{Exploratory Analyses}
+\label{sec:exploratory}
+The experiments in this section were designed after the confirmatory results and are reported as robustness analyses, not as hypothesis tests. Each inherits the perturbation stream of the condition it modifies, so it is a controlled comparison rather than a differently drawn workload; we verified that at zero loss, with no trace and with one controller, every method's errors, bytes and latencies equal the earlier values to every printed digit.
+
+\subsection{Adversarial Metadata: The Filter Is Exactly as Strong as Forgery Is Hard}
+\label{sec:forgery}
+The admissibility rule reads metadata and nothing else, so an adversary who can attach plausible location, time and hazard values to a report defeats it by construction. We hold the misaligned-evidence condition fixed and vary the fraction of misaligned reports whose metadata is set to the target incident's own values. Table~\ref{tab:forgery} shows an almost linear collapse. With no forgery the filter is worth 7.0 errors against 20.2 for the unfiltered rule. With complete forgery it is worth nothing: 20.2 against 20.2. The admitted fraction tracks the forged fraction almost exactly (24.1\%, 48.4\% and 72.4\% against 25\%, 50\% and 75\%), so the rule admits the forged items and nothing else and rejects no aligned item at any point. The optimizer contributes nothing to robustness: the proposed method tracks the filtered fixed rule within 0.6 to 3.0 errors across the range.
+
+\begin{table}[t]
+\caption{Errors out of 720 as the share of misaligned reports carrying forged metadata rises, with an uncompromised text source (left) and a compromised source corrupting 35\% of reports (right). Means of five seeds. The 25\% column with an uncompromised source is the reference condition of Section~\ref{sec:adm} and reproduces it exactly.}
+\label{tab:forgery}
+\centering\scriptsize
+\setlength{\tabcolsep}{2.5pt}
+\begin{tabular}{@{}lrrrrrrrrr@{}}
+\toprule
+ & \multicolumn{5}{c}{Uncompromised source} & \multicolumn{4}{c}{Compromised source} \\
+\cmidrule(lr){2-6}\cmidrule(lr){7-10}
+Method & 0\% & 25\% & 50\% & 75\% & 100\% & 0\% & 25\% & 50\% & 100\% \\
+\midrule
+Fixed rule (no filter) & 20.2 & 20.2 & 20.2 & 20.2 & 20.2 & 19.8 & 19.8 & 19.8 & 19.8 \\
+Fixed rule + adm.\ & 7.0 & 9.4 & 11.4 & 15.0 & 20.2 & 10.6 & 14.0 & 16.0 & 19.8 \\
+Proposed & 6.4 & 8.8 & 10.2 & 12.8 & 17.2 & 10.2 & 12.8 & 14.8 & 18.4 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Two consequences follow. There is no safe operating point, so a deployment cannot argue that a low expected forgery rate makes the rule sufficient. And metadata admissibility is a cheap filter against accident (misrouted reports, stale caches, misconfigured clients), not a security control; where an adversary is in the threat model it must be backed by signed observations or attested sources, whose cost belongs in the byte budget. We have not evaluated such a scheme and the sweep models metadata substitution only. Crossing the forgery rate with a compromised text source that points 35\% of reports toward a wrong class (right half of Table~\ref{tab:forgery}) shows that forgery alone is sufficient: with both capabilities the filtered rule reaches 19.8 errors, no worse than forgery alone.
+
+\subsection{Packet Loss and a Measured Link}
+\label{sec:link}
+The results so far treat the link as a constant-rate pipe. Two experiments relax that assumption. The first splits each payload into 1,500-byte packets, each lost independently with probability $p$ and retransmitted, so the bytes placed on the wire grow by $1/(1-p)$ and each lost packet costs one 200~ms retransmission timeout. The expected number of lost packets grows with the payload, so the time penalty is super-linear in bytes. Accuracy is unmoved, because nothing in this condition ties latency back to the decision; tail latency is not (Table~\ref{tab:loss}). The fixed rule goes from 0.09~s to 0.14~s at 10\% loss, a factor of 1.5; the proposed policy goes from 0.57~s to 4.70~s, a factor of 8.3. The gap between them widens from 6$\times$ to 34$\times$. The optimizer's surplus bytes were close to free under an idealised link; under a lossy one they are the dominant term.
+
+\begin{table}[t]
+\caption{95th-percentile modelled latency in seconds against packet loss, at the normal per-window budget. *Ignores the budget.}
+\label{tab:loss}
+\centering\footnotesize
+\begin{tabular}{@{}lrrrrr@{}}
+\toprule
+Method & 0\% & 1\% & 2\% & 5\% & 10\% \\
+\midrule
+Fixed rule & 0.09 & 0.10 & 0.10 & 0.12 & 0.14 \\
+Confidence gate & 0.33 & 0.39 & 0.40 & 0.41 & 0.44 \\
+Fixed compression & 0.10 & 0.11 & 0.12 & 0.14 & 0.17 \\
+Proposed & 0.57 & 0.83 & 1.23 & 2.47 & 4.70 \\
+Transmit all* & 2.24 & 2.89 & 3.64 & 6.12 & 10.72 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The second experiment replays measured cellular capacity traces in place of the constant rate~\cite{mahimahi}. Each trace records the milliseconds at which one MTU packet could be delivered on a real LTE uplink; we replay them unmodified, varying only the starting offset by slot and compare against a constant link at the same mean capacity, which isolates variability from speed (Table~\ref{tab:trace}). Holding mean capacity fixed, real variability inflates tail latency by up to 8.7$\times$. On the Verizon driving trace, whose fifth-percentile throughput falls to 0.25~Mbps, the proposed policy's tail rises from 0.25~s to 2.17~s and the fixed rule's from 0.24~s to 1.49~s; the steadier traces inflate far less, so the penalty tracks the depth of the fades, not the average rate. Ranking the five methods by tail latency gives the same order under the replayed trace as under its mean-matched constant for all three traces, so the ordering survives the more realistic link; what does not survive is the idea that the optimizer's extra bytes are cheap.
+
+\begin{table}[t]
+\caption{95th-percentile modelled latency in seconds under a replayed measured LTE trace against a constant link of the same mean capacity. *Ignores the budget.}
+\label{tab:trace}
+\centering\scriptsize
+\setlength{\tabcolsep}{2.5pt}
+\begin{tabular}{@{}lrrrrrrrrr@{}}
+\toprule
+ & \multicolumn{3}{c}{Verizon short} & \multicolumn{3}{c}{Verizon driving} & \multicolumn{3}{c}{T-Mobile driving} \\
+\cmidrule(lr){2-4}\cmidrule(lr){5-7}\cmidrule(lr){8-10}
+Method & Const. & Replay & $\times$ & Const. & Replay & $\times$ & Const. & Replay & $\times$ \\
+\midrule
+Fixed rule & 0.24 & 0.37 & 1.5 & 0.24 & 1.49 & 6.2 & 0.23 & 0.25 & 1.1 \\
+Confidence gate & 0.23 & 0.32 & 1.3 & 0.23 & 0.94 & 4.0 & 0.23 & 0.24 & 1.1 \\
+Fixed compression & 0.26 & 0.42 & 1.6 & 0.25 & 2.20 & 8.7 & 0.23 & 0.27 & 1.1 \\
+Proposed & 0.26 & 0.42 & 1.6 & 0.25 & 2.17 & 8.6 & 0.23 & 0.26 & 1.1 \\
+Transmit all* & 3.84 & 7.22 & 1.9 & 3.67 & 20.42 & 5.6 & 1.34 & 3.74 & 2.8 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Coordination Is Worth More to the Optimizer Than to the Simple Rule}
+\label{sec:coord}
+Every result so far grants the shared-budget formulation its most favourable assumption: one controller owns all six windows in a slot. An incident area is more plausibly served by several edge nodes that cannot coordinate per slot over the degraded link they are conserving. We deal the slot's windows round-robin to $C$ independent controllers, each allocating only its own windows against a share of the byte budget proportional to the windows it owns. The total budget is unchanged and all controllers still share the physical link. The contested-budget condition is used because it is the only regime in which the shared budget binds; $C=1$ reproduces Table~\ref{tab:contested} exactly.
+
+\begin{table}[t]
+\caption{Errors out of 720 at $B=900$ bytes as coordination is removed. $C$ is the number of independent controllers sharing one slot. Ten seeds.}
+\label{tab:coord}
+\centering\footnotesize
+\begin{tabular}{@{}lrrrr@{}}
+\toprule
+Method & $C=1$ & $C=2$ & $C=3$ & $C=6$ \\
+\midrule
+Summaries only & 78.7 & 78.7 & 78.7 & 78.7 \\
+Fixed rule, per window & 75.1 & 75.1 & 75.1 & 75.1 \\
+Greedy by uncertainty & 71.2 & 71.4 & 72.0 & 75.1 \\
+Proposed (exact knapsack) & 72.6 & 78.3 & 81.5 & 92.6 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The two per-window methods are controls: they allocate nothing across windows, so $C$ cannot affect them and it does not (Table~\ref{tab:coord}). The two coordinated methods separate sharply. Removing coordination costs the exact knapsack $+20.0$ errors $[14.2, 25.8]$ at $B=900$ and the greedy uncertainty ranking only $+3.9$ $[0.8, 7.0]$. The penalty peaks at $B=900$ rather than at $B=700$ ($+10.2$), because at 700 bytes the centralised optimizer already fails badly enough that little is left to take away. At $C=6$ the proposed method makes 92.6 errors against the greedy rule's 75.1, so a rough tie under centralisation becomes a clear loss once the assumption is dropped. The exact optimizer is not merely no better than a greedy ranking; it is more dependent on an architectural assumption that field deployments are least likely to satisfy and this benchmark charges nothing for the per-slot consensus it would need.
+
+\subsection{What the Policy Costs to Compute}
+\label{sec:compute}
+We timed the allocation step on the contested-budget views as best-of-five wall clock on one workstation and recorded peak allocation (Table~\ref{tab:compute}); no energy figure is inferred. The fixed rule decides a slot in 0.0012~ms; the exact knapsack takes 7.44~ms, about 6,190 times longer and holds 18 times the peak memory. Solve time grows close to linearly in the number of windows sharing a slot (1: 0.10~ms, 2: 0.42, 3: 0.88, 4: 1.44, 6: 2.37, 8: 3.24, 12: 4.83~ms), as the $O(K\cdot64\cdot2000)$ bound predicts. The greedy heuristic on the proposed utility is slower than the exact program (15.5 against 7.4~ms) only because it is a Python loop while the dynamic program is vectorised.
+
+\begin{table}[t]
+\caption{Measured decision cost at $B=1{,}200$ bytes. Each seed is timed five times and the fastest run kept; the table reports the mean of five seeds.}
+\label{tab:compute}
+\centering\scriptsize
+\begin{tabular}{@{}lrrr@{}}
+\toprule
+Method & Per slot (ms) & Per window (ms) & Peak (KiB) \\
+\midrule
+Fixed rule & 0.0012 & 0.0002 & 76 \\
+Fixed rule, per window & 0.2070 & 0.0345 & 76 \\
+Greedy by uncertainty & 0.4949 & 0.0825 & 180 \\
+Greedy, proposed utility & 15.4829 & 2.5805 & 1,329 \\
+Proposed (exact knapsack) & 7.4428 & 1.2405 & 1,329 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{A Reduced Comparison on Real Disaster Data}
+\label{sec:real}
+Every result above rests on a generated workload; the only measured input so far is the capacity traces. This section replaces the synthetic workload with one built from CrisisMMD~\cite{crisismmd}: 3,526 labelled report--image pairs from seven disasters in 2017, with real text, photographs, hazard types, arrival times recovered from the message identifiers, class imbalance and payload sizes. The policies are unchanged and the split is by event. The experiment was designed after the synthetic results, was not pre-registered and is exploratory.
+
+\subsection{Representations and Their Diagnostic}
+Both modalities are represented by CLIP embeddings~\cite{clip}, reduced by principal components fitted on training events only: eight components for text and ten for images, matching the dimensions the policy expects. Measured on the 968 held-out records before any budgeting decision, the image representation reaches 0.566 accuracy against a majority baseline of 0.490, while the text representation returns 0.490, the majority baseline to four decimal places: the text classifier predicts the majority class for every held-out record. A TF--IDF text representation tested before the CLIP encoder also returned the baseline. These are raw per-record accuracies, not the per-window error counts decided under a budget.
+
+We do not read the text result as a property of the task. CrisisMMD text is informative for other tasks~\cite{ofli2020}, the label here is damage annotated from the photograph, the pathway is an eight-component reduction of a general-purpose embedding, the training set is imbalanced and we did not vary the encoder, the dimensionality or the class weighting. The majority-class outcome is therefore consistent with a representation or class-imbalance artefact as much as with an uninformative modality and we cannot separate those explanations with the experiments run. What the result does establish is narrower: on this corpus, with this text representation, the text pathway contributes no predictive signal and nothing in the value function detects that.
+
+\subsection{What Carries Over}
+The comparison is reduced and the reductions are forced by the data. CrisisMMD has no sensor stream, so the workload has two modalities and the per-window action space shrinks from 64 combinations to 16; a fixed-seed placeholder keeps the shared code path running and the runner asserts it is never available. The annotations carry no geolocation, so the spatial term of (\ref{eq:adm}) reduces to event identity. No severity field exists that is independent of the damage label, so severity is held constant and its term in the value function is inert. Imagery is never missing, so the incomplete-modality machinery is not exercised. Three conditions carry over, not nine: delayed imagery is absent, so the derived constant wait threshold, the clearest positive result of Section~\ref{sec:results}, is not tested on real data. Three methods are absent for the same reason, including the fixed rule with admissibility, so the misaligned condition here cannot isolate the filter as Section~\ref{sec:adm} does.
+
+Five seeds vary model fitting only; the data, the split and the 968 test windows are identical across them and the test set is two disasters (795 windows from Hurricane Irma, 173 from the Iraq--Iran earthquake). Intervals here bound fitting jitter rather than sampling error; several are zero-width because the method is deterministic given the data.
+
+\begin{table}[t]
+\caption{All three real-data conditions. Errors out of 968; the majority-class baseline is 494. Bytes and tail latency are for low bandwidth. *Ignores the budget.}
+\label{tab:real}
+\centering\scriptsize
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{@{}lrrrrr@{}}
+\toprule
+Method & Normal & Low bw. & Misaligned & Bytes & p95 s \\
+\midrule
+Image only & 420.0 & 420.0 & 420.0 & 224 & 0.27 \\
+Transmit all* & 435.8 & 435.6 & 447.4 & 129,728 & 30.71 \\
+Fixed rule & 464.2 & 465.4 & 473.4 & 342 & 0.29 \\
+Confidence gate & 437.0 & 465.8 & 474.4 & 1,390 & 0.56 \\
+Random within budget & 462.0 & 465.8 & 474.6 & 1,212 & 0.52 \\
+Greedy by uncertainty & 466.8 & 466.8 & 476.0 & 2,166 & 0.63 \\
+Greedy, proposed utility & 447.0 & 466.8 & 462.2 & 1,896 & 0.63 \\
+Proposed (exact knapsack) & 447.0 & 466.8 & 462.2 & 1,896 & 0.63 \\
+Fixed compression & 483.0 & 483.0 & 486.0 & 3,072 & 0.80 \\
+Text only & 494.0 & 494.0 & 494.0 & 196 & 0.26 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Results}
+Against the fixed rule the ranking does not carry over (Table~\ref{tab:real}). The optimizer wins under normal connectivity by 17.2 errors $[15.8, 18.6]$ and under misaligned evidence by 11.2 $[7.8, 14.6]$ and loses only under low bandwidth, by 1.4 $[0.7, 2.1]$, which is 0.14\% of the test set. Reporting only the low-bandwidth column would have reproduced the synthetic conclusion by selection. One assignment of seven events to three splits produced that pattern and the test set is dominated by one hurricane, so we rotated the event list through seven pre-specified assignments, each keeping the same 3/2/2 shape, so that every event serves in the test set at least once (Table~\ref{tab:rotation}). The rotations were fixed before running and none was discarded. The direction survives the rotation and the per-condition pattern does not. The optimizer is ahead of the fixed rule in 15 of the 21 comparisons and under normal connectivity in every one of the seven, but the loss under low bandwidth occurs in 2 rotations of 7 and the win under misaligned evidence in 3. What generalises from this corpus is therefore narrower than Table~\ref{tab:real} alone suggests: on real data the optimizer is ahead of the fixed rule more often than not, decisively so when the link is not the constraint and which way any single condition falls depends on which disasters land in the test set.
+
+\begin{table}[t]
+\caption{Proposed minus fixed rule in errors, by event split. Negative means the optimizer wins. Rotation 0 is the split of Table~\ref{tab:real}. Counts differ because the events differ in size.}
+\label{tab:rotation}
+\centering\footnotesize
+\begin{tabular}{@{}llrrrr@{}}
+\toprule
+Rot. & Test events & $n$ & Normal & Low bw. & Misaligned \\
+\midrule
+0 & Irma + Iraq--Iran & 968 & $-17.2$ & $+1.4$ & $-11.2$ \\
+1 & Harvey + Iraq--Iran & 1,065 & $-3.0$ & $-5.4$ & $+2.8$ \\
+2 & Harvey + Maria & 1,754 & $-0.2$ & $+1.0$ & $+1.6$ \\
+3 & California + Maria & 1,393 & $-18.8$ & $-12.8$ & $+8.2$ \\
+4 & California + Mexico & 709 & $-3.0$ & $-1.0$ & $+18.8$ \\
+5 & Mexico + Sri Lanka & 273 & $-7.6$ & $-8.6$ & $-6.4$ \\
+6 & Irma + Sri Lanka & 890 & $-57.2$ & $-33.2$ & $-47.6$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The comparison that matters most for this paper is between the exact solver and a greedy heuristic on the same utility and on real data the two are identical: the same errors, bytes per window and 95th-percentile latency in all three conditions and at every seed, a paired difference of exactly 0.0. A greedy ranking by local uncertainty, which does not use the utility, makes 466.8 errors under normal connectivity against 447.0, so the utility is doing work even though the solver is not (Fig.~\ref{fig:real}).
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{fig_real_scatter.png}
+\caption{Errors against bytes on real data under low bandwidth. Intervals are fitting jitter across five seeds on one fixed test set and are zero-width for the deterministic methods. The exact knapsack and the greedy heuristic over the same utility occupy the same point.}
+\label{fig:real}
+\end{figure}
+
+What beats everything on errors is image-only, at 420.0 in every condition, ahead of the optimizer by 46.8 errors $[46.2, 47.4]$ under low bandwidth while sending 224 bytes. Its value cannot vary because the conditions perturb text and bandwidth and image-only consumes neither, so its constancy is not evidence of robustness; on the synthetic benchmark the same method makes 51.8 errors against the fixed rule's 4.2, so a method that is near-worst on one workload and best on the other is telling us about the workloads. The reason it wins is visible in the same table: text-only scores the majority-class count, 494.0, in every condition and everything that fuses text pays for it. Severity, reliability, recency, fidelity, uncertainty, quality and disagreement are all properties of the source or the signal; none asks whether this modality has ever predicted this label. A held-out estimate of predictive contribution is the quantity that would have been needed. Transmit-all is also ahead of the optimizer on errors, by 31.2 $[30.2, 32.2]$, but sends 129,728 bytes against 1,896 and pays 30.7~s of tail latency against 0.63~s.
+
+Two assumptions do not survive the move. Conformal coverage, which held between 0.883 and 0.898 across the synthetic conditions, falls to 0.816 under normal connectivity and 0.745 under low bandwidth against a nominal 0.90. Calibration and test windows come from different disasters, so the exchangeability that Proposition~2 assumes fails within a condition; per-condition recalibration cannot repair that and the 7.1-point spread across the three conditions shows a condition-dependent component this explanation does not account for. The byte model of Section~\ref{sec:workload} is contradicted by measurement: real images have a median of 103,142.5 bytes against an assumed 220,000 to 620,000 and every report is smaller than the smallest summary the method defines, 39 to 181 bytes against an assumed 350 to 1,800. Sending a report verbatim is cheaper than summarising it, so the summarise-or-send decision is vacuous for that modality on this corpus. Byte sizes are measurable before a budget is designed around them.
+
+\section{What the Evidence Supports}
+One conclusion holds across both workloads: the value of this formulation is not in its solver. On the synthetic benchmark a simple rule matched or beat the exact optimizer in every condition; on real data a greedy heuristic over the proposed utility returned the same allocation as the exact program at every seed. The formulation earns its place by identifying which quantities matter (the forecast delay, the value of the evidence already present, the incident metadata) and by supplying the threshold (\ref{eq:threshold}) that turns them into a rule. What does not hold across both workloads is the ranking: the fixed rule matched or beat the optimizer in all nine synthetic conditions, while on real data the optimizer leads it in 15 of 21 comparisons and a single-modality rule beats both. Which simple rule wins is a property of the workload, so the rule has to be derived and tested against held-out data from the deployment. Six checks follow, all within the simulation scope of this study:
+\begin{itemize}
+\item Derive the candidates (a byte-profile fixed rule, the constant threshold (\ref{eq:tstar}) and a greedy ranking with a summary floor where a shared budget binds) and choose among them on held-out events; keep the exact optimizer only if it beats all three.
+\item Before optimizing a value function, check what it prices at zero; the tight-budget failure was a misspecification that exact optimization exploited.
+\item Treat metadata admissibility as protection against accident, not adversaries; its value falls linearly with forging capability.
+\item Recalibrate conformal thresholds per operating condition and across the event boundary the deployment will cross and size the review queue from reviewer capacity.
+\item Check whether a shared-budget method still helps when controllers cannot coordinate; the exact knapsack lost far more than a greedy ranking.
+\item Add a held-out estimate of predictive contribution to the value function; no existing term detects a modality that carries no signal for the label.
+\end{itemize}
+The value of the wait-or-act decision itself rests on two quantities this benchmark assumes, how quickly an early decision loses value and how quickly evidence goes stale, which have to come from emergency-management partners and measured networks.
+
+\section{Limitations and Threats to Validity}
+The verification data are synthetic and well separated, which explains error rates below 1\% for the stronger methods and makes the conformal sets nearly binary. Byte sizes, delay distributions, forecast errors and the rate at which evidence ages are assumptions on which the conclusions about fixed rules and waiting depend; Section~\ref{sec:delay} shows the accuracy result under delay disappearing when evidence does not age. Section~\ref{sec:real} removes a smaller part of this limitation than ``real data'' suggests: the link, budgets, loss model, slot structure, sensor modality and severity stay synthetic or fixed, six of nine conditions and three of eleven methods do not carry over and the text pathway's majority-class outcome is unresolved between a task property and a representation or class-imbalance artefact.
+
+The link model is the sharpest limitation for an edge-systems audience. Loss, retransmission and replayed measured capacity narrow it, but there is no protocol stack: no MAC layer, routing, contention between nodes, congestion control or bidirectional traffic. There is no hardware testbed and no energy measurement; Section~\ref{sec:compute} reports wall-clock time and peak allocation on one workstation and we decline to infer joules from them. Section~\ref{sec:coord} relaxes the single-controller assumption by static partitioning only. Every statement in this paper about edge deployment is therefore bounded by simulation on a workstation.
+
+Policy coefficients and thresholds were set by hand; the latency penalty is accompanied by a sweep and the main protocol was not pre-registered. The admissibility test favours the filter by construction. The contested-budget difficulty was chosen by a rule fixed in advance, but the budget grid and the competitor were chosen by the authors and both protocols are timestamped only within the package. The severity estimator is weak, so severity-dependent behaviour is barely exercised. Five seeds and four test events per seed limit statistical resolution and several paired intervals include zero; we treat those comparisons as inconclusive rather than as equivalence. On the real-data side the seeds vary model fitting only, which is why we rotate the event split; the seven assignments reuse the same events and are not independent. Social-media and sensor sources carry participation and placement bias. Improved disaster outcomes cannot be claimed without measured network traces, more disasters and prospective studies with emergency-management partners.
+
+\section{Reproducibility, Oversight and Data Availability}
+The package contains the source, an environment lock, the configuration, event split identifiers, calibration temperatures and thresholds, the derived wait thresholds, seeds, integrity tests, record-level predictions for every method and condition, provenance envelopes, the two frozen contested-budget protocols with their SHA-256 digests and scripts that regenerate every table and figure. On one CPU architecture reruns reproduce every output file byte for byte across Python 3.12 to 3.14. Across architectures about 10\% of source observation vectors differ in their last bits because the generator's Beta and Dirichlet draws reach platform libm; every reported quantity is written at six significant figures or fewer and is unaffected and the provenance digest is taken over the observation rounded to nine decimals. The real-data pipeline depends on a pretrained encoder and on PyTorch whose versions are not pinned, so byte-for-byte reproduction of the derived records is not claimed; a digest of those records, the encoder identifier, the split, the label mapping and the source URL are recorded instead. The package changelog lists design errors found and corrected during development; results from before those corrections are superseded.
+
+The method is decision support, not an autonomous responder. Reviewers receive the evidence set, the uncertainty, the conflict indicators, the reason codes and the status rule that fired and the interface must distinguish observed evidence from model-derived fields. Governance follows the NIST AI RMF lifecycle~\cite{nistrmf}; deployment requires agency authority, privacy and cybersecurity review, periodic recalibration (Section~\ref{sec:coverage}) and a staffing plan for the queue of Section~\ref{sec:queue}. Raw transmission must be policy-gated.
+
+The package is maintained at \url{https://github.com/bdata-arindam/Edge}. \authorcheck{replace with the archival DOI of the deposited release before camera-ready.} The synthetic verification contains no personal data. Section~\ref{sec:real} uses CrisisMMD v2.0, obtained from its authors under their terms and not redistributed; we ship derived features, byte counts and labels, not the posts or images. Operational use of field reports or agency data would require institutional, legal and privacy review.
+
+\section{Conclusion}
+We formulated disaster evidence transmission as a shared-budget knapsack across concurrent incidents in which waiting for late evidence is an explicit decision with a delay threshold and admissibility is checked before any evidence is valued or fused. In the synthetic benchmark the simple rules the formulation generates match the optimizer it justifies, a pre-registered test found no benefit from exact optimization when the budget binds, the admissibility filter's protection falls to nothing in proportion to an adversary's ability to forge metadata and the conformal guarantee does not transfer across conditions. On real data the optimizer leads the fixed rule in 15 of 21 comparisons across seven event splits, a single-modality rule beats both because one modality contributed no predictive signal under the tested representation and the conformal guarantee and the byte model both fail against measured data. What survives both workloads is that the formulation earns its place by naming the quantities that matter and supplying the threshold that turns them into a rule, not by the solver, which never reliably beat a greedy alternative. Which simple rule to deploy has to be derived against the data a system will see; field value under a real protocol stack, on edge hardware and with the text pathway diagnosed remains to be established.
+
+\begin{table}[!t]
+\caption{Proposed (P), fixed rule (FR) and transmit all (TA) across every synthetic condition. Errors out of 720; bytes per window; 95th-percentile modelled latency in seconds.}
+\label{tab:allcond}
+\centering\scriptsize\setlength{\tabcolsep}{2.5pt}
+\begin{tabular}{@{}lrrrrrrr@{}}
+\toprule
+Condition & Err P & Err FR & Err TA & Bytes P & Bytes FR & p95 P & p95 FR \\
+\midrule
+Normal & 4.6 & 4.4 & 4.4 & 45,801 & 1,854 & 0.57 & 0.09 \\
+Low bandwidth & 4.4 & 4.2 & 4.4 & 3,590 & 1,854 & 0.92 & 0.59 \\
+Delayed imagery & 9.2 & 17.4 & 15.2 & 2,382 & 1,854 & 354.58 & 1,878.85 \\
+Outage & 4.2 & 4.4 & 4.4 & 3,678 & 1,854 & 13.87 & 13.71 \\
+Image missing & 12.2 & 12.2 & 12.2 & 1,630 & 1,630 & 0.19 & 0.19 \\
+Text missing & 12.4 & 13.2 & 12.2 & 2,608 & 784 & 0.21 & 0.16 \\
+Noisy text & 6.0 & 6.0 & 6.4 & 3,678 & 1,854 & 0.24 & 0.19 \\
+Contradictory & 12.4 & 12.4 & 13.0 & 3,678 & 1,854 & 0.24 & 0.19 \\
+Misaligned & 8.8 & 20.2 & 18.6 & 3,436 & 1,854 & 0.23 & 0.19 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[!t]
+\caption{Component ablations (component removed from policy and fusion; positive means it helped; severity replaced by its training mean). Only quality and the latency penalty are distinguishable from zero at five seeds.}
+\label{tab:ablation}
+\centering\footnotesize
+\begin{tabular}{@{}lr@{}}
+\toprule
+Component (condition) & $\Delta$ errors, ablated minus full [95\% CI] \\
+\midrule
+Severity (low bandwidth) & $+0.0$ [0.0, 0.0] \\
+Severity (normal) & $+0.0$ [0.0, 0.0] \\
+Novelty (contradictory) & $+0.0$ [0.0, 0.0] \\
+Reliability (contradictory) & $+2.0$ [$-0.9$, 4.9] \\
+Reliability (noisy text) & $-0.6$ [$-1.7$, 0.5] \\
+Quality (noisy text) & $+1.4$ [0.3, 2.5] \\
+Quality (contradictory) & $+1.0$ [0.1, 1.9] \\
+Recency (delayed) & $-0.6$ [$-1.7$, 0.5] \\
+Latency penalty (delayed) & $+6.0$ [2.8, 9.2] \\
+Novelty (noisy text) & $+0.0$ [0.0, 0.0] \\
+Admissibility (misaligned) & $+8.4$ [$-0.5$, 17.3] \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{thebibliography}{00}
+\bibitem{xbd} R. Gupta et al., ``Creating xBD: A dataset for assessing building damage from satellite imagery,'' in \emph{Proc. IEEE/CVF Conf. Comput. Vis. Pattern Recognit. Workshops (CVPRW)}, 2019, pp. 10--17.
+\bibitem{floodnet} M. Rahnemoonfar, T. Chowdhury, A. Sarkar, D. Varshney, M. Yari, and R. R. Murphy, ``FloodNet: A high resolution aerial imagery dataset for post flood scene understanding,'' \emph{IEEE Access}, vol. 9, pp. 89644--89654, 2021, doi: 10.1109/ACCESS.2021.3090981.
+\bibitem{sen1floods} D. Bonafilia, B. Tellman, T. Anderson, and E. Issenberg, ``Sen1Floods11: A georeferenced dataset to train and test deep learning flood algorithms for Sentinel-1,'' in \emph{Proc. IEEE/CVF Conf. Comput. Vis. Pattern Recognit. Workshops (CVPRW)}, 2020, pp. 835--845, doi: 10.1109/CVPRW50498.2020.00113.
+\bibitem{crisismmd} F. Alam, F. Ofli, and M. Imran, ``CrisisMMD: Multimodal Twitter datasets from natural disasters,'' in \emph{Proc. 12th Int. AAAI Conf. Web Social Media (ICWSM)}, 2018.
+\bibitem{ofli2020} F. Ofli, F. Alam, and M. Imran, ``Analysis of social media data using multimodal deep learning for disaster response,'' in \emph{Proc. 17th Int. Conf. Inf. Syst. Crisis Response Manage. (ISCRAM)}, 2020.
+\bibitem{shi2016} W. Shi, J. Cao, Q. Zhang, Y. Li, and L. Xu, ``Edge computing: Vision and challenges,'' \emph{IEEE Internet Things J.}, vol. 3, no. 5, pp. 637--646, 2016.
+\bibitem{satya2017} M. Satyanarayanan, ``The emergence of edge computing,'' \emph{Computer}, vol. 50, no. 1, pp. 30--39, 2017.
+\bibitem{neurosurgeon} Y. Kang et al., ``Neurosurgeon: Collaborative intelligence between the cloud and mobile edge,'' in \emph{Proc. 22nd ACM Int. Conf. Archit. Support Program. Lang. Oper. Syst. (ASPLOS)}, 2017, pp. 615--629, doi: 10.1145/3037697.3037698.
+\bibitem{shi2020} Y. Shi, K. Yang, T. Jiang, J. Zhang, and K. B. Letaief, ``Communication-efficient edge AI: Algorithms and systems,'' \emph{IEEE Commun. Surveys Tuts.}, vol. 22, no. 4, pp. 2167--2191, 2020.
+\bibitem{dat} Q. Guo, Z. Yang, Y. Hu, C. Zhao, and W. Ji, ``DAT: Dual-aware adaptive transmission for efficient multimodal LLM inference in edge-cloud systems,'' 2026, arXiv:2604.05375.
+\bibitem{cst} H. Chi et al., ``CST: Collaborative selective transmission for communication-efficient multimodal edge inference,'' 2026, arXiv:2608.22115.
+\bibitem{avery} R. Bhattacharjya et al., ``AVERY: Intent-driven adaptive VLM split computing via embodied self-awareness for efficient disaster response systems,'' 2025, arXiv:2511.18151.
+\bibitem{chen2023} Y. Chen, M. Zhao, and L. Bruzzone, ``Incomplete multimodal learning for remote sensing data fusion,'' 2023, arXiv:2304.11381.
+\bibitem{guo2017} C. Guo, G. Pleiss, Y. Sun, and K. Q. Weinberger, ``On calibration of modern neural networks,'' in \emph{Proc. 34th Int. Conf. Mach. Learn. (ICML)}, 2017, pp. 1321--1330.
+\bibitem{selectivenet} Y. Geifman and R. El-Yaniv, ``SelectiveNet: A deep neural network with an integrated reject option,'' in \emph{Proc. 36th Int. Conf. Mach. Learn. (ICML)}, 2019, pp. 2151--2159.
+\bibitem{sadinle} M. Sadinle, J. Lei, and L. Wasserman, ``Least ambiguous set-valued classifiers with bounded error levels,'' \emph{J. Amer. Statist. Assoc.}, vol. 114, no. 525, pp. 223--234, 2019.
+\bibitem{romano} Y. Romano, M. Sesia, and E. Cand\`es, ``Classification with valid and adaptive coverage,'' in \emph{Proc. Adv. Neural Inf. Process. Syst. (NeurIPS)}, vol. 33, 2020, pp. 3581--3591.
+\bibitem{ovadia} Y. Ovadia et al., ``Can you trust your model's uncertainty? Evaluating predictive uncertainty under dataset shift,'' in \emph{Proc. Adv. Neural Inf. Process. Syst. (NeurIPS)}, vol. 32, 2019.
+\bibitem{patent1} ``Methods, devices, media and equipment for disaster response decision making based on multimodal approaches,'' China Patent Appl. CN121981868A, May 5, 2026.
+\bibitem{patent2} ``A method for edge-cloud collaborative multimodal conflict resolution based on deep evidence uncertainty,'' China Patent Appl. CN119337322A, Jan. 21, 2025.
+\bibitem{mahimahi} R. Netravali et al., ``Mahimahi: Accurate record-and-replay for HTTP,'' in \emph{Proc. USENIX Annu. Tech. Conf. (ATC)}, 2015, pp. 417--429.
+\bibitem{nistrmf} National Institute of Standards and Technology, ``Artificial intelligence risk management framework (AI RMF 1.0),'' NIST AI 100-1, Jan. 2023, doi: 10.6028/NIST.AI.100-1.
+\bibitem{clip} A. Radford et al., ``Learning transferable visual models from natural language supervision,'' in \emph{Proc. 38th Int. Conf. Mach. Learn. (ICML)}, 2021, pp. 8748--8763.
+\end{thebibliography}
+
+\end{document}
