@@ -37,18 +37,17 @@ REVIEWER 1  (Content: Weak Accept 4; English: Very Good 4; References: Good 3; O
                                                                    a limitation with evidence and a named remedy
                                                                    (held-out predictive contribution).
 
- R1.3  Dataset DOI placeholder should be          PARTIALLY FIXED   The red placeholder is gone. Section XI now       Sec. XI: repository URL, "at version 2.6.17,
-       resolved before the final version.                          states what a reader can verify today: the      the version behind every result reported
-                                                                   repository, the exact version (2.6.17) and      here, whose SHA256SUMS records a digest for
-                                                                   that SHA256SUMS digests 113 files. Both facts    each of its 113 files". Verified 2026-10-08
-                                                                   were verified against the archived repository   against the archived repo: CITATION.cff says
-                                                                   today. What remains is the deposit itself,      2.6.17; SHA256SUMS has exactly 113 lines.
-                                                                   which only the authors can perform. We did     AUTHOR ACTION: deposit the release and
-                                                                   not invent an identifier.                       insert the identifier into \archivedoi.
-                                                                                                                   Also: CITATION.cff author fields still read
-                                                                                                                   "[To be completed before deposit]" while the
-                                                                                                                   paper names five authors; reconcile before
-                                                                                                                   deposit.
+ R1.3  Dataset DOI placeholder should be          PARTIALLY FIXED   The red placeholder is gone. Everything that     Sec. XI: "at version 2.6.18, which carries
+       resolved before the final version.                          precedes the deposit is done: release v2.6.18   the 2.6.17 package ... unchanged together
+                                                                   assembled (v2.6.17 unchanged, digests verified,  with the emulator, re-derivation and
+                                                                   plus the emulator, re-derivation and             established-task materials ... 146 files.
+                                                                   established-task materials, CITATION.cff with    The archived release is <DOI>." The DOI slot
+                                                                   the five authors, 146 files); the paper's        is wired in manuscript/latex/camera_ready.tex
+                                                                   identifier slot is wired and prints; the gate    and holds a dummy; the gate FAILS on it by
+                                                                   was run once with a simulated identifier and     design and passed 21/21 in the simulation.
+                                                                   passed 21/21. What remains is the deposit        AUTHOR ACTION: make the repository public,
+                                                                   itself, which only the authors can perform;      release v2.6.18, mint the DOI, paste it.
+                                                                   no identifier is invented.
 
  R1.4  Validation on actual edge and             PARTIALLY FIXED   A real transport was put under the link model:  Sec. VII "Emulator check": 2,890 TCP
        communication hardware would                (emulator, no     every byte-model payload sent over TCP through  transfers in 17 cells through mm-delay,
@@ -170,4 +169,5 @@ AUTHOR ACTIONS STILL OPEN
  2. Reconcile CITATION.cff author fields with the five authors named on the paper (R1.3).
  3. Paste the conference copyright line into \copyrightline, then run manuscript/latex/build.sh.
  4. Run an institutional iThenticate or Turnitin check (the one review item that cannot be done here).
- 5. Add scripts/emulator/ and results/emulator/ to the deposited release so the emulator check is reproducible (R1.4, R2.5).
+ 5. Release v2.6.18 is assembled by scripts/build_deposit_v2.6.18.sh with the emulator, re-derivation and
+    established-task materials inside; deposit it and paste the DOI into manuscript/latex/camera_ready.tex (R1.3).
