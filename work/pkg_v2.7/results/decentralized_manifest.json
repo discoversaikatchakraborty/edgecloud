@@ -1,0 +1,91 @@
+{
+  "experiment": "cost of removing coordination between controllers",
+  "preregistered": false,
+  "exploratory": true,
+  "contested_budget": {
+    "protocol_file": "PROTOCOL_contested_budget.md",
+    "protocol_sha256": "f7fc197e9c2f319032d6ea9e9a936b09dbb7d3715718131e8bfda366e132fc6c",
+    "noise_scale": 1.75,
+    "budgets_bytes_per_window": [
+      700,
+      900,
+      1200,
+      1500,
+      1900
+    ],
+    "seeds": [
+      101,
+      202,
+      303,
+      404,
+      505,
+      606,
+      707,
+      808,
+      909,
+      1010
+    ],
+    "bandwidth_bps": 256000,
+    "base_latency_s": 0.18,
+    "methods": [
+      "all_summary",
+      "fixed_rule_window",
+      "fixed_confidence_gate",
+      "random_within_budget",
+      "greedy_uncertainty",
+      "greedy_value",
+      "proposed",
+      "fixed_rule"
+    ],
+    "primary_comparison": "proposed_minus_greedy_uncertainty",
+    "alpha_holm": 0.05,
+    "confirmation": {
+      "protocol_file": "PROTOCOL_contested_budget_confirmation.md",
+      "protocol_sha256": "9da3d0b2ae22d54a96dbf0cba6423da78eee44f4fe5add0ed146a6c2a6cc0d97",
+      "seeds": [
+        2001,
+        2002,
+        2003,
+        2004,
+        2005,
+        2006,
+        2007,
+        2008,
+        2009,
+        2010
+      ],
+      "methods": [
+        "greedy_uncertainty",
+        "greedy_value",
+        "proposed",
+        "proposed_summary_floor",
+        "greedy_value_summary_floor"
+      ],
+      "primary_comparison": "proposed_summary_floor_minus_greedy_uncertainty",
+      "secondary_comparison": "proposed_summary_floor_minus_greedy_value_summary_floor"
+    }
+  },
+  "controllers": [
+    1,
+    2,
+    3,
+    6
+  ],
+  "methods": [
+    "proposed",
+    "greedy_uncertainty",
+    "fixed_rule_window",
+    "all_summary"
+  ],
+  "partition": "round-robin within a slot; budget share proportional to windows owned",
+  "config_sha256": "72a3420d4c734c2235e5a6693b46a2321692bb92b9b60298cc212b8641da646d",
+  "core_sha256": "1c129077a81be2a4dd454b220f0a67fe20955539931a05b087687f317d2df273",
+  "runner_sha256": "448f0c360f662f719cd72d985f4727f24f5d20d2ef6863f033e0835dea9afe05",
+  "runtime": {
+    "python": "3.12.14",
+    "numpy": "2.4.4",
+    "pandas": "3.0.2",
+    "scikit-learn": "1.8.0",
+    "scipy": "1.17.1"
+  }
+}

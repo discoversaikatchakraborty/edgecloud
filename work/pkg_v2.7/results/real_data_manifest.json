@@ -1,0 +1,91 @@
+{
+  "experiment": "policy comparison on CrisisMMD real disaster data",
+  "preregistered": false,
+  "exploratory": true,
+  "dataset_provenance": {
+    "dataset": "CrisisMMD v2.0",
+    "cite": "F. Alam, F. Ofli, M. Imran, CrisisMMD: multimodal Twitter datasets from natural disasters, in: Proc. 12th Int. AAAI Conf. Web and Social Media, 2018.",
+    "source_url": "https://crisisnlp.qcri.org/data/crisismmd/CrisisMMD_v2.0.tar.gz",
+    "redistributed": false,
+    "label": "image_damage, three classes: severe_damage, mild_damage, little_or_no_damage",
+    "rows": 3526,
+    "events": 7,
+    "class_counts": {
+      "0": 2212,
+      "1": 839,
+      "2": 475
+    },
+    "per_event": {
+      "california_wildfires": 531,
+      "hurricane_harvey": 892,
+      "hurricane_irma": 795,
+      "hurricane_maria": 862,
+      "iraq_iran_earthquake": 173,
+      "mexico_earthquake": 178,
+      "srilanka_floods": 95
+    },
+    "split": {
+      "train": [
+        "hurricane_harvey",
+        "hurricane_maria",
+        "california_wildfires"
+      ],
+      "calibration": [
+        "mexico_earthquake",
+        "srilanka_floods"
+      ],
+      "test": [
+        "hurricane_irma",
+        "iraq_iran_earthquake"
+      ]
+    },
+    "encoder": "openai/clip-vit-base-patch32",
+    "text_representation": "CLIP text embedding reduced by PCA to 8 components, PCA fitted on training events only",
+    "arrival_times": "recovered from the Twitter snowflake identifier; real, not synthesised",
+    "image_representation": "CLIP image embedding reduced by PCA to 10 components, PCA fitted on training events only",
+    "payload_sizes": "real: image byte sizes are the files on disk, text byte sizes are the UTF-8 length of the tweet. Neither is assumed.",
+    "images_resolved": 3526,
+    "not_modelled": [
+      "no sensor modality exists in CrisisMMD; the workload has two modalities",
+      "no geolocation in the annotations; spatial admissibility degrades to event identity",
+      "no severity field independent of the label; severity is held constant"
+    ],
+    "records_sha256": "b3e96ca8ad854da867935a871f29ea67a4484d3fc79b3d170498c90364a39588"
+  },
+  "methods": [
+    "image_only",
+    "text_only",
+    "cloud_transmit_all",
+    "fixed_confidence_gate",
+    "fixed_compression",
+    "fixed_rule",
+    "random_within_budget",
+    "greedy_uncertainty",
+    "greedy_value",
+    "proposed"
+  ],
+  "seeds": [
+    101,
+    202,
+    303,
+    404,
+    505
+  ],
+  "conditions": [
+    "normal",
+    "low_bandwidth",
+    "misaligned_evidence"
+  ],
+  "sensor_modality": "absent in CrisisMMD; marked permanently unavailable",
+  "severity": "held constant; no field independent of the label exists",
+  "spatial_admissibility": "degrades to event identity; no geolocation in the annotations",
+  "core_sha256": "1c129077a81be2a4dd454b220f0a67fe20955539931a05b087687f317d2df273",
+  "runner_sha256": "ed8d9192c47c0563137aa8298464bda3f952bc1a57efabbeaab851a1b3b3cbd8",
+  "runtime": {
+    "python": "3.12.14",
+    "numpy": "2.4.4",
+    "pandas": "3.0.2",
+    "scikit-learn": "1.8.0",
+    "scipy": "1.17.1"
+  }
+}

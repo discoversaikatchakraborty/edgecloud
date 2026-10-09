@@ -1,0 +1,950 @@
+{
+  "seeds": [
+    101,
+    202,
+    303,
+    404,
+    505,
+    606,
+    707,
+    808,
+    909,
+    1010,
+    1111,
+    1212,
+    1313,
+    1414,
+    1515,
+    1616,
+    1717,
+    1818,
+    1919,
+    2020
+  ],
+  "synthetic_benchmark": true,
+  "model_version": "edgecloud-prototype-2.2.0",
+  "policy_version": "c3d9ed4edaae8f92",
+  "config_sha256": "72a3420d4c734c2235e5a6693b46a2321692bb92b9b60298cc212b8641da646d",
+  "core_sha256": "9b816ef2c14f4f29de359a7c60b1d6683442a45bcf143daa1902c2566087df08",
+  "splits": {
+    "101": {
+      "train_events": [
+        "D00",
+        "D01",
+        "D02",
+        "D03",
+        "D04",
+        "D05"
+      ],
+      "calibration_events": [
+        "D06",
+        "D07"
+      ],
+      "test_events": [
+        "D08",
+        "D09",
+        "D10",
+        "D11"
+      ],
+      "temperatures": {
+        "image_local": 1.05,
+        "image_cloud": 1.1500000000000001,
+        "image_feature": 1.1500000000000001,
+        "text_local": 1.05,
+        "text_cloud": 1.05,
+        "text_feature": 1.0,
+        "sensor_local": 0.8500000000000001,
+        "sensor_cloud": 0.9000000000000001,
+        "sensor_feature": 0.9000000000000001
+      },
+      "severity_estimator_train_r2": 0.12100644772717695,
+      "derived_wait_threshold_s": 206.3177880679497
+    },
+    "202": {
+      "train_events": [
+        "D00",
+        "D01",
+        "D02",
+        "D03",
+        "D04",
+        "D05"
+      ],
+      "calibration_events": [
+        "D06",
+        "D07"
+      ],
+      "test_events": [
+        "D08",
+        "D09",
+        "D10",
+        "D11"
+      ],
+      "temperatures": {
+        "image_local": 0.8500000000000001,
+        "image_cloud": 0.8500000000000001,
+        "image_feature": 0.65,
+        "text_local": 0.9500000000000001,
+        "text_cloud": 1.1500000000000001,
+        "text_feature": 1.1,
+        "sensor_local": 1.2000000000000002,
+        "sensor_cloud": 1.25,
+        "sensor_feature": 1.25
+      },
+      "severity_estimator_train_r2": 0.11087884465548603,
+      "derived_wait_threshold_s": 218.72111893006712
+    },
+    "303": {
+      "train_events": [
+        "D00",
+        "D01",
+        "D02",
+        "D03",
+        "D04",
+        "D05"
+      ],
+      "calibration_events": [
+        "D06",
+        "D07"
+      ],
+      "test_events": [
+        "D08",
+        "D09",
+        "D10",
+        "D11"
+      ],
+      "temperatures": {
+        "image_local": 0.9000000000000001,
+        "image_cloud": 1.2000000000000002,
+        "image_feature": 1.05,
+        "text_local": 0.9500000000000001,
+        "text_cloud": 1.0,
+        "text_feature": 0.9000000000000001,
+        "sensor_local": 0.9500000000000001,
+        "sensor_cloud": 0.9500000000000001,
+        "sensor_feature": 0.9500000000000001
+      },
+      "severity_estimator_train_r2": 0.09188731393929761,
+      "derived_wait_threshold_s": 196.1882318829408
+    },
+    "404": {
+      "train_events": [
+        "D00",
+        "D01",
+        "D02",
+        "D03",
+        "D04",
+        "D05"
+      ],
+      "calibration_events": [
+        "D06",
+        "D07"
+      ],
+      "test_events": [
+        "D08",
+        "D09",
+        "D10",
+        "D11"
+      ],
+      "temperatures": {
+        "image_local": 0.8500000000000001,
+        "image_cloud": 0.9000000000000001,
+        "image_feature": 0.8500000000000001,
+        "text_local": 1.0,
+        "text_cloud": 1.3,
+        "text_feature": 1.2000000000000002,
+        "sensor_local": 1.1,
+        "sensor_cloud": 1.1,
+        "sensor_feature": 1.05
+      },
+      "severity_estimator_train_r2": 0.09575389141630597,
+      "derived_wait_threshold_s": 204.37878165610195
+    },
+    "505": {
+      "train_events": [
+        "D00",
+        "D01",
+        "D02",
+        "D03",
+        "D04",
+        "D05"
+      ],
+      "calibration_events": [
+        "D06",
+        "D07"
+      ],
+      "test_events": [
+        "D08",
+        "D09",
+        "D10",
+        "D11"
+      ],
+      "temperatures": {
+        "image_local": 1.05,
+        "image_cloud": 1.1,
+        "image_feature": 0.9500000000000001,
+        "text_local": 0.8,
+        "text_cloud": 1.0,
+        "text_feature": 0.9500000000000001,
+        "sensor_local": 0.9000000000000001,
+        "sensor_cloud": 0.9500000000000001,
+        "sensor_feature": 0.9500000000000001
+      },
+      "severity_estimator_train_r2": 0.09944917131445874,
+      "derived_wait_threshold_s": 197.22526672765338
+    },
+    "606": {
+      "train_events": [
+        "D00",
+        "D01",
+        "D02",
+        "D03",
+        "D04",
+        "D05"
+      ],
+      "calibration_events": [
+        "D06",
+        "D07"
+      ],
+      "test_events": [
+        "D08",
+        "D09",
+        "D10",
+        "D11"
+      ],
+      "temperatures": {
+        "image_local": 1.05,
+        "image_cloud": 1.0,
+        "image_feature": 1.0,
+        "text_local": 0.9500000000000001,
+        "text_cloud": 1.05,
+        "text_feature": 1.0,
+        "sensor_local": 1.25,
+        "sensor_cloud": 1.2000000000000002,
+        "sensor_feature": 1.1500000000000001
+      },
+      "severity_estimator_train_r2": 0.12492957354230172,
+      "derived_wait_threshold_s": 184.21273846334867
+    },
+    "707": {
+      "train_events": [
+        "D00",
+        "D01",
+        "D02",
+        "D03",
+        "D04",
+        "D05"
+      ],
+      "calibration_events": [
+        "D06",
+        "D07"
+      ],
+      "test_events": [
+        "D08",
+        "D09",
+        "D10",
+        "D11"
+      ],
+      "temperatures": {
+        "image_local": 0.8500000000000001,
+        "image_cloud": 1.0,
+        "image_feature": 0.9000000000000001,
+        "text_local": 0.9500000000000001,
+        "text_cloud": 0.8500000000000001,
+        "text_feature": 0.8,
+        "sensor_local": 1.05,
+        "sensor_cloud": 1.25,
+        "sensor_feature": 1.25
+      },
+      "severity_estimator_train_r2": 0.13947568613805572,
+      "derived_wait_threshold_s": 206.78146186368906
+    },
+    "808": {
+      "train_events": [
+        "D00",
+        "D01",
+        "D02",
+        "D03",
+        "D04",
+        "D05"
+      ],
+      "calibration_events": [
+        "D06",
+        "D07"
+      ],
+      "test_events": [
+        "D08",
+        "D09",
+        "D10",
+        "D11"
+      ],
+      "temperatures": {
+        "image_local": 1.2000000000000002,
+        "image_cloud": 1.1,
+        "image_feature": 0.9500000000000001,
+        "text_local": 1.2000000000000002,
+        "text_cloud": 1.35,
+        "text_feature": 1.3,
+        "sensor_local": 1.2000000000000002,
+        "sensor_cloud": 1.1500000000000001,
+        "sensor_feature": 1.1500000000000001
+      },
+      "severity_estimator_train_r2": 0.12148545542503009,
+      "derived_wait_threshold_s": 219.28972449888252
+    },
+    "909": {
+      "train_events": [
+        "D00",
+        "D01",
+        "D02",
+        "D03",
+        "D04",
+        "D05"
+      ],
+      "calibration_events": [
+        "D06",
+        "D07"
+      ],
+      "test_events": [
+        "D08",
+        "D09",
+        "D10",
+        "D11"
+      ],
+      "temperatures": {
+        "image_local": 0.8500000000000001,
+        "image_cloud": 0.9000000000000001,
+        "image_feature": 0.9000000000000001,
+        "text_local": 0.9500000000000001,
+        "text_cloud": 0.8500000000000001,
+        "text_feature": 0.8500000000000001,
+        "sensor_local": 1.1,
+        "sensor_cloud": 1.25,
+        "sensor_feature": 1.2000000000000002
+      },
+      "severity_estimator_train_r2": 0.10922530198781044,
+      "derived_wait_threshold_s": 186.92220018499032
+    },
+    "1010": {
+      "train_events": [
+        "D00",
+        "D01",
+        "D02",
+        "D03",
+        "D04",
+        "D05"
+      ],
+      "calibration_events": [
+        "D06",
+        "D07"
+      ],
+      "test_events": [
+        "D08",
+        "D09",
+        "D10",
+        "D11"
+      ],
+      "temperatures": {
+        "image_local": 1.2000000000000002,
+        "image_cloud": 1.1500000000000001,
+        "image_feature": 1.1500000000000001,
+        "text_local": 1.1500000000000001,
+        "text_cloud": 1.1500000000000001,
+        "text_feature": 1.1,
+        "sensor_local": 1.1,
+        "sensor_cloud": 0.8,
+        "sensor_feature": 0.8
+      },
+      "severity_estimator_train_r2": 0.10629741657978409,
+      "derived_wait_threshold_s": 173.36017394001175
+    },
+    "1111": {
+      "train_events": [
+        "D00",
+        "D01",
+        "D02",
+        "D03",
+        "D04",
+        "D05"
+      ],
+      "calibration_events": [
+        "D06",
+        "D07"
+      ],
+      "test_events": [
+        "D08",
+        "D09",
+        "D10",
+        "D11"
+      ],
+      "temperatures": {
+        "image_local": 1.1,
+        "image_cloud": 1.1500000000000001,
+        "image_feature": 1.05,
+        "text_local": 1.1500000000000001,
+        "text_cloud": 1.3,
+        "text_feature": 1.2000000000000002,
+        "sensor_local": 1.0,
+        "sensor_cloud": 1.05,
+        "sensor_feature": 1.05
+      },
+      "severity_estimator_train_r2": 0.10293459450240461,
+      "derived_wait_threshold_s": 203.35815569409968
+    },
+    "1212": {
+      "train_events": [
+        "D00",
+        "D01",
+        "D02",
+        "D03",
+        "D04",
+        "D05"
+      ],
+      "calibration_events": [
+        "D06",
+        "D07"
+      ],
+      "test_events": [
+        "D08",
+        "D09",
+        "D10",
+        "D11"
+      ],
+      "temperatures": {
+        "image_local": 1.0,
+        "image_cloud": 1.05,
+        "image_feature": 0.9500000000000001,
+        "text_local": 1.05,
+        "text_cloud": 1.2000000000000002,
+        "text_feature": 1.1,
+        "sensor_local": 1.3,
+        "sensor_cloud": 1.35,
+        "sensor_feature": 1.35
+      },
+      "severity_estimator_train_r2": 0.10572987219410379,
+      "derived_wait_threshold_s": 210.86614775243822
+    },
+    "1313": {
+      "train_events": [
+        "D00",
+        "D01",
+        "D02",
+        "D03",
+        "D04",
+        "D05"
+      ],
+      "calibration_events": [
+        "D06",
+        "D07"
+      ],
+      "test_events": [
+        "D08",
+        "D09",
+        "D10",
+        "D11"
+      ],
+      "temperatures": {
+        "image_local": 1.2000000000000002,
+        "image_cloud": 1.25,
+        "image_feature": 1.1500000000000001,
+        "text_local": 1.0,
+        "text_cloud": 1.1,
+        "text_feature": 1.05,
+        "sensor_local": 1.1500000000000001,
+        "sensor_cloud": 1.05,
+        "sensor_feature": 0.9500000000000001
+      },
+      "severity_estimator_train_r2": 0.08217346300666228,
+      "derived_wait_threshold_s": 204.3404193447618
+    },
+    "1414": {
+      "train_events": [
+        "D00",
+        "D01",
+        "D02",
+        "D03",
+        "D04",
+        "D05"
+      ],
+      "calibration_events": [
+        "D06",
+        "D07"
+      ],
+      "test_events": [
+        "D08",
+        "D09",
+        "D10",
+        "D11"
+      ],
+      "temperatures": {
+        "image_local": 0.75,
+        "image_cloud": 0.9500000000000001,
+        "image_feature": 0.9000000000000001,
+        "text_local": 1.25,
+        "text_cloud": 1.25,
+        "text_feature": 1.2000000000000002,
+        "sensor_local": 1.1,
+        "sensor_cloud": 1.35,
+        "sensor_feature": 1.35
+      },
+      "severity_estimator_train_r2": 0.11418861346065678,
+      "derived_wait_threshold_s": 199.34259241097737
+    },
+    "1515": {
+      "train_events": [
+        "D00",
+        "D01",
+        "D02",
+        "D03",
+        "D04",
+        "D05"
+      ],
+      "calibration_events": [
+        "D06",
+        "D07"
+      ],
+      "test_events": [
+        "D08",
+        "D09",
+        "D10",
+        "D11"
+      ],
+      "temperatures": {
+        "image_local": 1.2000000000000002,
+        "image_cloud": 1.2000000000000002,
+        "image_feature": 1.1,
+        "text_local": 1.05,
+        "text_cloud": 1.05,
+        "text_feature": 1.05,
+        "sensor_local": 0.9500000000000001,
+        "sensor_cloud": 1.1,
+        "sensor_feature": 1.0
+      },
+      "severity_estimator_train_r2": 0.10673668120124946,
+      "derived_wait_threshold_s": 177.34743004776658
+    },
+    "1616": {
+      "train_events": [
+        "D00",
+        "D01",
+        "D02",
+        "D03",
+        "D04",
+        "D05"
+      ],
+      "calibration_events": [
+        "D06",
+        "D07"
+      ],
+      "test_events": [
+        "D08",
+        "D09",
+        "D10",
+        "D11"
+      ],
+      "temperatures": {
+        "image_local": 1.05,
+        "image_cloud": 1.05,
+        "image_feature": 1.0,
+        "text_local": 1.35,
+        "text_cloud": 1.35,
+        "text_feature": 1.35,
+        "sensor_local": 0.9000000000000001,
+        "sensor_cloud": 1.1500000000000001,
+        "sensor_feature": 1.1
+      },
+      "severity_estimator_train_r2": 0.11055994050934137,
+      "derived_wait_threshold_s": 224.50418018182322
+    },
+    "1717": {
+      "train_events": [
+        "D00",
+        "D01",
+        "D02",
+        "D03",
+        "D04",
+        "D05"
+      ],
+      "calibration_events": [
+        "D06",
+        "D07"
+      ],
+      "test_events": [
+        "D08",
+        "D09",
+        "D10",
+        "D11"
+      ],
+      "temperatures": {
+        "image_local": 0.9000000000000001,
+        "image_cloud": 1.05,
+        "image_feature": 0.9000000000000001,
+        "text_local": 0.9500000000000001,
+        "text_cloud": 0.9500000000000001,
+        "text_feature": 0.9500000000000001,
+        "sensor_local": 1.0,
+        "sensor_cloud": 1.05,
+        "sensor_feature": 1.05
+      },
+      "severity_estimator_train_r2": 0.09702723394508139,
+      "derived_wait_threshold_s": 196.6632687057302
+    },
+    "1818": {
+      "train_events": [
+        "D00",
+        "D01",
+        "D02",
+        "D03",
+        "D04",
+        "D05"
+      ],
+      "calibration_events": [
+        "D06",
+        "D07"
+      ],
+      "test_events": [
+        "D08",
+        "D09",
+        "D10",
+        "D11"
+      ],
+      "temperatures": {
+        "image_local": 1.1,
+        "image_cloud": 1.05,
+        "image_feature": 1.0,
+        "text_local": 0.8500000000000001,
+        "text_cloud": 0.9000000000000001,
+        "text_feature": 0.8,
+        "sensor_local": 0.9500000000000001,
+        "sensor_cloud": 1.0,
+        "sensor_feature": 0.9500000000000001
+      },
+      "severity_estimator_train_r2": 0.1317013825475054,
+      "derived_wait_threshold_s": 203.0584659641496
+    },
+    "1919": {
+      "train_events": [
+        "D00",
+        "D01",
+        "D02",
+        "D03",
+        "D04",
+        "D05"
+      ],
+      "calibration_events": [
+        "D06",
+        "D07"
+      ],
+      "test_events": [
+        "D08",
+        "D09",
+        "D10",
+        "D11"
+      ],
+      "temperatures": {
+        "image_local": 1.1500000000000001,
+        "image_cloud": 1.4500000000000002,
+        "image_feature": 1.35,
+        "text_local": 0.8500000000000001,
+        "text_cloud": 0.9500000000000001,
+        "text_feature": 0.8,
+        "sensor_local": 0.8500000000000001,
+        "sensor_cloud": 0.9000000000000001,
+        "sensor_feature": 0.8
+      },
+      "severity_estimator_train_r2": 0.09834316455906777,
+      "derived_wait_threshold_s": 182.69572734953562
+    },
+    "2020": {
+      "train_events": [
+        "D00",
+        "D01",
+        "D02",
+        "D03",
+        "D04",
+        "D05"
+      ],
+      "calibration_events": [
+        "D06",
+        "D07"
+      ],
+      "test_events": [
+        "D08",
+        "D09",
+        "D10",
+        "D11"
+      ],
+      "temperatures": {
+        "image_local": 0.9000000000000001,
+        "image_cloud": 0.9500000000000001,
+        "image_feature": 0.9000000000000001,
+        "text_local": 1.1500000000000001,
+        "text_cloud": 1.25,
+        "text_feature": 1.2000000000000002,
+        "sensor_local": 1.1500000000000001,
+        "sensor_cloud": 1.25,
+        "sensor_feature": 1.2000000000000002
+      },
+      "severity_estimator_train_r2": 0.10812622555609053,
+      "derived_wait_threshold_s": 206.70526446905862
+    }
+  },
+  "config": {
+    "seeds": [
+      101,
+      202,
+      303,
+      404,
+      505
+    ],
+    "model_version": "edgecloud-prototype-2.2.0",
+    "conformal_alpha": 0.1,
+    "conformal_score": "LAC (1 - p_true), split conformal, calibrated per method and scenario on calibration events under the same scenario",
+    "event_splits": {
+      "train": [
+        "D00",
+        "D01",
+        "D02",
+        "D03",
+        "D04",
+        "D05"
+      ],
+      "calibration": [
+        "D06",
+        "D07"
+      ],
+      "test": [
+        "D08",
+        "D09",
+        "D10",
+        "D11"
+      ]
+    },
+    "concurrency_k": 6,
+    "policy": {
+      "base_value": 0.28,
+      "uncertainty_weight": 0.34,
+      "quality_weight": 0.23,
+      "novelty_weight": 0.35,
+      "latency_penalty_per_second": 0.0004,
+      "byte_cost_weight": 0.11,
+      "conflict_threshold": 0.15,
+      "confirmed_threshold": 0.9,
+      "high_severity_threshold": 0.7
+    },
+    "baselines": {
+      "confidence_gate_threshold": 0.72,
+      "wait_if_uncertain_confidence": 0.9,
+      "derived_threshold": "median closed-form image-summary wait threshold at the reference latency penalty, over calibration windows with a pending image"
+    },
+    "latency_penalty_sweep": [
+      0.0,
+      0.0001,
+      0.0002,
+      0.0004,
+      0.0008,
+      0.0016,
+      0.01
+    ],
+    "admissibility": {
+      "max_cell_distance": 1,
+      "time_tolerance_s": {
+        "image": 7200.0,
+        "text": 1800.0,
+        "sensor": 600.0
+      }
+    },
+    "recency_tau_seconds": {
+      "image": 3600.0,
+      "text": 900.0,
+      "sensor": 300.0
+    },
+    "byte_model": {
+      "summary": {
+        "image": 224,
+        "text": 196,
+        "sensor": 184
+      },
+      "feature": {
+        "image": 2048,
+        "text": 1024,
+        "sensor": 768
+      },
+      "raw_range": {
+        "image": [
+          220000,
+          620000
+        ],
+        "text": [
+          350,
+          1800
+        ],
+        "sensor": [
+          220,
+          900
+        ]
+      }
+    },
+    "scenarios": [
+      {
+        "name": "normal",
+        "bandwidth_bps": 10000000,
+        "base_latency_s": 0.04,
+        "budget_bytes": 360000
+      },
+      {
+        "name": "low_bandwidth",
+        "bandwidth_bps": 256000,
+        "base_latency_s": 0.18,
+        "budget_bytes": 4000
+      },
+      {
+        "name": "delayed_imagery",
+        "bandwidth_bps": 2000000,
+        "base_latency_s": 0.1,
+        "budget_bytes": 32000,
+        "image_delay_prob": 0.7,
+        "image_delay_median_s": 900.0,
+        "delay_forecast_sigma": 0.4
+      },
+      {
+        "name": "intermittent_outage",
+        "bandwidth_bps": 512000,
+        "base_latency_s": 1.5,
+        "budget_bytes": 7500,
+        "outage_probability": 0.35,
+        "interruption_s": 12.0
+      },
+      {
+        "name": "image_missing",
+        "bandwidth_bps": 2000000,
+        "base_latency_s": 0.1,
+        "budget_bytes": 24000,
+        "missing_image": 1.0
+      },
+      {
+        "name": "text_missing",
+        "bandwidth_bps": 2000000,
+        "base_latency_s": 0.1,
+        "budget_bytes": 24000,
+        "missing_text": 1.0
+      },
+      {
+        "name": "noisy_text",
+        "bandwidth_bps": 2000000,
+        "base_latency_s": 0.1,
+        "budget_bytes": 24000,
+        "noisy_text": 0.35
+      },
+      {
+        "name": "contradictory_evidence",
+        "bandwidth_bps": 2000000,
+        "base_latency_s": 0.1,
+        "budget_bytes": 24000,
+        "contradictory_text": 0.35
+      },
+      {
+        "name": "misaligned_evidence",
+        "bandwidth_bps": 2000000,
+        "base_latency_s": 0.1,
+        "budget_bytes": 24000,
+        "misaligned_text": 0.3,
+        "spoofed_metadata": 0.25
+      }
+    ],
+    "wait_threshold_sweep_s": [
+      0,
+      30,
+      60,
+      120,
+      300,
+      600,
+      900,
+      1800
+    ],
+    "review_sensitivity": {
+      "alpha": [
+        0.01,
+        0.05,
+        0.1
+      ],
+      "conflict_threshold": [
+        0.15,
+        0.3,
+        0.5,
+        null
+      ]
+    },
+    "contested_budget": {
+      "protocol_file": "PROTOCOL_contested_budget.md",
+      "protocol_sha256": "f7fc197e9c2f319032d6ea9e9a936b09dbb7d3715718131e8bfda366e132fc6c",
+      "noise_scale": 1.75,
+      "budgets_bytes_per_window": [
+        700,
+        900,
+        1200,
+        1500,
+        1900
+      ],
+      "seeds": [
+        101,
+        202,
+        303,
+        404,
+        505,
+        606,
+        707,
+        808,
+        909,
+        1010
+      ],
+      "bandwidth_bps": 256000,
+      "base_latency_s": 0.18,
+      "methods": [
+        "all_summary",
+        "fixed_rule_window",
+        "fixed_confidence_gate",
+        "random_within_budget",
+        "greedy_uncertainty",
+        "greedy_value",
+        "proposed",
+        "fixed_rule"
+      ],
+      "primary_comparison": "proposed_minus_greedy_uncertainty",
+      "alpha_holm": 0.05,
+      "confirmation": {
+        "protocol_file": "PROTOCOL_contested_budget_confirmation.md",
+        "protocol_sha256": "9da3d0b2ae22d54a96dbf0cba6423da78eee44f4fe5add0ed146a6c2a6cc0d97",
+        "seeds": [
+          2001,
+          2002,
+          2003,
+          2004,
+          2005,
+          2006,
+          2007,
+          2008,
+          2009,
+          2010
+        ],
+        "methods": [
+          "greedy_uncertainty",
+          "greedy_value",
+          "proposed",
+          "proposed_summary_floor",
+          "greedy_value_summary_floor"
+        ],
+        "primary_comparison": "proposed_summary_floor_minus_greedy_uncertainty",
+        "secondary_comparison": "proposed_summary_floor_minus_greedy_value_summary_floor"
+      }
+    }
+  },
+  "runtime": {
+    "python": "3.12.14",
+    "platform": "macOS-26.6.2-arm64-arm-64bit",
+    "numpy": "2.3.5",
+    "pandas": "2.2.3",
+    "scikit-learn": "1.8.0",
+    "scipy": "1.17.0",
+    "matplotlib": "3.10.8"
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "task": "humanitarian",
+  "classes": [
+    "affected_individuals",
+    "infrastructure_and_utility_damage",
+    "not_humanitarian",
+    "other_relevant_information",
+    "rescue_volunteering_or_donation_effort"
+  ],
+  "rows": 8079,
+  "split_rows": {
+    "train": 6126,
+    "calibration": 998,
+    "test": 955
+  },
+  "class_counts_test": {
+    "0": 9,
+    "1": 81,
+    "2": 504,
+    "3": 235,
+    "4": 126
+  },
+  "split_source": "crisismmd_datasplit_agreed_label.zip (Ofli, Alam, Imran 2020)",
+  "encoder": "openai/clip-vit-base-patch32",
+  "pca": "text 8, image 10, fitted on the training split; text retains 0.328, image 0.328",
+  "records_sha256": "457fff7ee5d8701bfb7b6bfcd381efd9235ff43ca8190178bb59408745ab95ba"
+}

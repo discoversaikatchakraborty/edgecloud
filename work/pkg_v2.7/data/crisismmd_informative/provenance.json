@@ -1,0 +1,21 @@
+{
+  "task": "informative",
+  "classes": [
+    "informative",
+    "not_informative"
+  ],
+  "rows": 12708,
+  "split_rows": {
+    "train": 9601,
+    "calibration": 1573,
+    "test": 1534
+  },
+  "class_counts_test": {
+    "0": 1030,
+    "1": 504
+  },
+  "split_source": "crisismmd_datasplit_agreed_label.zip (Ofli, Alam, Imran 2020)",
+  "encoder": "openai/clip-vit-base-patch32",
+  "pca": "text 8, image 10, fitted on the training split; text retains 0.352, image 0.344",
+  "records_sha256": "d4e078c913b7ddc5255c50774fb13c36c7e5d69684320fbb05072ecba3897a4b"
+}
