@@ -102,20 +102,21 @@ REVIEWER 2  (Content: Accept 5; English: Good 3; References: Good 3; Overall 50-
                                                                     exactly first. Direction survives, magnitudes   rules get worse, as do four fusing methods.
                                                                     change; the single-modality rule wins partly    Reference [26] He and Garcia added for the
                                                                     because imbalance was left in place.            handling and the metric reading.
-       (c) Use an established CrisisMMD task      PARTIALLY FIXED   (c) The humanitarian label, defined by the      Sec. VIII-F "A Label the Paper Did Not
-           and baseline.                                            dataset's annotators, was run (restricted to   Choose": 11 of 21 and 3 of 7 rather than 15 of
-                                                                    its three most frequent categories because     21 and 7 of 7. The published multimodal
-                                                                    the machinery is fixed at three). The result   baseline of [5] EXCLUDES the damage task
-                                                                    weakens the paper's headline and is reported.  ("damage severity was applied only on
-                                                                    The published-baseline reproduction cannot     images, we do not consider this task"),
-                                                                    run because no published multimodal baseline   verified from the paper; the official split
-                                                                    exists for the damage task. The full archive   was obtained and inspected (3,526 records,
-                                                                    with images (CrisisMMD_v2.0.tar.gz) was        2,468/529/529). Derivation rerun 2026-10-09
-                                                                    obtained 2026-10-08 and the derivation rerun:   from the archive: 19 of 29 record columns
-                                                                    Table III reproduces to within 1.0 error.      byte-identical, image PCA components within
-                                                                                                                   0.13, Table III cells within 1.0 error, all 27
-                                                                                                                   paired signs preserved (results/
-                                                                                                                   reproduction_crisismmd/). Sec. X, XI state it.
+       (c) Use an established CrisisMMD task      FIXED             (c) Two things. The humanitarian label, defined  Sec. VIII-F: 11 of 21 and 3 of 7 rather than
+           and baseline.                                            by the dataset's annotators, was run through    15 of 21 and 7 of 7 on the annotators' label.
+                                                                    the budgeting comparison (restricted to its     Established tasks on the published agreed-
+                                                                    three most frequent categories because the      label splits (test sizes match [5] Table 1):
+                                                                    machinery is fixed at three); the result        informative 93.7% (text 87.9) vs published
+                                                                    weakens the headline and is reported. And the   84.4; humanitarian 88.9% (text 83.4) vs 78.4;
+                                                                    two established tasks of [5] were scored on     reduced 8/10-d form 91.5 and 87.7. Evidence:
+                                                                    the published splits with this paper's          results/established_tasks/. [5] full text
+                                                                    representation against the published            verified: the damage task is excluded
+                                                                    baselines, which it exceeds in every cell.      ("damage severity was applied only on
+                                                                    Scope: a representation check on their task,    images, we do not consider this task"), so
+                                                                    not a reproduction of their CNN/VGG16 models;   no published baseline exists for the paper's
+                                                                    no published baseline exists for the damage     own task. Derivation rerun from the full
+                                                                    task itself, so the budgeting comparison has    archive: Table III within 1.0 error, all 27
+                                                                    none to be scored against.                      paired signs preserved.
        (d) 82% of the test set is one             FIXED             (d) Seven pre-specified event rotations; the    Sec. VIII-C: "the test set is dominated by
            hurricane; severity fixed; no          (disclosed)       direction survives rotation, the per-           one hurricane, so we rotated the event list
            sensor modality; only 3 of 9                             condition pattern does not. Severity, sensor   through seven pre-specified assignments";
@@ -156,14 +157,13 @@ REVIEWER 2  (Content: Accept 5; English: Good 3; References: Good 3; Overall 50-
 ====================================================================================================
 SUMMARY
 ====================================================================================================
- FIXED            R1.1, R1.2, R2.1, R2.2, R2.3(a), R2.3(b), R2.3(d), R2.4, R2.5, R2.6    10
- PARTIALLY FIXED  R1.3 (deposit is the authors'), R2.3(c) (baseline does not exist at     3
-                  source; the task itself was run), R1.4 (emulator run; no hardware)
+ FIXED            R1.1, R1.2, R2.1, R2.2, R2.3(a)-(d), R2.4, R2.5, R2.6                 11
+ PARTIALLY FIXED  R1.3 (deposit is the authors'), R1.4 (emulator run; no hardware)        2
  NOT FIXED        none                                                                    0
 
 Two outcomes go against the paper's own narrative and are reported rather than softened: the
 threshold rule does not carry over on accuracy (R2.1); the     real-data ranking depends on the
-label chosen (R2.3c). A reviewer who asked for honesty about negative results gets it.
+label chosen (R2.3c), while the representation itself clears the published baselines on the established tasks. A reviewer who asked for honesty about negative results gets it.
 
 AUTHOR ACTIONS STILL OPEN
  1. Deposit the release and insert the identifier into \archivedoi (R1.3).
