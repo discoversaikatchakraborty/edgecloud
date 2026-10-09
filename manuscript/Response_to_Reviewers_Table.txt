@@ -1,7 +1,7 @@
 RESPONSE TO REVIEWERS -- POINT-BY-POINT TABLE
-Manuscript : Evidence Budgeting for Edge AI under Degraded Connectivity (ICCA, camera-ready)
+Manuscript : EdgeCloud: Evidence Budgeting for Edge AI under Degraded Connectivity: A Validation Study of Adaptivity, Admissibility and Adversarial Metadata on Synthetic and Real Disaster Data (ICCA, camera-ready)
 Reviewed   : EdgeCloud_Merged_IEEE.pdf, 17 pages (byte-identical to manuscript/Original_Submission.pdf)
-Current    : manuscript/EdgeCloud_ICCA_Revised_IEEEA4.pdf, 12 pages
+Current    : manuscript/EdgeCloud_ICCA_Revised_IEEEA4.pdf, 12 pages (emulator check added 2026-10-09)
 Date       : 2026-10-08
 Status key : FIXED            the comment is closed in the current manuscript, with the location given
              PARTIALLY FIXED  closed as far as the evidence or environment allows; what remains is stated
@@ -39,7 +39,7 @@ REVIEWER 1  (Content: Weak Accept 4; English: Very Good 4; References: Good 3; O
 
  R1.3  Dataset DOI placeholder should be          PARTIALLY FIXED   The red placeholder is gone. Section XI now       Sec. XI: repository URL, "at version 2.6.17,
        resolved before the final version.                          states what a reader can verify today: the      the version behind every result reported
-                                                                   repository, the exact version (2.6.17), and     here, whose SHA256SUMS records a digest for
+                                                                   repository, the exact version (2.6.17) and      here, whose SHA256SUMS records a digest for
                                                                    that SHA256SUMS digests 113 files. Both facts    each of its 113 files". Verified 2026-10-08
                                                                    were verified against the archived repository   against the archived repo: CITATION.cff says
                                                                    today. What remains is the deposit itself,      2.6.17; SHA256SUMS has exactly 113 lines.
@@ -50,13 +50,14 @@ REVIEWER 1  (Content: Weak Accept 4; English: Very Good 4; References: Good 3; O
                                                                                                                    paper names five authors; reconcile before
                                                                                                                    deposit.
 
- R1.4  Validation on actual edge and             NOT FIXED         No edge hardware, radio testbed or emulator     Sec. X: "no hardware testbed"; Sec. XII names
-       communication hardware would                (bounded)        was available. The paper claims nothing that    it as the primary open item. The optional
-       significantly strengthen the work.                          would need one, and names this as the primary   emulator run (item F) needs Mahimahi link
-                                                                   open item. Added instead: packet loss with      shells, not installed on this machine.
-                                                                   retransmission and replayed measured LTE
-                                                                   capacity traces (Sec. VII), which narrow the
-                                                                   link model without claiming to close it.
+ R1.4  Validation on actual edge and             PARTIALLY FIXED   A real transport was put under the link model:  Sec. VII "Emulator check": 2,890 TCP
+       communication hardware would                (emulator, no     every byte-model payload sent over TCP through  transfers in 17 cells through mm-delay,
+       significantly strengthen the work.          hardware)         Mahimahi link shells on the three constant      mm-loss and mm-link, none failed. Byte term
+                                                                     links, five loss rates and the three LTE        of (3) confirmed (raw record 14.05 s vs
+                                                                     traces. No edge device, radio or energy         13.35 s modelled at 256 kbps); fixed overhead
+                                                                     measurement was available, so hardware          one RTT short (+0.20-0.24 s at 180 ms RTT);
+                                                                     validation itself remains open and Sec. XII     slow start and loss recovery not modelled.
+                                                                     says so.                                        Log: results/emulator/transfers.csv.
 
 ====================================================================================================
 REVIEWER 2  (Content: Accept 5; English: Good 3; References: Good 3; Overall 50-60; Accept)
@@ -107,10 +108,14 @@ REVIEWER 2  (Content: Accept 5; English: Good 3; References: Good 3; Overall 50-
                                                                     the machinery is fixed at three). The result   baseline of [5] EXCLUDES the damage task
                                                                     weakens the paper's headline and is reported.  ("damage severity was applied only on
                                                                     The published-baseline reproduction cannot     images, we do not consider this task"),
-                                                                    run, and today the reason was established at   verified from the paper today; the official
-                                                                    source: no published multimodal baseline       split was obtained and inspected (3,526
-                                                                    exists for the damage task.                    records, 2,468/529/529); image files absent.
-                                                                                                                   Sec. X states this.
+                                                                    run because no published multimodal baseline   verified from the paper; the official split
+                                                                    exists for the damage task. The full archive   was obtained and inspected (3,526 records,
+                                                                    with images (CrisisMMD_v2.0.tar.gz) was        2,468/529/529). Derivation rerun 2026-10-09
+                                                                    obtained 2026-10-08 and the derivation rerun:   from the archive: 19 of 29 record columns
+                                                                    Table III reproduces to within 1.0 error.      byte-identical, image PCA components within
+                                                                                                                   0.13, Table III cells within 1.0 error, all 27
+                                                                                                                   paired signs preserved (results/
+                                                                                                                   reproduction_crisismmd/). Sec. X, XI state it.
        (d) 82% of the test set is one             FIXED             (d) Seven pre-specified event rotations; the    Sec. VIII-C: "the test set is dominated by
            hurricane; severity fixed; no          (disclosed)       direction survives rotation, the per-           one hurricane, so we rotated the event list
            sensor modality; only 3 of 9                             condition pattern does not. Severity, sensor   through seven pre-specified assignments";
@@ -130,12 +135,14 @@ REVIEWER 2  (Content: Accept 5; English: Good 3; References: Good 3; Overall 50-
                                                                    are separate sections with the distinction      well separated, which explains error rates
                                                                    stated. Easy data acknowledged.                 below 1%".
 
- R2.5  Network model abstract: latency only,     PARTIALLY FIXED   Two experiments narrow the link model: packet   Sec. VII: loss at 10% takes the policy's tail
-       no protocol stack, contention or edge                       loss with retransmission, and replayed          0.57 -> 4.70 s against 0.09 -> 0.14 s for the
-       hardware. Scale back claims or                              measured LTE capacity traces. Deployment        fixed rule; measured traces inflate tail
-       validate with an emulator or testbed.                       claims scaled back everywhere. No emulator or   latency up to 8.7x. Sec. X: "no protocol
-                                                                   testbed was available; stated rather than       stack ... no hardware testbed". Emulator not
-                                                                   worked around.                                  available (see R1.4).
+ R2.5  Network model abstract: latency only,     FIXED             Claims scaled back everywhere and the            Sec. VII: loss at 10% takes the policy's tail
+       no protocol stack, contention or edge                       emulator validation the reviewer offered as     0.57 -> 4.70 s; measured traces inflate tail
+       hardware. Scale back claims or                              the alternative was run: a TCP path through     latency up to 8.7x; emulator: byte term
+       validate with an emulator or testbed.                       Mahimahi link shells (delay, loss, measured     confirmed, additive constant one RTT short,
+                                                                   LTE traces). The model's byte term is           loss term misses both ways on the 10 Mbps
+                                                                   confirmed; its fixed overhead, slow start and   link, trace ordering matches. Sec. X now
+                                                                   loss recovery are shown to be missing and are   lists what is still absent: MAC layer,
+                                                                   stated as limitations with numbers.             routing, contention, radio, hardware.
 
  R2.6  Presentation: very long, a narrative      FIXED             17 pages -> 12. Every instance of the draft     "earlier version": 6 occurrences -> 0 (the
        audit; internal and draft text                              text the reviewer quoted is gone, the last      last one removed today). "journal's
@@ -149,13 +156,13 @@ REVIEWER 2  (Content: Accept 5; English: Good 3; References: Good 3; Overall 50-
 ====================================================================================================
 SUMMARY
 ====================================================================================================
- FIXED            R1.1, R1.2, R2.1, R2.2, R2.3(a), R2.3(b), R2.3(d), R2.4, R2.6          9
+ FIXED            R1.1, R1.2, R2.1, R2.2, R2.3(a), R2.3(b), R2.3(d), R2.4, R2.5, R2.6    10
  PARTIALLY FIXED  R1.3 (deposit is the authors'), R2.3(c) (baseline does not exist at     3
-                  source; the task itself was run), R2.5 (narrowed, not closed)
- NOT FIXED        R1.4 (no hardware; claims bounded instead)                              1
+                  source; the task itself was run), R1.4 (emulator run; no hardware)
+ NOT FIXED        none                                                                    0
 
 Two outcomes go against the paper's own narrative and are reported rather than softened: the
-threshold rule does not carry over on accuracy (R2.1), and the real-data ranking depends on the
+threshold rule does not carry over on accuracy (R2.1); the     real-data ranking depends on the
 label chosen (R2.3c). A reviewer who asked for honesty about negative results gets it.
 
 AUTHOR ACTIONS STILL OPEN
@@ -163,3 +170,4 @@ AUTHOR ACTIONS STILL OPEN
  2. Reconcile CITATION.cff author fields with the five authors named on the paper (R1.3).
  3. Paste the conference copyright line into \copyrightline, then run manuscript/latex/build.sh.
  4. Run an institutional iThenticate or Turnitin check (the one review item that cannot be done here).
+ 5. Add scripts/emulator/ and results/emulator/ to the deposited release so the emulator check is reproducible (R1.4, R2.5).

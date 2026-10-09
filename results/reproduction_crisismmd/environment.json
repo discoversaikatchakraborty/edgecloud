@@ -1,0 +1,18 @@
+{
+ "date": "2026-10-09",
+ "source_archive": "CrisisMMD_v2.0.tar.gz (sha256 351b9be6123a5d50..., 1,902,053,684 bytes, obtained by the author 2026-10-08)",
+ "images_in_archive": 18082,
+ "images_resolved": 3526,
+ "device": "mps (cpu agrees to 5e-5)",
+ "torch": "2.14.1",
+ "transformers": "5.19.0",
+ "sklearn": "1.8.0",
+ "pillow": "12.3.0",
+ "numpy": "2.3.5",
+ "pandas": "2.2.3",
+ "python": "3.12.14",
+ "machine": "arm64",
+ "script": "upstream/prototype_v2.3/prepare_crisismmd.py, unchanged, run from an isolated copy; then run_real_data.py unchanged on the re-derived records",
+ "frozen_records_sha256": "b3e96ca8ad854da867935a871f29ea67a4484d3fc79b3d170498c90364a39588",
+ "rerun_records_sha256": "2ba9ac47a9a4f4a8e4d872c5df296e3a0bba80276cd6fd7118264fd8a4c21dc4"
+}

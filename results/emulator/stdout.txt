@@ -1,0 +1,17 @@
+cell: low_bandwidth_loss0 delay 90 loss 0.0
+cell: low_bandwidth_loss0.01 delay 90 loss 0.01
+cell: low_bandwidth_loss0.02 delay 90 loss 0.02
+cell: low_bandwidth_loss0.05 delay 90 loss 0.05
+cell: low_bandwidth_loss0.1 delay 90 loss 0.1
+cell: normal_loss0 delay 20 loss 0.0
+cell: normal_loss0.01 delay 20 loss 0.01
+cell: normal_loss0.02 delay 20 loss 0.02
+cell: normal_loss0.05 delay 20 loss 0.05
+cell: normal_loss0.1 delay 20 loss 0.1
+cell: delayed_imagery_loss0 delay 50 loss 0.0
+cell: trace_Verizon-LTE-short.up delay 90 loss 0.0
+cell: constmatched_Verizon-LTE-short.up delay 90 loss 0.0
+cell: trace_Verizon-LTE-driving.up delay 90 loss 0.0
+cell: constmatched_Verizon-LTE-driving.up delay 90 loss 0.0
+cell: trace_TMobile-LTE-driving.up delay 90 loss 0.0
+cell: constmatched_TMobile-LTE-driving.up delay 90 loss 0.0
