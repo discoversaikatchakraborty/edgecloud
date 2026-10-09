@@ -1,5 +1,6 @@
 #!/bin/bash
-# Assemble the v2.6.18 deposit: the frozen v2.6.17 package plus the three new evidence directories,
+# Assemble the v2.6.18 deposit: the frozen v2.6.17 package plus the three new evidence directories, the v2.7
+# copy (N-class core, predictive-contribution term, published-task records and all v2.7 results),
 # the completed CITATION.cff and a regenerated SHA256SUMS. Nothing in v2.6.17 is modified.
 set -e
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
@@ -14,6 +15,11 @@ cp "$ROOT"/scripts/crisismmd_compare_records.py "$ROOT"/scripts/crisismmd_compar
 cp -R "$ROOT/results/reproduction_crisismmd/." "$OUT/reproduction_crisismmd/results/"
 cp "$ROOT/scripts/crisismmd_established_tasks.py" "$OUT/established_tasks/"
 cp -R "$ROOT/results/established_tasks/." "$OUT/established_tasks/results/"
+mkdir -p "$OUT/v2.7"
+cp "$ROOT"/work/pkg_v2.7/*.py "$OUT/v2.7/"
+cp -R "$ROOT/work/pkg_v2.7/results_v27" "$OUT/v2.7/results_v27"
+cp -R "$ROOT/work/pkg_v2.7/data/crisismmd_informative" "$ROOT/work/pkg_v2.7/data/crisismmd_humanitarian" "$OUT/v2.7/"
+rm -rf "$OUT/v2.7/results_v27/synthetic20_pc_off/record_level_results.csv.gz" "$OUT/v2.7/results_v27/synthetic20_pc_on/record_level_results.csv.gz" "$OUT/v2.7/results_v27"/*/evidence_envelopes_proposed.jsonl.gz
 cp "$ROOT/manuscript/deposit/CITATION.cff" "$OUT/CITATION.cff"
 cp "$ROOT/manuscript/deposit/RELEASE_NOTES_v2.6.18.txt" "$OUT/RELEASE_NOTES.txt"
 (cd "$OUT" && find . -type f ! -name SHA256SUMS ! -name .DS_Store | LC_ALL=C sort | xargs shasum -a 256 > SHA256SUMS)

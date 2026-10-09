@@ -19,6 +19,9 @@ from matplotlib.ticker import FuncFormatter
 
 ROOT = Path(__file__).resolve().parents[1]
 RES = ROOT / "upstream" / "prototype_v2.3" / "results"
+# Fig. 1 can be drawn from a twenty-seed rerun of the sweeps (item 8): point FIG1_RES at that results dir.
+import os
+FIG1_RES = Path(os.environ["FIG1_RES"]) if os.environ.get("FIG1_RES") else RES
 OUT = ROOT / "results" / "figures_colwidth"; OUT.mkdir(parents=True, exist_ok=True)
 COL = 3.45
 BLUE, ORANGE, VIOLET = "#2a78d6", "#eb6834", "#4a3aa7"
@@ -45,14 +48,14 @@ def frame(ax, xgrid=False):
 
 def save(fig, name):
     fig.savefig(OUT / name, bbox_inches="tight", pad_inches=0.02, facecolor="white"); plt.close(fig)
-    print("wrote", (OUT / name).relative_to(ROOT))
+    print("wrote", OUT / name)
 
 
 def fig_delay():
-    sweep = pd.read_csv(RES / "latency_penalty_sweep.csv"); tsweep = pd.read_csv(RES / "wait_threshold_sweep.csv")
+    sweep = pd.read_csv(FIG1_RES / "latency_penalty_sweep.csv"); tsweep = pd.read_csv(FIG1_RES / "wait_threshold_sweep.csv")
     tsweep = tsweep[tsweep.recency_decay == True] if "recency_decay" in tsweep else tsweep
-    d = pd.read_csv(RES / "confidence_intervals.csv"); d = d[d.scenario == "delayed_imagery"]
-    fig, ax = plt.subplots(figsize=(COL, 1.7))
+    d = pd.read_csv(FIG1_RES / "confidence_intervals.csv"); d = d[d.scenario == "delayed_imagery"]
+    fig, ax = plt.subplots(figsize=(COL, 1.6))
     s = sweep.sort_values("p95_latency_s_mean")
     ax.plot(s.p95_latency_s_mean, s.errors_mean, "-o", color=BLUE, lw=1.3, ms=3.6, mec="white", mew=0.6, zorder=4,
             label="Proposed policy, latency penalty swept")
@@ -71,7 +74,7 @@ def fig_delay():
                     ecolor=VIOLET if star else GREY, elinewidth=0.7, capsize=1.8, mec="white", mew=0.5, zorder=5)
         ax.annotate(lab, (r.p95_latency_s_mean, r.errors_mean), textcoords="offset points", xytext=off, ha=ha, va=va,
                     fontsize=F - 0.5, color=VIOLET if star else INK)
-    ax.set_xscale("log"); ax.set_xlim(0.12, 5200); ax.set_ylim(5.0, 23.5); frame(ax)
+    ax.set_xscale("log"); ax.set_xlim(0.12, 5200); ax.set_ylim(5.0, max(23.5, float(d[d.method.isin(marks)].errors_ci_high.max()) + 1.0)); frame(ax)
     ax.set_xlabel("95th-percentile modelled latency, s (log scale)"); ax.set_ylabel("Misclassified windows of 720")
     ax.legend(frameon=False, loc="upper left", handletextpad=0.4, borderaxespad=0.2, handlelength=2.0)
     save(fig, "fig_delay_frontier.png")
@@ -80,7 +83,7 @@ def fig_delay():
 def fig_contested():
     s = pd.read_csv(RES / "contested_budget_summary.csv"); pr = pd.read_csv(RES / "contested_budget_paired.csv")
     pr = pr[(pr.comparison == "proposed_minus_greedy_uncertainty") & (pr.metric == "errors")].sort_values("budget_bytes")
-    fig, axes = plt.subplots(1, 2, figsize=(COL, 1.75), gridspec_kw={"width_ratios": [1.5, 1], "wspace": 0.5})
+    fig, axes = plt.subplots(1, 2, figsize=(COL, 1.65), gridspec_kw={"width_ratios": [1.5, 1], "wspace": 0.5})
     ax = axes[0]
     context = [("all_summary", "Summaries", 3), ("fixed_confidence_gate", "Conf. gate", 6),
                ("fixed_rule_window", "Fixed/window", -6)]
@@ -130,7 +133,7 @@ def fig_real():
     MARK = {"image_only": ("*", 12), "text_only": ("s", 5), "fixed_rule": ("^", 5.5), "random_within_budget": ("v", 5.5),
             "fixed_confidence_gate": ("p", 5.5), "greedy_uncertainty": ("X", 5.5), "greedy_value": ("D", 5),
             "proposed": ("o", 10), "fixed_compression": ("P", 5.5), "cloud_transmit_all": ("h", 5.5)}
-    fig, ax = plt.subplots(figsize=(COL, 2.0))
+    fig, ax = plt.subplots(figsize=(COL, 1.8))
     ax.axhline(BASELINE, color=GREY, lw=0.9, ls=(0, (3, 3)), zorder=1)
     ax.annotate("majority-class baseline, 494", (3.2e5, BASELINE), fontsize=F - 1, color=MUTED, ha="right", va="bottom")
     d = d.set_index("method").loc[ORDER].reset_index()

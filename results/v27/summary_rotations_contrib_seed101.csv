@@ -1,0 +1,8 @@
+rotation,cal_events,n_cal,raw_image,raw_text,raw_sensor,rel_image,rel_text,rel_sensor
+0,mexico_earthquake+srilanka_floods,273,0.02,0.0,0.0,1.0,0.0,0.0
+1,srilanka_floods+hurricane_irma,890,0.187,0.0,0.0,1.0,0.0,0.0
+2,hurricane_irma+iraq_iran_earthquake,968,0.123,0.0,0.0,1.0,0.0,0.0
+3,iraq_iran_earthquake+hurricane_harvey,1065,0.348,0.138,0.0,1.0,0.397,0.0
+4,hurricane_harvey+hurricane_maria,1754,0.307,0.102,0.002,1.0,0.333,0.006
+5,hurricane_maria+california_wildfires,1393,0.235,0.168,0.0,1.0,0.713,0.0
+6,california_wildfires+mexico_earthquake,709,0.034,0.0,0.0,1.0,0.0,0.0

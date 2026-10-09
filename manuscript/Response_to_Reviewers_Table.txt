@@ -116,6 +116,12 @@ REVIEWER 2  (Content: Accept 5; English: Good 3; References: Good 3; Overall 50-
                                                                     no published baseline exists for the damage     own task. Derivation rerun from the full
                                                                     task itself, so the budgeting comparison has    archive: Table III within 1.0 error, all 27
                                                                     none to be scored against.                      paired signs preserved.
+                                                                    Then (2026-10-09, v2.7): the budgeting
+                                                                    comparison itself ran on both published tasks
+                                                                    through an N-class copy of the pipeline:
+                                                                    transmit-all 91.4% and 86.3% against the
+                                                                    published 84.4% and 78.4%, the damage-label
+                                                                    condition pattern repeating (Sec. VIII-G).
        (d) 82% of the test set is one             FIXED             (d) Seven pre-specified event rotations; the    Sec. VIII-C: "the test set is dominated by
            hurricane; severity fixed; no          (disclosed)       direction survives rotation, the per-           one hurricane, so we rotated the event list
            sensor modality; only 3 of 9                             condition pattern does not. Severity, sensor   through seven pre-specified assignments";
