@@ -154,8 +154,40 @@ METHOD = {'Proposed': 'proposed', 'Fixed rule': 'fixed_rule',
           'Derived threshold': 'derived_threshold', 'Confidence gate': 'fixed_confidence_gate',
           'Fixed compression': 'fixed_compression',
           'Random within budget': 'random_within_budget', 'Image only': 'image_only',
-          'Text only': 'text_only', 'Fixed rule + admissibility': 'fixed_rule_admissible'}
+          'Text only': 'text_only', 'Fixed rule + admissibility': 'fixed_rule_admissible',
+          # The real-data tables name the solver arms the way the manuscript prints them.
+          # 'Proposed (exact knapsack)' is the same package policy as 'Proposed': core.py
+          # solves the budgeted selection exactly and the longer name is the manuscript's
+          # way of distinguishing it from the two greedy arms beside it in the table.
+          'Proposed (exact knapsack)': 'proposed',
+          'Greedy by uncertainty': 'greedy_uncertainty',
+          'Greedy, proposed utility': 'greedy_value'}
 METRIC = {'errors': 'errors', 'bytes': 'mean_bytes', 'p95': 'p95_latency_s'}
+
+
+@functools.lru_cache(maxsize=None)
+def _seed_experiment(seed: int):
+    """The whole return tuple of core.experiment for one seed, cached.
+
+    _seed_summary keeps only element 0, the per-scenario method summaries. Item E's
+    ablation table needs element 3, which core.experiment already computes on the same pass,
+    so discarding it meant the ablations could not be recomputed at twenty seeds without
+    paying for the whole benchmark again.
+    """
+    if _UPSTREAM not in sys.path:
+        sys.path.insert(0, _UPSTREAM)
+    cwd = os.getcwd()
+    os.chdir(_UPSTREAM)
+    try:
+        import core
+        return core.experiment(int(seed), log=lambda *a, **k: None)
+    finally:
+        os.chdir(cwd)
+
+
+def seed_ablations(seed: int):
+    """The ablation rows core.experiment produces for one seed."""
+    return _seed_experiment(seed)[3]
 
 
 @functools.lru_cache(maxsize=None)
@@ -165,15 +197,7 @@ def _seed_summary(seed: int):
     core.py reads its configuration and data by relative path, so the working directory has
     to be the package root while it runs.
     """
-    if _UPSTREAM not in sys.path:
-        sys.path.insert(0, _UPSTREAM)
-    cwd = os.getcwd()
-    os.chdir(_UPSTREAM)
-    try:
-        import core
-        return core.experiment(int(seed), log=lambda *a, **k: None)[0]
-    finally:
-        os.chdir(cwd)
+    return _seed_experiment(seed)[0]
 
 
 def _run_synthetic_condition(condition: str, seeds, methods) -> dict:
@@ -241,7 +265,7 @@ def _rotation_frame(rotation: int):
 
 _TEXT_FULL = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
                           'data', 'crisismmd_text_full.npz')
-_ANNOTATIONS = ('/Users/arlina/Downloads/all_projects/12_edgewait/data_real/ex/'
+_ANNOTATIONS = ('/Users/arlina/Downloads/all_projects/Tier-Ready/12_edgewait/data_real/ex/'
                 'CrisisMMD_v2.0/annotations')
 
 
@@ -359,7 +383,11 @@ def _run_real_budgeting(split, condition: str, seed: int, methods,
     cwd = os.getcwd()
     os.chdir(_UPSTREAM)
     try:
-        models = core.fit_models(train, cal, seed)
+        # class_weight carries item A's chosen class handling for item C. It used to be
+        # accepted and then dropped on the floor here, so the handled variant silently
+        # reproduced the unhandled one. 'none' still delegates to the package's own
+        # fit_models, so the current column is the package code path unchanged.
+        models = fit_models_handled(core, train, cal, seed, class_weight or 'none')
         cv = core.attach_probabilities(cal, models)
         tv = core.attach_probabilities(test, models)
         sc = rrd.scenario(CONDITION.get(condition, condition))
@@ -394,3 +422,102 @@ def _run_real_budgeting(split, condition: str, seed: int, methods,
         return out
     finally:
         os.chdir(cwd)
+
+
+# ---------------------------------------------------------------------------
+# Item C: class handling in the real-data pipeline
+# ---------------------------------------------------------------------------
+# core.fit_models builds every per-modality model with no class handling. Item C has to
+# apply item A's chosen handling to all of them. upstream/prototype_v2.3 is reproduced
+# unchanged so that its published numbers stay checkable against it, so the variant is
+# built here instead of edited into core.py. Everything other than the class handling is
+# mirrored from core.fit_models line for line: the same estimators, the same
+# hyperparameters, the same absence of feature scaling, the same quantised PCA encoder for
+# the feature pathway, the same temperature tuning on calibration rows and the same ridge
+# severity estimator. The handled and unhandled variants therefore differ in exactly one
+# factor, which is what makes the side-by-side comparison interpretable.
+#
+# The representation is NOT changed here. Item A's best cell also used the full 512
+# dimension text embedding, but Rerun_Spec item C asks only for the class handling to
+# carry over. The deployed pipeline's shipped components are kept so that the only moved
+# factor is class handling; the representation finding stays item A's, reported separately.
+
+def balanced_resample(X, y, seed: int):
+    """Oversample minority classes to the majority count.
+
+    Identical to item A's balanced_resample, so the handling applied to the budgeting
+    pipeline is the same operation that was selected in the diagnostic.
+    """
+    r = np.random.default_rng(int(seed))
+    classes, counts = np.unique(y, return_counts=True)
+    target = int(counts.max())
+    idx = []
+    for c in classes:
+        ci = np.flatnonzero(y == c)
+        idx.append(r.choice(ci, size=target, replace=len(ci) < target))
+    idx = np.concatenate(idx)
+    r.shuffle(idx)
+    return X[idx], y[idx]
+
+
+def fit_models_handled(core, train, cal, seed: int, class_handling: str):
+    """core.fit_models with item A's class handling applied to every per-modality model.
+
+    class_handling is 'none', 'class_weight' or 'resample'. 'none' delegates straight to
+    core.fit_models so the unhandled variant is literally the package's own code path and
+    cannot drift from it.
+    """
+    from sklearn.linear_model import LogisticRegression, Ridge
+
+    if class_handling == 'none':
+        return core.fit_models(train, cal, seed)
+    if class_handling not in ('class_weight', 'resample'):
+        raise ValueError(f'unknown class handling: {class_handling!r}')
+    cw = 'balanced' if class_handling == 'class_weight' else None
+    resample = class_handling == 'resample'
+
+    ytr, ycal = train.y.to_numpy(), cal.y.to_numpy()
+    models = {'temps': {}}
+    for mi, m in enumerate(core.MODALITIES):
+        xtr, xcal = core.stack(train, f'{m}_x'), core.stack(cal, f'{m}_x')
+        ld = core.LOCAL_DIMS[m]
+
+        def _fit(est, X, y, s=seed, mi=mi):
+            # one resample draw per (modality, pathway) call, seeded from the run seed and
+            # the modality index so the three modalities do not share one draw
+            if resample:
+                X, y = balanced_resample(X, y, s * 100 + mi)
+            return est.fit(X, y)
+
+        local = _fit(LogisticRegression(max_iter=700, C=0.75, class_weight=cw,
+                                        random_state=seed), xtr[:, :ld], ytr)
+        cloud = _fit(LogisticRegression(max_iter=700, C=1.15, class_weight=cw,
+                                        random_state=seed), xtr, ytr)
+        # the quantised PCA encoder is fitted on the unresampled training rows: it is the
+        # transport code path, not a classifier, and resampling it would change what the
+        # feature action transmits rather than how the model handles imbalance
+        mu = xtr.mean(axis=0)
+        _, _, vt = np.linalg.svd(xtr - mu, full_matrices=False)
+        comps = vt[:core.FEATURE_DIMS[m]]
+        scale = np.abs((xtr - mu) @ comps.T).max(axis=0) / 127.0
+
+        def enc(x, mu=mu, comps=comps, scale=scale):
+            return np.clip(np.round(((x - mu) @ comps.T) / scale), -127, 127) * scale
+
+        feat = _fit(LogisticRegression(max_iter=700, C=1.15, class_weight=cw,
+                                       random_state=seed), enc(xtr), ytr)
+        models[m] = {'local': local, 'cloud': cloud, 'feature': feat, 'encode': enc}
+        models['temps'][(m, 'local')] = core.tune_temperature(
+            local.predict_proba(xcal[:, :ld]), ycal)
+        models['temps'][(m, 'cloud')] = core.tune_temperature(cloud.predict_proba(xcal), ycal)
+        models['temps'][(m, 'feature')] = core.tune_temperature(
+            feat.predict_proba(enc(xcal)), ycal)
+
+    ptr = np.hstack([core.temperature_scale(
+        models[m]['local'].predict_proba(core.stack(train, f'{m}_x')[:, :core.LOCAL_DIMS[m]]),
+        models['temps'][(m, 'local')]) for m in core.MODALITIES])
+    models['severity'] = Ridge(alpha=1.0).fit(ptr, train.severity_true.to_numpy())
+    models['severity_mean'] = float(train.severity_true.mean())
+    models['severity_train_r2'] = float(
+        models['severity'].score(ptr, train.severity_true.to_numpy()))
+    return models

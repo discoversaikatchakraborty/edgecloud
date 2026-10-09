@@ -1,0 +1,207 @@
+{
+  "A": {
+    "question": "Is the majority-class text classifier a property of the task, of the 8-component reduction or of class imbalance?",
+    "protocol": "itemA_protocol_rev1.json",
+    "protocol_sha256": "d85db896ad1dc3135009d2a68801eb4a9983d7f8d7d9fdc2682b5c02a90a7e3c",
+    "seeds": "[0,1,2,3,4]; item A scores every cell against a majority baseline computed on the same records, never against a published value, so it does not need the package seed list",
+    "best_cell": {
+      "representation": "full",
+      "class_handling": "resample",
+      "classifier": "package_edge",
+      "rotation0_mean_macro_f1": 0.451974679222757
+    },
+    "primary_rule_outcome": false,
+    "rotations_passing": "0 of 7, 5 required",
+    "secondary_reading": {
+      "outcome": true,
+      "cells": [
+        "pca32|none|logreg",
+        "pca32|none|package_edge",
+        "full|none|package_edge"
+      ]
+    },
+    "what_it_supports": "Under the pre-registered primary rule the text pathway is NOT informative under any tested representation: 0 of 7 rotations. The best cell, the full 512-dimension CLIP embedding with balanced resampling, raises macro-F1 over the majority classifier in all 7 rotations but its accuracy is below the majority baseline in every one. Read the looser way Rerun_Spec words it, three cells qualify. Both readings are recorded; neither is discarded."
+  },
+  "B": {
+    "question": "Does the real-data comparison survive a label defined by the dataset annotators rather than by this paper?",
+    "protocol": "itemB_protocol_rev1.json",
+    "seeds": "CONFIG[\"seeds\"] = [101,202,303,404,505]",
+    "label": "text_human",
+    "categories_kept": {
+      "other_relevant_information": 0,
+      "infrastructure_and_utility_damage": 1,
+      "rescue_volunteering_or_donation_effort": 2
+    },
+    "categories_dropped": {
+      "not_humanitarian": 398,
+      "injured_or_dead_people": 187,
+      "affected_individuals": 150,
+      "vehicle_damage": 21,
+      "missing_or_found_people": 7
+    },
+    "rows": "2,763 of 3,526 records, 78.4 per cent",
+    "optimizer_ahead": {
+      "current": "11 of 21",
+      "handled": "8 of 21"
+    },
+    "per_condition": {
+      "current": {
+        "normal": "3 of 7",
+        "low_bandwidth": "3 of 7",
+        "misaligned": "5 of 7"
+      },
+      "handled": {
+        "normal": "4 of 7",
+        "low_bandwidth": "2 of 7",
+        "misaligned": "2 of 7"
+      }
+    },
+    "blocked": {
+      "status": "BLOCKED",
+      "grounds": [
+        "The official CrisisMMD train/dev/test split is not present on this machine. Only annotations/*.tsv is held; the corpus Readme names the split as a separate archive, crisismmd_datasplit_all.zip, not retrieved.",
+        "The published baseline values of Ofli, Alam and Imran (ISCRAM 2020) are not held on this machine in any retained form, so the gap has no verified reference to be measured against.",
+        "The image files are absent; only derived CLIP image embeddings are retained, so no baseline can be computed from pixels."
+      ],
+      "to_unblock": "Supply crisismmd_datasplit_all.zip and the published baseline table as files in the project."
+    },
+    "not_run": {
+      "informative_vs_not": {
+        "status": "NOT RUN",
+        "reason": "Two classes. The decision machinery in upstream/prototype_v2.3/core.py is fixed at three: CLASSES and CLASS_NAMES hold three entries, evidence fusion falls back to a uniform 1/3, and the conformal set indexes range(3) over the membership matrix. upstream is reproduced unchanged so its published numbers stay checkable, so it was not edited to admit a two-class task."
+      },
+      "humanitarian_eight_class": {
+        "status": "NOT RUN",
+        "reason": "Eight classes in the annotations, blocked by the same fixed three-class machinery. The three most frequent categories were run instead and the restriction is reported, not hidden."
+      }
+    },
+    "what_it_supports": "This is the finding that goes against the revision. On the label the paper chose, image_damage, the optimizer is ahead of the fixed rule in 15 of 21 comparisons and in 7 of 7 under normal connectivity. On the annotators\u2019 own humanitarian category, restricted to its three most frequent classes, it is ahead in 11 of 21 and in 3 of 7 under normal connectivity, and with item A\u2019s class handling in 8 of 21. The per-condition pattern the paper already reports as fragile is fragile to the choice of label as well, and the strongest single claim in Section VIII, every one of the seven under normal connectivity, does not survive it."
+  },
+  "C": {
+    "question": "Does the real-data result hold when item A's class handling is applied to every per-modality model?",
+    "protocol": "itemC_protocol_rev2.json",
+    "protocol_sha256": "1b8d10e8772d12c49942fd963f4612673f752289e28c530efb8dac6aafe01579",
+    "seeds": "CONFIG[\"seeds\"] = [101,202,303,404,505]",
+    "class_handling": "balanced resampling, inherited from item A",
+    "reproduction_gate": "PASS, all ten methods of Table XIII reproduce exactly on the unhandled column",
+    "optimizer_ahead": {
+      "current": "15 of 21",
+      "handled": "14 of 21"
+    },
+    "per_condition": {
+      "current": {
+        "normal": "7 of 7",
+        "low_bandwidth": "5 of 7",
+        "misaligned": "3 of 7"
+      },
+      "handled": {
+        "normal": "7 of 7",
+        "low_bandwidth": "4 of 7",
+        "misaligned": "3 of 7"
+      }
+    },
+    "what_it_supports": "Class handling does not change the direction of the headline claim: the optimizer stays ahead in 14 of 21 against 15 of 21, and in 7 of 7 under normal connectivity in both columns. It changes the magnitudes a great deal, from -17.2 errors to -112.6 in rotation 0 under normal connectivity, and it moves methods in opposite directions: fusing methods improve while single-modality text gets worse, 494.0 to 576.4 errors. The comparison is therefore sensitive to class handling in size but not in sign."
+  },
+  "D": {
+    "question": "Does the constant-threshold rule carry over to real data?",
+    "protocol": "itemD_protocol_rev2.json",
+    "protocol_sha256": "3ed91224925cc0b72461f1f65c1eb174240fa09de1acc459c10c7b8e9f15493d",
+    "seeds": "CONFIG[\"seeds\"] = [101,202,303,404,505]",
+    "latency_condition": "7 of 7 rotations",
+    "error_condition": "1 of 7 rotations, 5 required",
+    "carries_over": false,
+    "T_star_range": "164.0 to 186.8 s",
+    "what_it_supports": "The decision rule returns FALSE. The latency half holds decisively: the derived threshold beats wait-if-uncertain on p95 latency in all seven rotations, about 25 s against about 1,800 s. The error half does not: the derived rule is inside the paired interval of the proposed policy in only 1 of 7 rotations, where 5 were required. So on real data the threshold rule buys the latency the synthetic benchmark showed while its error parity does not carry over. The identical conclusion was reached on both seed lists, so it does not depend on the seed defect described in the archive note."
+  },
+  "E": {
+    "question": "Do the paired intervals of Sections VI-A to VI-D hold at twenty seeds rather than five?",
+    "protocol": "itemE_protocol.json",
+    "protocol_sha256": "7dc76bee61b3ec8bcaa8a236b2215b513321bf704ffb7ce312afbc9a0f4eacea",
+    "seeds": "twenty, beginning with the package five and extending them",
+    "reproduction_gate": "PASS on the first five seeds for every condition",
+    "error_comparisons": [
+      {
+        "condition": "normal",
+        "a": "Proposed",
+        "b": "Fixed rule",
+        "diff": -0.65,
+        "lo": -1.53,
+        "hi": 0.23,
+        "p": 0.137,
+        "includes_zero": true
+      },
+      {
+        "condition": "low_bandwidth",
+        "a": "Proposed",
+        "b": "Fixed rule",
+        "diff": -0.75,
+        "lo": -1.67,
+        "hi": 0.17,
+        "p": 0.105,
+        "includes_zero": true
+      },
+      {
+        "condition": "delayed_imagery",
+        "a": "Proposed",
+        "b": "Fixed rule",
+        "diff": -13.25,
+        "lo": -17.31,
+        "hi": -9.19,
+        "p": 1.59e-06,
+        "includes_zero": false
+      },
+      {
+        "condition": "delayed_imagery",
+        "a": "Proposed",
+        "b": "Wait if uncertain",
+        "diff": -5.85,
+        "lo": -8.53,
+        "hi": -3.17,
+        "p": 0.000209,
+        "includes_zero": false
+      },
+      {
+        "condition": "delayed_imagery",
+        "a": "Proposed",
+        "b": "Derived threshold",
+        "diff": -0.65,
+        "lo": -1.5,
+        "hi": 0.2,
+        "p": 0.126,
+        "includes_zero": true
+      },
+      {
+        "condition": "misaligned",
+        "a": "Proposed",
+        "b": "Fixed rule",
+        "diff": -21.05,
+        "lo": -26.24,
+        "hi": -15.86,
+        "p": 6.97e-08,
+        "includes_zero": false
+      },
+      {
+        "condition": "misaligned",
+        "a": "Proposed",
+        "b": "Fixed rule + admissibility",
+        "diff": -1.45,
+        "lo": -2.65,
+        "hi": -0.25,
+        "p": 0.0205,
+        "includes_zero": false
+      },
+      {
+        "condition": "contradictory",
+        "a": "Proposed",
+        "b": "Fixed rule",
+        "diff": -2.5,
+        "lo": -4.2,
+        "hi": -0.8,
+        "p": 0.00622,
+        "includes_zero": false
+      }
+    ],
+    "includes_zero": "3 of 8 error comparisons",
+    "what_it_supports": "Four times the seeds narrows the intervals without reversing any reported direction. Three of the eight error comparisons still include zero: proposed against the fixed rule under normal connectivity and under low bandwidth, and proposed against the derived threshold under delayed imagery. That last one is the paper\u2019s own claim that the threshold matters while the solver does not, and twenty seeds leave it standing."
+  }
+}

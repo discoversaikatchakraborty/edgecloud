@@ -1,0 +1,30 @@
+{
+  "item": "D",
+  "title": "Derived constant wait threshold on real data with constructed arrival delays, matched to the package generator",
+  "reviewer_items": [
+    "R2.1"
+  ],
+  "late_fraction": 0.7,
+  "median_delay_s": 900.0,
+  "sigma_delay": 0.5,
+  "sigma_forecast": 0.4,
+  "draw_seed_base": 7000,
+  "seeds": [
+    0,
+    1,
+    2,
+    3,
+    4
+  ],
+  "decision_rule": {
+    "latency": "Derived threshold p95 latency below Wait-if-uncertain p95 in all 7 rotations",
+    "min_rotations_errors_within": 5,
+    "errors": "Derived threshold error count within the paired 95% interval of the Proposed policy in at least 5 of 7 rotations"
+  },
+  "notes": "The delivered protocol assumed sigma_delay equal to sigma_forecast at 0.4 and set the delay of a not-late item to zero and its own note asked for both to be confirmed against the package and a new file frozen if they differed. They differ. core.py draws the delay as median 900 s times a lognormal of sigma 0.5 for a late item and uniform 0 to 30 s for one that is not late, then multiplies by a lognormal of sigma 0.4 for the forecast. This file matches the generator so that the real-data arm exercises the same delay family as the synthetic condition it is compared against. The late fraction 0.70, the median 900 s and the forecast sigma 0.4 were confirmed unchanged against config.json.",
+  "not_late_delay_uniform_s": [
+    0.0,
+    30.0
+  ],
+  "supersedes": "itemD_protocol.json"
+}

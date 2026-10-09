@@ -1,0 +1,10 @@
+Moved out of manuscript/latex on 2026-10-08, closing novelty finding N-6.
+
+pages/                 twelve page renders from an inspection pass. Unreferenced by main.tex
+                       and superseded by the current build, so they would have shipped stale
+                       page images inside the submission package.
+main_master.tex.bak    a backup of the master source from before the variant mechanism was
+                       introduced. Superseded by main.tex, which now builds both variants.
+
+Nothing here is referenced by the manuscript. They are kept rather than deleted so the
+superseded state stays visible.

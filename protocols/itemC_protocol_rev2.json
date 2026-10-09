@@ -1,0 +1,67 @@
+{
+  "item": "C",
+  "title": "Real-data budgeting with item A class handling",
+  "reviewer_items": [
+    "R2.3"
+  ],
+  "conditions": [
+    "normal",
+    "low_bandwidth",
+    "misaligned"
+  ],
+  "seeds": [
+    101,
+    202,
+    303,
+    404,
+    505
+  ],
+  "methods": [
+    "Image only",
+    "Transmit all",
+    "Fixed rule",
+    "Confidence gate",
+    "Random within budget",
+    "Greedy by uncertainty",
+    "Greedy, proposed utility",
+    "Proposed (exact knapsack)",
+    "Fixed compression",
+    "Text only"
+  ],
+  "reference_rotation0_current": {
+    "Image only": 420.0,
+    "Transmit all": 435.8,
+    "Fixed rule": 464.2,
+    "Confidence gate": 437.0,
+    "Random within budget": 462.0,
+    "Greedy by uncertainty": 466.8,
+    "Greedy, proposed utility": 447.0,
+    "Proposed (exact knapsack)": 447.0,
+    "Fixed compression": 483.0,
+    "Text only": 494.0
+  },
+  "notes": "Reference values are the normal-connectivity column of the revised manuscript's Table XIII. The current variant must reproduce them before the handled variant is interpreted.",
+  "supersedes": "itemC_protocol_rev1.json (wrong seeds, archived)",
+  "rotations": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+  ],
+  "class_handling": "resample",
+  "inherits_from": {
+    "decision_file": "itemA_decision_rev1.json",
+    "protocol_sha256": "d85db896ad1dc3135009d2a68801eb4a9983d7f8d7d9fdc2682b5c02a90a7e3c",
+    "best_cell": {
+      "representation": "full",
+      "class_handling": "resample",
+      "classifier": "package_edge",
+      "rotation0_mean_macro_f1": 0.451974679222757
+    }
+  },
+  "representation_note": "Only the class handling carries over from item A. The representation stays the deployed pipeline's shipped components so that the handled and current columns differ in exactly one factor.",
+  "why_frozen": "Frozen before the run; sha256 recorded beside it and in the run manifest. Seeds are CONFIG[\"seeds\"] from upstream/prototype_v2.3/config.json, the same five the paper averages, so the unhandled column can be checked against the printed table. The rev1 protocol used [0,1,2,3,4] and could not reproduce it; see archive/superseded_2026-10-08/WHY_SUPERSEDED.txt."
+}

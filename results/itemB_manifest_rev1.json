@@ -1,0 +1,11 @@
+{
+  "protocol": "itemB_protocol_rev1.json",
+  "protocol_sha256": "f8cd9ed81ed1ba2e41513b687379fb8624cacad38a053fd2e06b31c05a8f50aa",
+  "started_utc": "2026-10-08T07:10:22Z",
+  "python": "3.12.14",
+  "numpy": "2.3.5",
+  "argv": [
+    "scripts/item_b_established_task.py"
+  ],
+  "sklearn": "1.8.0"
+}

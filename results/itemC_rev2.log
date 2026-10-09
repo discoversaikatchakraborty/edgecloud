@@ -1,0 +1,18 @@
+[protocol] froze itemC_protocol_rev2.json sha256=1b8d10e8772d12c49942fd963f4612673f752289e28c530efb8dac6aafe01579
+[manifest] /Users/arlina/Downloads/all_projects/25_EDGECLOUD/results/itemC_manifest_rev2.json
+[item C] class handling from item A: resample
+[write] /Users/arlina/Downloads/all_projects/25_EDGECLOUD/results/crisismmd_budgeting_rev2.csv (300 rows)
+[write] /Users/arlina/Downloads/all_projects/25_EDGECLOUD/results/crisismmd_rotations_rev2.csv (42 rows)
+[repro] Image only                   expected   420.0 got   420.0 OK
+[repro] Transmit all                 expected   435.8 got   435.8 OK
+[repro] Fixed rule                   expected   464.2 got   464.2 OK
+[repro] Confidence gate              expected   437.0 got   437.0 OK
+[repro] Random within budget         expected   462.0 got   462.0 OK
+[repro] Greedy by uncertainty        expected   466.8 got   466.8 OK
+[repro] Greedy, proposed utility     expected   447.0 got   447.0 OK
+[repro] Proposed (exact knapsack)    expected   447.0 got   447.0 OK
+[repro] Fixed compression            expected   483.0 got   483.0 OK
+[repro] Text only                    expected   494.0 got   494.0 OK
+[item C] handled variant: optimizer ahead of fixed rule in 14 of 21 comparisons (paper, current: 15 of 21)
+MANUSCRIPT: Tables XIII and XIV, Section VIII-C first two paragraphs, abstract '15 of 21'.
+itemC exit=0

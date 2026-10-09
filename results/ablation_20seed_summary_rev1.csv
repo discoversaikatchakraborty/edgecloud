@@ -1,0 +1,17 @@
+ablation,scenario,n,errors_mean,errors_lo,errors_hi,includes_zero_vs_zero
+no_novelty,contradictory_evidence,20,13.75,11.081367330971688,16.418632669028312,False
+no_quality,contradictory_evidence,20,16.55,13.789633648862653,19.310366351137347,False
+no_reliability,contradictory_evidence,20,16.5,13.495561612557797,19.504438387442203,False
+no_delay_penalty,delayed_imagery,20,19.2,15.073307860464189,23.326692139535808,False
+no_recency,delayed_imagery,20,9.65,7.890476791649075,11.409523208350926,False
+sensitivity:cloud_transmit_all:no_recency,delayed_imagery,20,4.35,2.972691066003597,5.727308933996403,False
+sensitivity:derived_threshold:no_recency,delayed_imagery,20,10.7,8.639729171663047,12.760270828336951,False
+sensitivity:fixed_rule:no_recency,delayed_imagery,20,5.15,3.675666649769106,6.624333350230895,False
+sensitivity:proposed:no_recency,delayed_imagery,20,9.65,7.890476791649075,11.409523208350926,False
+sensitivity:wait_if_uncertain:no_recency,delayed_imagery,20,5.4,3.92468955817121,6.875310441828791,False
+no_severity,low_bandwidth,20,4.4,3.2297176865017203,5.57028231349828,False
+no_admissibility,misaligned_evidence,20,30.1,22.875196513883598,37.32480348611641,False
+no_novelty,noisy_text,20,6.45,4.997725779653003,7.902274220346998,False
+no_quality,noisy_text,20,9.9,7.710602268544131,12.08939773145587,False
+no_reliability,noisy_text,20,6.0,4.543564243029679,7.456435756970321,False
+no_severity,normal,20,4.55,3.2843556147688586,5.815644385231141,False

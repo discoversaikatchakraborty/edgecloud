@@ -1,0 +1,301 @@
+condition,variant,method,seed,errors,bytes,p95,median,image_sent
+normal,current,Image only,0,420.0,224.0,0.08607519999999999,0.08553759999999999,nan
+normal,current,Transmit all,0,435.0,129727.94008264462,0.86540444,0.41431799999999996,nan
+normal,current,Fixed rule,0,465.0,342.2603305785124,0.0866712,0.08588080000000001,nan
+normal,current,Confidence gate,0,437.0,77374.4194214876,0.702388,0.26178239999999997,nan
+normal,current,Random within budget,0,461.0,30356.7923553719,0.37677675999999993,0.12661519999999998,nan
+normal,current,Greedy by uncertainty,0,467.0,2166.2603305785124,0.0954264,0.09025839999999999,nan
+normal,current,"Greedy, proposed utility",0,447.0,99213.79338842975,0.68905572,0.3453031999999999,nan
+normal,current,Proposed (exact knapsack),0,447.0,99213.79338842975,0.68905572,0.3453031999999999,nan
+normal,current,Fixed compression,0,483.0,3072.0,0.09974559999999999,0.0923728,nan
+normal,current,Text only,0,494.0,196.0,0.0859408,0.0854704,nan
+normal,handled,Image only,0,460.0,224.0,0.08607519999999999,0.08553759999999999,nan
+normal,handled,Transmit all,0,386.0,129727.94008264462,0.86540444,0.41431799999999996,nan
+normal,handled,Fixed rule,0,509.0,342.2603305785124,0.0866712,0.08588080000000001,nan
+normal,handled,Confidence gate,0,386.0,123943.12809917355,0.8193525999999999,0.3998608,nan
+normal,handled,Random within budget,0,468.0,30356.7923553719,0.37677675999999993,0.12661519999999998,nan
+normal,handled,Greedy by uncertainty,0,512.0,2166.2603305785124,0.0954264,0.09025839999999999,nan
+normal,handled,"Greedy, proposed utility",0,393.0,105349.77169421487,0.72995228,0.35813199999999995,nan
+normal,handled,Proposed (exact knapsack),0,393.0,105349.77169421487,0.72995228,0.35813199999999995,nan
+normal,handled,Fixed compression,0,503.0,3072.0,0.09974559999999999,0.0923728,nan
+normal,handled,Text only,0,573.0,196.0,0.0859408,0.0854704,nan
+normal,current,Image only,1,420.0,224.0,0.08607519999999999,0.08553759999999999,nan
+normal,current,Transmit all,1,435.0,129727.94008264462,0.86540444,0.41431799999999996,nan
+normal,current,Fixed rule,1,465.0,342.2603305785124,0.0866712,0.08588080000000001,nan
+normal,current,Confidence gate,1,437.0,77374.4194214876,0.702388,0.26178239999999997,nan
+normal,current,Random within budget,1,455.0,31514.62603305785,0.38970027999999995,0.12611,nan
+normal,current,Greedy by uncertainty,1,467.0,2166.2603305785124,0.0954264,0.09025839999999999,nan
+normal,current,"Greedy, proposed utility",1,447.0,99213.79338842975,0.68905572,0.3453031999999999,nan
+normal,current,Proposed (exact knapsack),1,447.0,99213.79338842975,0.68905572,0.3453031999999999,nan
+normal,current,Fixed compression,1,483.0,3072.0,0.09974559999999999,0.0923728,nan
+normal,current,Text only,1,494.0,196.0,0.0859408,0.0854704,nan
+normal,handled,Image only,1,455.0,224.0,0.08607519999999999,0.08553759999999999,nan
+normal,handled,Transmit all,1,371.0,129727.94008264462,0.86540444,0.41431799999999996,nan
+normal,handled,Fixed rule,1,479.0,342.2603305785124,0.0866712,0.08588080000000001,nan
+normal,handled,Confidence gate,1,371.0,123943.39256198348,0.8193525999999999,0.3998608,nan
+normal,handled,Random within budget,1,480.0,31514.62603305785,0.38970027999999995,0.12611,nan
+normal,handled,Greedy by uncertainty,1,495.0,2166.2603305785124,0.0954264,0.09025839999999999,nan
+normal,handled,"Greedy, proposed utility",1,378.0,105281.17355371901,0.72477316,0.35532159999999996,nan
+normal,handled,Proposed (exact knapsack),1,378.0,105281.17355371901,0.72477316,0.35532159999999996,nan
+normal,handled,Fixed compression,1,517.0,3072.0,0.09974559999999999,0.0923728,nan
+normal,handled,Text only,1,586.0,196.0,0.0859408,0.0854704,nan
+normal,current,Image only,2,420.0,224.0,0.08607519999999999,0.08553759999999999,nan
+normal,current,Transmit all,2,436.0,129727.94008264462,0.86540444,0.41431799999999996,nan
+normal,current,Fixed rule,2,465.0,342.2603305785124,0.0866712,0.08588080000000001,nan
+normal,current,Confidence gate,2,437.0,77374.4194214876,0.702388,0.26178239999999997,nan
+normal,current,Random within budget,2,455.0,34437.59504132231,0.4008109599999999,0.1405688,nan
+normal,current,Greedy by uncertainty,2,467.0,2166.2603305785124,0.0954264,0.09025839999999999,nan
+normal,current,"Greedy, proposed utility",2,448.0,99164.52995867768,0.68905572,0.34463799999999994,nan
+normal,current,Proposed (exact knapsack),2,448.0,99164.52995867768,0.68905572,0.34463799999999994,nan
+normal,current,Fixed compression,2,483.0,3072.0,0.09974559999999999,0.0923728,nan
+normal,current,Text only,2,494.0,196.0,0.0859408,0.0854704,nan
+normal,handled,Image only,2,464.0,224.0,0.08607519999999999,0.08553759999999999,nan
+normal,handled,Transmit all,2,392.0,129727.94008264462,0.86540444,0.41431799999999996,nan
+normal,handled,Fixed rule,2,506.0,342.2603305785124,0.0866712,0.08588080000000001,nan
+normal,handled,Confidence gate,2,393.0,123943.12809917355,0.8193525999999999,0.3998608,nan
+normal,handled,Random within budget,2,473.0,34437.59504132231,0.4008109599999999,0.1405688,nan
+normal,handled,Greedy by uncertainty,2,516.0,2166.2603305785124,0.0954264,0.09025839999999999,nan
+normal,handled,"Greedy, proposed utility",2,399.0,104552.19318181818,0.72225564,0.35454359999999996,nan
+normal,handled,Proposed (exact knapsack),2,399.0,104552.19318181818,0.72225564,0.35454359999999996,nan
+normal,handled,Fixed compression,2,504.0,3072.0,0.09974559999999999,0.0923728,nan
+normal,handled,Text only,2,582.0,196.0,0.0859408,0.0854704,nan
+normal,current,Image only,3,420.0,224.0,0.08607519999999999,0.08553759999999999,nan
+normal,current,Transmit all,3,435.0,129727.94008264462,0.86540444,0.41431799999999996,nan
+normal,current,Fixed rule,3,465.0,342.2603305785124,0.0866712,0.08588080000000001,nan
+normal,current,Confidence gate,3,437.0,77374.4194214876,0.702388,0.26178239999999997,nan
+normal,current,Random within budget,3,457.0,31773.919421487604,0.3852484399999999,0.138436,nan
+normal,current,Greedy by uncertainty,3,466.0,2166.2603305785124,0.0954264,0.09025839999999999,nan
+normal,current,"Greedy, proposed utility",3,447.0,99191.15392561983,0.68905572,0.34349359999999995,nan
+normal,current,Proposed (exact knapsack),3,447.0,99191.15392561983,0.68905572,0.34349359999999995,nan
+normal,current,Fixed compression,3,482.0,3072.0,0.09974559999999999,0.0923728,nan
+normal,current,Text only,3,494.0,196.0,0.0859408,0.0854704,nan
+normal,handled,Image only,3,456.0,224.0,0.08607519999999999,0.08553759999999999,nan
+normal,handled,Transmit all,3,371.0,129727.94008264462,0.86540444,0.41431799999999996,nan
+normal,handled,Fixed rule,3,489.0,342.2603305785124,0.0866712,0.08588080000000001,nan
+normal,handled,Confidence gate,3,372.0,123943.92975206612,0.8193525999999999,0.3998608,nan
+normal,handled,Random within budget,3,485.0,31773.919421487604,0.3852484399999999,0.138436,nan
+normal,handled,Greedy by uncertainty,3,495.0,2166.2603305785124,0.0954264,0.09025839999999999,nan
+normal,handled,"Greedy, proposed utility",3,379.0,106097.56714876032,0.73214804,0.3603284,nan
+normal,handled,Proposed (exact knapsack),3,379.0,106097.56714876032,0.73214804,0.3603284,nan
+normal,handled,Fixed compression,3,517.0,3072.0,0.09974559999999999,0.0923728,nan
+normal,handled,Text only,3,582.0,196.0,0.0859408,0.0854704,nan
+normal,current,Image only,4,420.0,224.0,0.08607519999999999,0.08553759999999999,nan
+normal,current,Transmit all,4,436.0,129727.94008264462,0.86540444,0.41431799999999996,nan
+normal,current,Fixed rule,4,465.0,342.2603305785124,0.0866712,0.08588080000000001,nan
+normal,current,Confidence gate,4,437.0,77374.4194214876,0.702388,0.26178239999999997,nan
+normal,current,Random within budget,4,463.0,33129.92148760331,0.39945163999999994,0.138746,nan
+normal,current,Greedy by uncertainty,4,467.0,2166.2603305785124,0.0954264,0.09025839999999999,nan
+normal,current,"Greedy, proposed utility",4,447.0,99544.14256198348,0.68905572,0.34608799999999995,nan
+normal,current,Proposed (exact knapsack),4,447.0,99544.14256198348,0.68905572,0.34608799999999995,nan
+normal,current,Fixed compression,4,483.0,3072.0,0.09974559999999999,0.0923728,nan
+normal,current,Text only,4,494.0,196.0,0.0859408,0.0854704,nan
+normal,handled,Image only,4,468.0,224.0,0.08607519999999999,0.08553759999999999,nan
+normal,handled,Transmit all,4,386.0,129727.94008264462,0.86540444,0.41431799999999996,nan
+normal,handled,Fixed rule,4,488.0,342.2603305785124,0.0866712,0.08588080000000001,nan
+normal,handled,Confidence gate,4,386.0,123943.47933884297,0.8193525999999999,0.3998608,nan
+normal,handled,Random within budget,4,488.0,33129.92148760331,0.39945163999999994,0.138746,nan
+normal,handled,Greedy by uncertainty,4,495.0,2166.2603305785124,0.0954264,0.09025839999999999,nan
+normal,handled,"Greedy, proposed utility",4,393.0,104851.44938016529,0.72225564,0.35532159999999996,nan
+normal,handled,Proposed (exact knapsack),4,393.0,104851.44938016529,0.72225564,0.35532159999999996,nan
+normal,handled,Fixed compression,4,504.0,3072.0,0.09974559999999999,0.0923728,nan
+normal,handled,Text only,4,580.0,196.0,0.0859408,0.0854704,nan
+low_bandwidth,current,Image only,0,420.0,224.0,0.267,0.246,nan
+low_bandwidth,current,Transmit all,0,436.0,129727.94008264462,30.7095484375,13.088984374999999,nan
+low_bandwidth,current,Fixed rule,0,465.0,342.2603305785124,0.29028125,0.25940625,nan
+low_bandwidth,current,Confidence gate,0,466.0,1389.809917355372,0.5637078125,0.370796875,nan
+low_bandwidth,current,Random within budget,0,460.0,1178.6022727272727,0.5095796874999999,0.34125,nan
+low_bandwidth,current,Greedy by uncertainty,0,467.0,2166.2603305785124,0.6322812499999999,0.43040625,nan
+low_bandwidth,current,"Greedy, proposed utility",0,467.0,1896.7572314049587,0.630465625,0.42903125,nan
+low_bandwidth,current,Proposed (exact knapsack),0,467.0,1896.7572314049587,0.630465625,0.42903125,nan
+low_bandwidth,current,Fixed compression,0,483.0,3072.0,0.8009999999999999,0.5129999999999999,nan
+low_bandwidth,current,Text only,0,494.0,196.0,0.26175,0.243375,nan
+low_bandwidth,handled,Image only,0,460.0,224.0,0.267,0.246,nan
+low_bandwidth,handled,Transmit all,0,386.0,129727.94008264462,30.7095484375,13.088984374999999,nan
+low_bandwidth,handled,Fixed rule,0,509.0,342.2603305785124,0.29028125,0.25940625,nan
+low_bandwidth,handled,Confidence gate,0,513.0,2168.938016528926,0.6323749999999999,0.430578125,nan
+low_bandwidth,handled,Random within budget,0,529.0,1178.6022727272727,0.5095796874999999,0.34125,nan
+low_bandwidth,handled,Greedy by uncertainty,0,513.0,2166.2603305785124,0.6322812499999999,0.43040625,nan
+low_bandwidth,handled,"Greedy, proposed utility",0,513.0,2006.0464876033059,0.6315203125,0.42965624999999996,nan
+low_bandwidth,handled,Proposed (exact knapsack),0,513.0,2006.0464876033059,0.6315203125,0.42965624999999996,nan
+low_bandwidth,handled,Fixed compression,0,502.0,3072.0,0.8009999999999999,0.5129999999999999,nan
+low_bandwidth,handled,Text only,0,573.0,196.0,0.26175,0.243375,nan
+low_bandwidth,current,Image only,1,420.0,224.0,0.267,0.246,nan
+low_bandwidth,current,Transmit all,1,436.0,129727.94008264462,30.7095484375,13.088984374999999,nan
+low_bandwidth,current,Fixed rule,1,465.0,342.2603305785124,0.29028125,0.25940625,nan
+low_bandwidth,current,Confidence gate,1,466.0,1389.809917355372,0.5637078125,0.370796875,nan
+low_bandwidth,current,Random within budget,1,467.0,1180.013429752066,0.4977453125,0.34681249999999997,nan
+low_bandwidth,current,Greedy by uncertainty,1,467.0,2166.2603305785124,0.6322812499999999,0.43040625,nan
+low_bandwidth,current,"Greedy, proposed utility",1,467.0,1894.8729338842975,0.630465625,0.42903125,nan
+low_bandwidth,current,Proposed (exact knapsack),1,467.0,1894.8729338842975,0.630465625,0.42903125,nan
+low_bandwidth,current,Fixed compression,1,483.0,3072.0,0.8009999999999999,0.5129999999999999,nan
+low_bandwidth,current,Text only,1,494.0,196.0,0.26175,0.243375,nan
+low_bandwidth,handled,Image only,1,455.0,224.0,0.267,0.246,nan
+low_bandwidth,handled,Transmit all,1,372.0,129727.94008264462,30.7095484375,13.088984374999999,nan
+low_bandwidth,handled,Fixed rule,1,480.0,342.2603305785124,0.29028125,0.25940625,nan
+low_bandwidth,handled,Confidence gate,1,494.0,2169.2024793388427,0.6323749999999999,0.43209375,nan
+low_bandwidth,handled,Random within budget,1,529.0,1180.013429752066,0.4977453125,0.34681249999999997,nan
+low_bandwidth,handled,Greedy by uncertainty,1,494.0,2166.2603305785124,0.6322812499999999,0.43040625,nan
+low_bandwidth,handled,"Greedy, proposed utility",1,491.0,2007.9307851239669,0.6315203125,0.42965624999999996,nan
+low_bandwidth,handled,Proposed (exact knapsack),1,491.0,2007.9307851239669,0.6315203125,0.42965624999999996,nan
+low_bandwidth,handled,Fixed compression,1,518.0,3072.0,0.8009999999999999,0.5129999999999999,nan
+low_bandwidth,handled,Text only,1,586.0,196.0,0.26175,0.243375,nan
+low_bandwidth,current,Image only,2,420.0,224.0,0.267,0.246,nan
+low_bandwidth,current,Transmit all,2,436.0,129727.94008264462,30.7095484375,13.088984374999999,nan
+low_bandwidth,current,Fixed rule,2,465.0,342.2603305785124,0.29028125,0.25940625,nan
+low_bandwidth,current,Confidence gate,2,466.0,1389.809917355372,0.5637078125,0.370796875,nan
+low_bandwidth,current,Random within budget,2,460.0,1186.7097107438017,0.5081249999999999,0.342875,nan
+low_bandwidth,current,Greedy by uncertainty,2,467.0,2166.2603305785124,0.6322812499999999,0.43040625,nan
+low_bandwidth,current,"Greedy, proposed utility",2,467.0,1900.525826446281,0.6305921875,0.42903125,nan
+low_bandwidth,current,Proposed (exact knapsack),2,467.0,1900.525826446281,0.6305921875,0.42903125,nan
+low_bandwidth,current,Fixed compression,2,483.0,3072.0,0.8009999999999999,0.5129999999999999,nan
+low_bandwidth,current,Text only,2,494.0,196.0,0.26175,0.243375,nan
+low_bandwidth,handled,Image only,2,464.0,224.0,0.267,0.246,nan
+low_bandwidth,handled,Transmit all,2,393.0,129727.94008264462,30.7095484375,13.088984374999999,nan
+low_bandwidth,handled,Fixed rule,2,506.0,342.2603305785124,0.29028125,0.25940625,nan
+low_bandwidth,handled,Confidence gate,2,515.0,2168.938016528926,0.6323749999999999,0.430578125,nan
+low_bandwidth,handled,Random within budget,2,528.0,1186.7097107438017,0.5081249999999999,0.342875,nan
+low_bandwidth,handled,Greedy by uncertainty,2,515.0,2166.2603305785124,0.6322812499999999,0.43040625,nan
+low_bandwidth,handled,"Greedy, proposed utility",2,513.0,2007.9307851239669,0.6315203125,0.42965624999999996,nan
+low_bandwidth,handled,Proposed (exact knapsack),2,513.0,2007.9307851239669,0.6315203125,0.42965624999999996,nan
+low_bandwidth,handled,Fixed compression,2,504.0,3072.0,0.8009999999999999,0.5129999999999999,nan
+low_bandwidth,handled,Text only,2,582.0,196.0,0.26175,0.243375,nan
+low_bandwidth,current,Image only,3,420.0,224.0,0.267,0.246,nan
+low_bandwidth,current,Transmit all,3,435.0,129727.94008264462,30.7095484375,13.088984374999999,nan
+low_bandwidth,current,Fixed rule,3,465.0,342.2603305785124,0.29028125,0.25940625,nan
+low_bandwidth,current,Confidence gate,3,466.0,1389.809917355372,0.5637078125,0.370796875,nan
+low_bandwidth,current,Random within budget,3,471.0,1159.5113636363637,0.5028921874999999,0.346796875,nan
+low_bandwidth,current,Greedy by uncertainty,3,467.0,2166.2603305785124,0.6322812499999999,0.43040625,nan
+low_bandwidth,current,"Greedy, proposed utility",3,467.0,1900.525826446281,0.6306140625,0.42903125,nan
+low_bandwidth,current,Proposed (exact knapsack),3,467.0,1900.525826446281,0.6306140625,0.42903125,nan
+low_bandwidth,current,Fixed compression,3,483.0,3072.0,0.8009999999999999,0.5129999999999999,nan
+low_bandwidth,current,Text only,3,494.0,196.0,0.26175,0.243375,nan
+low_bandwidth,handled,Image only,3,456.0,224.0,0.267,0.246,nan
+low_bandwidth,handled,Transmit all,3,371.0,129727.94008264462,30.7095484375,13.088984374999999,nan
+low_bandwidth,handled,Fixed rule,3,490.0,342.2603305785124,0.29028125,0.25940625,nan
+low_bandwidth,handled,Confidence gate,3,493.0,2169.7396694214876,0.6324156249999999,0.433546875,nan
+low_bandwidth,handled,Random within budget,3,508.0,1159.5113636363637,0.5028921874999999,0.346796875,nan
+low_bandwidth,handled,Greedy by uncertainty,3,493.0,2166.2603305785124,0.6322812499999999,0.43040625,nan
+low_bandwidth,handled,"Greedy, proposed utility",3,492.0,2007.9307851239669,0.6315203125,0.42965624999999996,nan
+low_bandwidth,handled,Proposed (exact knapsack),3,492.0,2007.9307851239669,0.6315203125,0.42965624999999996,nan
+low_bandwidth,handled,Fixed compression,3,518.0,3072.0,0.8009999999999999,0.5129999999999999,nan
+low_bandwidth,handled,Text only,3,582.0,196.0,0.26175,0.243375,nan
+low_bandwidth,current,Image only,4,420.0,224.0,0.267,0.246,nan
+low_bandwidth,current,Transmit all,4,436.0,129727.94008264462,30.7095484375,13.088984374999999,nan
+low_bandwidth,current,Fixed rule,4,464.0,342.2603305785124,0.29028125,0.25940625,nan
+low_bandwidth,current,Confidence gate,4,466.0,1389.809917355372,0.5637078125,0.370796875,nan
+low_bandwidth,current,Random within budget,4,471.0,1153.8078512396694,0.4966234374999999,0.3375,nan
+low_bandwidth,current,Greedy by uncertainty,4,467.0,2166.2603305785124,0.6322812499999999,0.43040625,nan
+low_bandwidth,current,"Greedy, proposed utility",4,467.0,1894.8729338842975,0.630465625,0.429015625,nan
+low_bandwidth,current,Proposed (exact knapsack),4,467.0,1894.8729338842975,0.630465625,0.429015625,nan
+low_bandwidth,current,Fixed compression,4,483.0,3072.0,0.8009999999999999,0.5129999999999999,nan
+low_bandwidth,current,Text only,4,494.0,196.0,0.26175,0.243375,nan
+low_bandwidth,handled,Image only,4,468.0,224.0,0.267,0.246,nan
+low_bandwidth,handled,Transmit all,4,384.0,129727.94008264462,30.7095484375,13.088984374999999,nan
+low_bandwidth,handled,Fixed rule,4,489.0,342.2603305785124,0.29028125,0.25940625,nan
+low_bandwidth,handled,Confidence gate,4,495.0,2169.289256198347,0.6323749999999999,0.43209375,nan
+low_bandwidth,handled,Random within budget,4,526.0,1153.8078512396694,0.4966234374999999,0.3375,nan
+low_bandwidth,handled,Greedy by uncertainty,4,495.0,2166.2603305785124,0.6322812499999999,0.43040625,nan
+low_bandwidth,handled,"Greedy, proposed utility",4,494.0,2006.0464876033059,0.6315203125,0.42965624999999996,nan
+low_bandwidth,handled,Proposed (exact knapsack),4,494.0,2006.0464876033059,0.6315203125,0.42965624999999996,nan
+low_bandwidth,handled,Fixed compression,4,504.0,3072.0,0.8009999999999999,0.5129999999999999,nan
+low_bandwidth,handled,Text only,4,580.0,196.0,0.26175,0.243375,nan
+misaligned,current,Image only,0,420.0,224.0,0.150376,0.147688,nan
+misaligned,current,Transmit all,0,453.0,129727.94008264462,4.0470222,1.79159,nan
+misaligned,current,Fixed rule,0,478.0,342.2603305785124,0.153356,0.149404,nan
+misaligned,current,Confidence gate,0,479.0,1628.297520661157,0.197609,0.16396,nan
+misaligned,current,Random within budget,0,472.0,1461.0878099173553,0.20689039999999992,0.16132400000000002,nan
+misaligned,current,Greedy by uncertainty,0,479.0,2166.2603305785124,0.197132,0.171292,nan
+misaligned,current,"Greedy, proposed utility",0,454.0,2498.1787190082646,0.2187068,0.178814,nan
+misaligned,current,Proposed (exact knapsack),0,454.0,2498.1787190082646,0.2187068,0.178814,nan
+misaligned,current,Fixed compression,0,486.0,3072.0,0.218728,0.181864,nan
+misaligned,current,Text only,0,494.0,196.0,0.149704,0.147352,nan
+misaligned,handled,Image only,0,460.0,224.0,0.150376,0.147688,nan
+misaligned,handled,Transmit all,0,386.0,129727.94008264462,4.0470222,1.79159,nan
+misaligned,handled,Fixed rule,0,531.0,342.2603305785124,0.153356,0.149404,nan
+misaligned,handled,Confidence gate,0,524.0,2804.0320247933882,0.25976000000000005,0.179546,nan
+misaligned,handled,Random within budget,0,543.0,1461.0878099173553,0.20689039999999992,0.16132400000000002,nan
+misaligned,handled,Greedy by uncertainty,0,534.0,2166.2603305785124,0.197132,0.171292,nan
+misaligned,handled,"Greedy, proposed utility",0,494.0,2623.9896694214876,0.241197,0.17902400000000002,nan
+misaligned,handled,Proposed (exact knapsack),0,494.0,2623.9896694214876,0.241197,0.17902400000000002,nan
+misaligned,handled,Fixed compression,0,525.0,3072.0,0.218728,0.181864,nan
+misaligned,handled,Text only,0,605.0,196.0,0.149704,0.147352,nan
+misaligned,current,Image only,1,420.0,224.0,0.150376,0.147688,nan
+misaligned,current,Transmit all,1,451.0,129727.94008264462,4.0470222,1.79159,nan
+misaligned,current,Fixed rule,1,479.0,342.2603305785124,0.153356,0.149404,nan
+misaligned,current,Confidence gate,1,478.0,1629.150826446281,0.1976118,0.16398400000000002,nan
+misaligned,current,Random within budget,1,470.0,1366.9462809917356,0.1878948,0.16109,nan
+misaligned,current,Greedy by uncertainty,1,480.0,2166.2603305785124,0.197132,0.171292,nan
+misaligned,current,"Greedy, proposed utility",1,463.0,2492.2665289256197,0.2183638,0.178612,nan
+misaligned,current,Proposed (exact knapsack),1,463.0,2492.2665289256197,0.2183638,0.178612,nan
+misaligned,current,Fixed compression,1,488.0,3072.0,0.218728,0.181864,nan
+misaligned,current,Text only,1,494.0,196.0,0.149704,0.147352,nan
+misaligned,handled,Image only,1,455.0,224.0,0.150376,0.147688,nan
+misaligned,handled,Transmit all,1,361.0,129727.94008264462,4.0470222,1.79159,nan
+misaligned,handled,Fixed rule,1,506.0,342.2603305785124,0.153356,0.149404,nan
+misaligned,handled,Confidence gate,1,509.0,2804.2964876033056,0.25976000000000005,0.179546,nan
+misaligned,handled,Random within budget,1,525.0,1366.9462809917356,0.1878948,0.16109,nan
+misaligned,handled,Greedy by uncertainty,1,515.0,2166.2603305785124,0.197132,0.171292,nan
+misaligned,handled,"Greedy, proposed utility",1,487.0,2618.0774793388427,0.241262,0.178726,nan
+misaligned,handled,Proposed (exact knapsack),1,487.0,2618.0774793388427,0.241262,0.178726,nan
+misaligned,handled,Fixed compression,1,521.0,3072.0,0.218728,0.181864,nan
+misaligned,handled,Text only,1,610.0,196.0,0.149704,0.147352,nan
+misaligned,current,Image only,2,420.0,224.0,0.150376,0.147688,nan
+misaligned,current,Transmit all,2,455.0,129727.94008264462,4.0470222,1.79159,nan
+misaligned,current,Fixed rule,2,477.0,342.2603305785124,0.153356,0.149404,nan
+misaligned,current,Confidence gate,2,476.0,1629.9752066115702,0.197628,0.16392600000000002,nan
+misaligned,current,Random within budget,2,468.0,1489.2252066115702,0.194936,0.16126400000000002,nan
+misaligned,current,Greedy by uncertainty,2,478.0,2166.2603305785124,0.197132,0.171292,nan
+misaligned,current,"Greedy, proposed utility",2,464.0,2494.4555785123966,0.219384,0.178714,nan
+misaligned,current,Proposed (exact knapsack),2,464.0,2494.4555785123966,0.219384,0.178714,nan
+misaligned,current,Fixed compression,2,488.0,3072.0,0.218728,0.181864,nan
+misaligned,current,Text only,2,494.0,196.0,0.149704,0.147352,nan
+misaligned,handled,Image only,2,464.0,224.0,0.150376,0.147688,nan
+misaligned,handled,Transmit all,2,381.0,129727.94008264462,4.0470222,1.79159,nan
+misaligned,handled,Fixed rule,2,520.0,342.2603305785124,0.153356,0.149404,nan
+misaligned,handled,Confidence gate,2,521.0,2804.0320247933882,0.25976000000000005,0.179546,nan
+misaligned,handled,Random within budget,2,518.0,1489.2252066115702,0.194936,0.16126400000000002,nan
+misaligned,handled,Greedy by uncertainty,2,530.0,2166.2603305785124,0.197132,0.171292,nan
+misaligned,handled,"Greedy, proposed utility",2,511.0,2620.2665289256197,0.2416974,0.17882599999999998,nan
+misaligned,handled,Proposed (exact knapsack),2,511.0,2620.2665289256197,0.2416974,0.17882599999999998,nan
+misaligned,handled,Fixed compression,2,522.0,3072.0,0.218728,0.181864,nan
+misaligned,handled,Text only,2,599.0,196.0,0.149704,0.147352,nan
+misaligned,current,Image only,3,420.0,224.0,0.150376,0.147688,nan
+misaligned,current,Transmit all,3,442.0,129727.94008264462,4.0470222,1.79159,nan
+misaligned,current,Fixed rule,3,473.0,342.2603305785124,0.153356,0.149404,nan
+misaligned,current,Confidence gate,3,477.0,1629.6673553719008,0.1975534,0.163974,nan
+misaligned,current,Random within budget,3,480.0,1383.706611570248,0.192262,0.16020600000000002,nan
+misaligned,current,Greedy by uncertainty,3,476.0,2166.2603305785124,0.197132,0.171292,nan
+misaligned,current,"Greedy, proposed utility",3,459.0,2496.2128099173556,0.21911,0.178734,nan
+misaligned,current,Proposed (exact knapsack),3,459.0,2496.2128099173556,0.21911,0.178734,nan
+misaligned,current,Fixed compression,3,488.0,3072.0,0.218728,0.181864,nan
+misaligned,current,Text only,3,494.0,196.0,0.149704,0.147352,nan
+misaligned,handled,Image only,3,456.0,224.0,0.150376,0.147688,nan
+misaligned,handled,Transmit all,3,368.0,129727.94008264462,4.0470222,1.79159,nan
+misaligned,handled,Fixed rule,3,503.0,342.2603305785124,0.153356,0.149404,nan
+misaligned,handled,Confidence gate,3,498.0,2804.8336776859505,0.25976000000000005,0.179556,nan
+misaligned,handled,Random within budget,3,542.0,1383.706611570248,0.192262,0.16020600000000002,nan
+misaligned,handled,Greedy by uncertainty,3,510.0,2166.2603305785124,0.197132,0.171292,nan
+misaligned,handled,"Greedy, proposed utility",3,486.0,2622.0237603305786,0.2415,0.17882199999999998,nan
+misaligned,handled,Proposed (exact knapsack),3,486.0,2622.0237603305786,0.2415,0.17882199999999998,nan
+misaligned,handled,Fixed compression,3,530.0,3072.0,0.218728,0.181864,nan
+misaligned,handled,Text only,3,592.0,196.0,0.149704,0.147352,nan
+misaligned,current,Image only,4,420.0,224.0,0.150376,0.147688,nan
+misaligned,current,Transmit all,4,453.0,129727.94008264462,4.0470222,1.79159,nan
+misaligned,current,Fixed rule,4,473.0,342.2603305785124,0.153356,0.149404,nan
+misaligned,current,Confidence gate,4,473.0,1629.0278925619834,0.1977476,0.16398400000000002,nan
+misaligned,current,Random within budget,4,475.0,1433.206611570248,0.1922286,0.159478,nan
+misaligned,current,Greedy by uncertainty,4,472.0,2166.2603305785124,0.197132,0.171292,nan
+misaligned,current,"Greedy, proposed utility",4,463.0,2497.009297520661,0.2188734,0.178774,nan
+misaligned,current,Proposed (exact knapsack),4,463.0,2497.009297520661,0.2188734,0.178774,nan
+misaligned,current,Fixed compression,4,485.0,3072.0,0.218728,0.181864,nan
+misaligned,current,Text only,4,494.0,196.0,0.149704,0.147352,nan
+misaligned,handled,Image only,4,468.0,224.0,0.150376,0.147688,nan
+misaligned,handled,Transmit all,4,381.0,129727.94008264462,4.0470222,1.79159,nan
+misaligned,handled,Fixed rule,4,498.0,342.2603305785124,0.153356,0.149404,nan
+misaligned,handled,Confidence gate,4,498.0,2804.3347107438017,0.25976000000000005,0.179546,nan
+misaligned,handled,Random within budget,4,526.0,1433.206611570248,0.1922286,0.159478,nan
+misaligned,handled,Greedy by uncertainty,4,505.0,2166.2603305785124,0.197132,0.171292,nan
+misaligned,handled,"Greedy, proposed utility",4,487.0,2601.3863636363635,0.23597719999999997,0.178814,nan
+misaligned,handled,Proposed (exact knapsack),4,487.0,2601.3863636363635,0.23597719999999997,0.178814,nan
+misaligned,handled,Fixed compression,4,520.0,3072.0,0.218728,0.181864,nan
+misaligned,handled,Text only,4,593.0,196.0,0.149704,0.147352,nan

@@ -1,0 +1,54 @@
+Superseded EdgeCloud rerun outputs, moved here 8 October 2026
+=============================================================
+
+Why these are here, and what replaces them.
+
+THE DEFECT
+
+The package's own seed list is CONFIG["seeds"] = [101, 202, 303, 404, 505], in
+upstream/prototype_v2.3/config.json. Every published real-data number in the manuscript is a
+mean over those five seeds; the retained package output results/real_data_summary.csv
+confirms it, for example cloud_transmit_all under normal connectivity at 435.8 errors, which
+is exactly the value Table XIII prints.
+
+Two rerun protocols were frozen with seeds [0, 1, 2, 3, 4] instead:
+
+  itemC_protocol.json  ->  itemC_protocol_rev1.json   (archived here)
+  itemD_protocol.json  ->  itemD_protocol_rev1.json   (copied here)
+
+Item C's own reproduction gate caught it. Its instruction is that the current, unhandled
+column must reproduce the manuscript's Table XIII before the handled column is interpreted.
+On the wrong seeds it did not, on six of the ten methods:
+
+  method                       manuscript   wrong-seed run
+  Image only                        420.0            420.0   agrees
+  Transmit all                      435.8            435.4
+  Fixed rule                        464.2            465.0
+  Confidence gate                   437.0            437.0   agrees
+  Random within budget              462.0            458.2
+  Greedy by uncertainty             466.8            466.8   agrees
+  Greedy, proposed utility          447.0            447.2
+  Proposed (exact knapsack)         447.0            447.2
+  Fixed compression                 483.0            482.8
+  Text only                         494.0            494.0   agrees
+
+The gap is small on the deterministic arms and largest, 3.8 errors, on the randomised
+baseline, which is what a wrong seed list predicts. No conclusion was drawn from the handled
+column, because the protocol forbids interpreting it until the current column reproduces.
+
+WHAT IS AFFECTED, AND WHAT IS NOT
+
+  item A   NOT affected. It uses seeds [0..4] as well, but its cells are scored against a
+           majority baseline computed on the same records, never against a published value,
+           so reproducing a printed table is not part of its decision rule. Its seed basis
+           is now stated explicitly in its own record rather than left implicit.
+  item C   AFFECTED. Re-frozen as itemC_protocol_rev2.json on the package seeds and rerun.
+  item D   AFFECTED. Re-frozen as itemD_protocol_rev2.json on the package seeds and rerun.
+           The rev1 files are COPIED here rather than moved, so the committed state stays
+           intact until the rev2 outputs exist.
+  item E   NOT affected. Its twenty seeds begin with the package's five and extend them,
+           which is what Rerun_Spec item E asks for.
+
+NOTHING HERE IS DELETED. A failed or superseded run stays visible; that is the protocol's
+rule and the reason this directory exists rather than a removal. These files are the evidence
+for the defect described above and must not be cited as results.

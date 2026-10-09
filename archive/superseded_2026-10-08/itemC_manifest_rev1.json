@@ -1,0 +1,11 @@
+{
+  "protocol": "itemC_protocol_rev1.json",
+  "protocol_sha256": "a48c6347c0da426432d82926a745156d0d407635757d7df6ab04f8d37de31318",
+  "started_utc": "2026-10-08T07:02:52Z",
+  "python": "3.12.14",
+  "numpy": "2.3.5",
+  "argv": [
+    "scripts/item_c_real_class_handling.py"
+  ],
+  "sklearn": "1.8.0"
+}

@@ -1,0 +1,74 @@
+[manifest] /Users/arlina/Downloads/all_projects/25_EDGECLOUD/results/itemD_manifest.json
+rot0 T*=178.4s p95 thr=25.4 wiu=1833.9 errors thr-prop=+0.0 [+0.0,+0.0]
+rot1 T*=180.0s p95 thr=25.8 wiu=1914.8 errors thr-prop=-3.4 [-4.1,-2.7]
+rot2 T*=180.2s p95 thr=25.8 wiu=1800.5 errors thr-prop=-1.0 [-1.0,-1.0]
+rot3 T*=186.8s p95 thr=25.1 wiu=1739.2 errors thr-prop=+3.2 [+1.6,+4.8]
+rot4 T*=184.2s p95 thr=25.1 wiu=1830.7 errors thr-prop=-3.0 [-3.0,-3.0]
+rot5 T*=181.5s p95 thr=26.8 wiu=1791.1 errors thr-prop=+4.0 [+4.0,+4.0]
+rot6 T*=164.0s p95 thr=25.7 wiu=1739.4 errors thr-prop=+8.8 [+8.2,+9.4]
+[write] /Users/arlina/Downloads/all_projects/25_EDGECLOUD/results/real_delay_rev1.csv (140 rows)
+[write] /Users/arlina/Downloads/all_projects/25_EDGECLOUD/results/real_delay_draws_rev1.csv (24682 rows)
+{
+  "latency_rotations_passing": 7,
+  "error_rotations_within_interval": 1,
+  "threshold_carries_over": false,
+  "per_rotation": {
+    "0": {
+      "T_star": 178.36455718182953,
+      "latency_ok": true,
+      "errors_within_interval": true,
+      "thr_minus_proposed": 0.0,
+      "lo": 0.0,
+      "hi": 0.0
+    },
+    "1": {
+      "T_star": 180.04613984352187,
+      "latency_ok": true,
+      "errors_within_interval": false,
+      "thr_minus_proposed": -3.4,
+      "lo": -4.080087380658256,
+      "hi": -2.7199126193417444
+    },
+    "2": {
+      "T_star": 180.15741671599767,
+      "latency_ok": true,
+      "errors_within_interval": false,
+      "thr_minus_proposed": -1.0,
+      "lo": -1.0,
+      "hi": -1.0
+    },
+    "3": {
+      "T_star": 186.76048408272885,
+      "latency_ok": true,
+      "errors_within_interval": false,
+      "thr_minus_proposed": 3.2,
+      "lo": 1.581068215291297,
+      "hi": 4.818931784708703
+    },
+    "4": {
+      "T_star": 184.22285213433713,
+      "latency_ok": true,
+      "errors_within_interval": false,
+      "thr_minus_proposed": -3.0,
+      "lo": -3.0,
+      "hi": -3.0
+    },
+    "5": {
+      "T_star": 181.52847857019088,
+      "latency_ok": true,
+      "errors_within_interval": false,
+      "thr_minus_proposed": 4.0,
+      "lo": 4.0,
+      "hi": 4.0
+    },
+    "6": {
+      "T_star": 164.00723697588063,
+      "latency_ok": true,
+      "errors_within_interval": false,
+      "thr_minus_proposed": 8.8,
+      "lo": 8.244710978960441,
+      "hi": 9.35528902103956
+    }
+  }
+}
+MANUSCRIPT: Section VIII-B 'not tested on real data', Section I-A item 1, Section IX check 1, Conclusion.

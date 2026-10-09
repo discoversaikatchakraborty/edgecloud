@@ -1,0 +1,27 @@
+[manifest] /Users/arlina/Downloads/all_projects/25_EDGECLOUD/results/itemE_fullmetrics_manifest_rev1.json
+[full metrics] 20 seeds
+  seed 101: 75 rows, 9 scenarios
+  seed 202: 75 rows, 9 scenarios
+  seed 303: 75 rows, 9 scenarios
+  seed 404: 75 rows, 9 scenarios
+  seed 505: 75 rows, 9 scenarios
+  seed 606: 75 rows, 9 scenarios
+  seed 707: 75 rows, 9 scenarios
+  seed 808: 75 rows, 9 scenarios
+  seed 909: 75 rows, 9 scenarios
+  seed 1010: 75 rows, 9 scenarios
+  seed 1111: 75 rows, 9 scenarios
+  seed 1212: 75 rows, 9 scenarios
+  seed 1313: 75 rows, 9 scenarios
+  seed 1414: 75 rows, 9 scenarios
+  seed 1515: 75 rows, 9 scenarios
+  seed 1616: 75 rows, 9 scenarios
+  seed 1717: 75 rows, 9 scenarios
+  seed 1818: 75 rows, 9 scenarios
+  seed 1919: 75 rows, 9 scenarios
+  seed 2020: 75 rows, 9 scenarios
+[write] /Users/arlina/Downloads/all_projects/25_EDGECLOUD/results/full_metrics_20seed_rev1.csv (1500 rows)
+[write] /Users/arlina/Downloads/all_projects/25_EDGECLOUD/results/full_metrics_20seed_summary_rev1.csv (75 rows)
+[full metrics] 75 scenario-method cells at 20 seeds
+MANUSCRIPT: Tables V and VI move to twenty seeds in every column, including median latency, image share and queue share.
+exit=0

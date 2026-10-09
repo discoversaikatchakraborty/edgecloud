@@ -1,0 +1,11 @@
+{
+  "protocol": "itemD_protocol_rev1.json",
+  "protocol_sha256": "85aabb1b31166c5559490fb95446b89c2c4702c7b1e3d838af812ae448442e78",
+  "started_utc": "2026-10-07T04:53:11Z",
+  "python": "3.12.14",
+  "numpy": "2.3.5",
+  "argv": [
+    "scripts/item_d_real_delay_threshold.py"
+  ],
+  "sklearn": "1.8.0"
+}

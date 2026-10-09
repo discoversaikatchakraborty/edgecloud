@@ -9,9 +9,9 @@ results/ so the exact draw is auditable. T* is derived on calibration windows
 only, through the adapter.
 
 Outputs:
-  results/real_delay_rev1.csv
-  results/real_delay_draws_rev1.csv
-  results/itemD_decision.json
+  results/real_delay_rev2.csv
+  results/real_delay_draws_rev2.csv
+  results/itemD_decision_rev2.json
 """
 from __future__ import annotations
 
@@ -46,8 +46,8 @@ def draw_delays(n: int, proto: dict, seed: int):
 
 
 def main():
-    proto = load_protocol("itemD_protocol_rev1.json")
-    run_manifest(os.path.join(RESULTS, "itemD_manifest.json"), proto)
+    proto = load_protocol("itemD_protocol_rev2.json")
+    run_manifest(os.path.join(RESULTS, "itemD_manifest_rev2.json"), proto)
     rows, draws, decision = [], [], {}
     for rot in range(7):
         split = adapters.load_crisismmd_rotation(rot)
@@ -74,14 +74,14 @@ def main():
                               "thr_minus_proposed": float(pt.mean), "lo": float(pt.lo), "hi": float(pt.hi)}
         print(f"rot{rot} T*={tstar:.1f}s p95 thr={p95_thr:.1f} wiu={p95_wiu:.1f} "
               f"errors thr-prop={pt.mean:+.1f} [{pt.lo:+.1f},{pt.hi:+.1f}]")
-    write_csv(os.path.join(RESULTS, "real_delay_rev1.csv"), rows)
-    write_csv(os.path.join(RESULTS, "real_delay_draws_rev1.csv"), draws)
+    write_csv(os.path.join(RESULTS, "real_delay_rev2.csv"), rows)
+    write_csv(os.path.join(RESULTS, "real_delay_draws_rev2.csv"), draws)
     lat = sum(d["latency_ok"] for d in decision.values())
     err = sum(d["errors_within_interval"] for d in decision.values())
     carries = lat == 7 and err >= proto["decision_rule"]["min_rotations_errors_within"]
     out = {"latency_rotations_passing": int(lat), "error_rotations_within_interval": int(err),
            "threshold_carries_over": bool(carries), "per_rotation": decision}
-    json.dump(out, open(os.path.join(RESULTS, "itemD_decision.json"), "w"), indent=2)
+    json.dump(out, open(os.path.join(RESULTS, "itemD_decision_rev2.json"), "w"), indent=2)
     print(json.dumps(out, indent=2))
     print("MANUSCRIPT: Section VIII-B 'not tested on real data', Section I-A item 1, "
           "Section IX check 1, Conclusion.")

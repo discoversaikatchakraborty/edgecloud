@@ -1,0 +1,17 @@
+ablation,scenario,n,helped_by,lo,hi,includes_zero
+no_novelty,contradictory_evidence,20,0.0,0.0,0.0,True
+no_quality,contradictory_evidence,20,2.8,1.52,4.08,False
+no_reliability,contradictory_evidence,20,2.75,1.71,3.79,False
+no_delay_penalty,delayed_imagery,20,9.05,5.64,12.46,False
+no_recency,delayed_imagery,20,-0.5,-0.99,-0.01,False
+sensitivity:cloud_transmit_all:no_recency,delayed_imagery,20,-5.8,-7.08,-4.52,False
+sensitivity:derived_threshold:no_recency,delayed_imagery,20,0.55,-0.22,1.32,True
+sensitivity:fixed_rule:no_recency,delayed_imagery,20,-5.0,-6.17,-3.83,False
+sensitivity:proposed:no_recency,delayed_imagery,20,-0.5,-0.99,-0.01,False
+sensitivity:wait_if_uncertain:no_recency,delayed_imagery,20,-4.75,-5.96,-3.54,False
+no_severity,low_bandwidth,20,0.0,0.0,0.0,True
+no_admissibility,misaligned_evidence,20,16.2,11.07,21.33,False
+no_novelty,noisy_text,20,0.0,0.0,0.0,True
+no_quality,noisy_text,20,3.45,2.35,4.55,False
+no_reliability,noisy_text,20,-0.45,-0.89,-0.01,False
+no_severity,normal,20,0.0,0.0,0.0,True

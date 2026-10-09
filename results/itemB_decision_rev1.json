@@ -1,0 +1,99 @@
+{
+  "protocol": "itemB_protocol_rev1.json",
+  "protocol_sha256": "f8cd9ed81ed1ba2e41513b687379fb8624cacad38a053fd2e06b31c05a8f50aa",
+  "external_label_field": "text_human",
+  "categories_kept": {
+    "other_relevant_information": 0,
+    "infrastructure_and_utility_damage": 1,
+    "rescue_volunteering_or_donation_effort": 2
+  },
+  "categories_dropped": {
+    "not_humanitarian": 398,
+    "injured_or_dead_people": 187,
+    "affected_individuals": 150,
+    "vehicle_damage": 21,
+    "missing_or_found_people": 7
+  },
+  "rows_kept_per_rotation": [
+    {
+      "rotation": 0,
+      "rows_kept": 2763,
+      "rows_total": 3526,
+      "n_train": 1784,
+      "n_cal": 199,
+      "n_test": 780
+    },
+    {
+      "rotation": 1,
+      "rows_kept": 2763,
+      "rows_total": 3526,
+      "n_train": 1190,
+      "n_cal": 731,
+      "n_test": 842
+    },
+    {
+      "rotation": 2,
+      "rows_kept": 2763,
+      "rows_total": 3526,
+      "n_train": 621,
+      "n_cal": 780,
+      "n_test": 1362
+    },
+    {
+      "rotation": 3,
+      "rows_kept": 2763,
+      "rows_total": 3526,
+      "n_train": 865,
+      "n_cal": 842,
+      "n_test": 1056
+    },
+    {
+      "rotation": 4,
+      "rows_kept": 2763,
+      "rows_total": 3526,
+      "n_train": 845,
+      "n_cal": 1362,
+      "n_test": 556
+    },
+    {
+      "rotation": 5,
+      "rows_kept": 2763,
+      "rows_total": 3526,
+      "n_train": 1508,
+      "n_cal": 1056,
+      "n_test": 199
+    },
+    {
+      "rotation": 6,
+      "rows_kept": 2763,
+      "rows_total": 3526,
+      "n_train": 1476,
+      "n_cal": 556,
+      "n_test": 731
+    }
+  ],
+  "class_handling_from_item_a": "resample",
+  "optimizer_ahead_of_fixed_rule": {
+    "current": "11 of 21",
+    "handled": "8 of 21"
+  },
+  "comparisons_per_variant": 21,
+  "step_1_published_baseline_reproduction": {
+    "status": "BLOCKED",
+    "grounds": [
+      "The official CrisisMMD train/dev/test split is not present on this machine. Only annotations/*.tsv is held; the corpus Readme names the split as a separate archive, crisismmd_datasplit_all.zip, not retrieved.",
+      "The published baseline values of Ofli, Alam and Imran (ISCRAM 2020) are not held on this machine in any retained form, so the gap has no verified reference to be measured against.",
+      "The image files are absent; only derived CLIP image embeddings are retained, so no baseline can be computed from pixels."
+    ],
+    "to_unblock": "Supply crisismmd_datasplit_all.zip and the published baseline table as files in the project."
+  },
+  "informative_vs_not_informative_task": {
+    "status": "NOT RUN",
+    "reason": "Two classes. The decision machinery in upstream/prototype_v2.3/core.py is fixed at three: CLASSES and CLASS_NAMES hold three entries, evidence fusion falls back to a uniform 1/3, and the conformal set indexes range(3) over the membership matrix. upstream is reproduced unchanged so its published numbers stay checkable, so it was not edited to admit a two-class task."
+  },
+  "humanitarian_category_at_published_cardinality": {
+    "status": "NOT RUN",
+    "reason": "Eight classes in the annotations, blocked by the same fixed three-class machinery. The three most frequent categories were run instead and the restriction is reported, not hidden."
+  },
+  "what_this_does_and_does_not_establish": "It establishes how the budgeting comparison behaves when the label comes from the dataset annotators rather than from this paper, on the three most frequent humanitarian categories, under the same conditions and the same event-based splits. It does not reproduce any published baseline, does not measure a reproduction gap and is not the published eight-class task."
+}

@@ -1,0 +1,67 @@
+{
+  "item": "B",
+  "title": "Established CrisisMMD task with a published baseline",
+  "reviewer_items": [
+    "R2.3"
+  ],
+  "tasks": [
+    "informative_vs_not",
+    "humanitarian_category"
+  ],
+  "baseline_reference": "Ofli, Alam and Imran, ISCRAM 2020 (multimodal), with single-modality baselines from the same paper",
+  "official_split": "CrisisMMD v2.0 train/dev/test as released by the dataset authors",
+  "steps": [
+    "1. Reproduce the published single-modality and multimodal baseline numbers on the official split. Record the reproduction gap per task and modality.",
+    "2. Using the class handling chosen by item A, run the budgeting comparison (all methods of itemC_protocol.json) on each task under the three carried-over conditions.",
+    "3. Report both tasks; do not pick the one that favours the optimizer."
+  ],
+  "outputs": [
+    "results/crisismmd_baseline_repro_rev1.csv",
+    "results/crisismmd_humanitarian_rev1.csv",
+    "results/crisismmd_informative_rev1.csv"
+  ],
+  "notes": "No runner script is supplied for item B because the official task labels and split files are not part of the shipped derived features; the adapter must load them from the corpus obtained from its authors. Freeze this protocol (its .sha256 sidecar) before any run.",
+  "seeds": [
+    101,
+    202,
+    303,
+    404,
+    505
+  ],
+  "rotations": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+  ],
+  "conditions": [
+    "normal",
+    "low_bandwidth",
+    "misaligned"
+  ],
+  "methods": [
+    "Image only",
+    "Transmit all",
+    "Fixed rule",
+    "Confidence gate",
+    "Random within budget",
+    "Greedy by uncertainty",
+    "Greedy, proposed utility",
+    "Proposed (exact knapsack)",
+    "Fixed compression",
+    "Text only"
+  ],
+  "class_handling": "resample",
+  "label_field": "text_human",
+  "label_classes_kept": 3,
+  "label_source": "CrisisMMD v2.0 annotations/*.tsv, column text_human, the dataset annotators\u2019 own humanitarian category. Joined to the derived records on image_id with no missing values.",
+  "label_restriction_reason": "The decision machinery in upstream/prototype_v2.3/core.py is fixed at three classes: CLASSES and CLASS_NAMES hold three entries, evidence fusion falls back to a uniform 1/3, and the conformal set indexes range(3) over the membership matrix. upstream is reproduced unchanged so its published numbers stay checkable, so the task is restricted to the three most frequent categories rather than the package being edited. This is NOT the published eight-category task and is not reported as one.",
+  "blocked": [
+    "step 1, reproducing the published baseline on the official split: the official split archive crisismmd_datasplit_all.zip is not present, the published values are not retained on this machine, and the image files are absent so no baseline can be computed from pixels",
+    "the informative-against-not-informative task: two classes, blocked by the same fixed three-class machinery"
+  ],
+  "why_frozen": "Frozen before the run; sha256 recorded beside it and in the run manifest. Seeds are CONFIG[\"seeds\"] from upstream/prototype_v2.3/config.json, the same five the paper averages, so the unhandled column can be checked against the printed table. The rev1 protocol used [0,1,2,3,4] and could not reproduce it; see archive/superseded_2026-10-08/WHY_SUPERSEDED.txt."
+}

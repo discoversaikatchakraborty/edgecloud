@@ -1,0 +1,45 @@
+[manifest] /Users/arlina/Downloads/all_projects/25_EDGECLOUD/results/itemE_ablation_manifest_rev1.json
+[item E ablations] 20 seeds: [101, 202, 303, 404, 505, 606, 707, 808, 909, 1010, 1111, 1212, 1313, 1414, 1515, 1616, 1717, 1818, 1919, 2020]
+  seed 101: 16 ablation rows
+  seed 202: 16 ablation rows
+  seed 303: 16 ablation rows
+  seed 404: 16 ablation rows
+  seed 505: 16 ablation rows
+  seed 606: 16 ablation rows
+  seed 707: 16 ablation rows
+  seed 808: 16 ablation rows
+  seed 909: 16 ablation rows
+  seed 1010: 16 ablation rows
+  seed 1111: 16 ablation rows
+  seed 1212: 16 ablation rows
+  seed 1313: 16 ablation rows
+  seed 1414: 16 ablation rows
+  seed 1515: 16 ablation rows
+  seed 1616: 16 ablation rows
+  seed 1717: 16 ablation rows
+  seed 1818: 16 ablation rows
+  seed 1919: 16 ablation rows
+  seed 2020: 16 ablation rows
+[write] /Users/arlina/Downloads/all_projects/25_EDGECLOUD/results/ablation_20seed_rev1.csv (320 rows)
+[write] /Users/arlina/Downloads/all_projects/25_EDGECLOUD/results/ablation_20seed_summary_rev1.csv (16 rows)
+
+                                 ablation               scenario  n  errors_mean  errors_lo  errors_hi  includes_zero_vs_zero
+                               no_novelty contradictory_evidence 20        13.75  11.081367  16.418633                  False
+                               no_quality contradictory_evidence 20        16.55  13.789634  19.310366                  False
+                           no_reliability contradictory_evidence 20        16.50  13.495562  19.504438                  False
+                         no_delay_penalty        delayed_imagery 20        19.20  15.073308  23.326692                  False
+                               no_recency        delayed_imagery 20         9.65   7.890477  11.409523                  False
+sensitivity:cloud_transmit_all:no_recency        delayed_imagery 20         4.35   2.972691   5.727309                  False
+ sensitivity:derived_threshold:no_recency        delayed_imagery 20        10.70   8.639729  12.760271                  False
+        sensitivity:fixed_rule:no_recency        delayed_imagery 20         5.15   3.675667   6.624333                  False
+          sensitivity:proposed:no_recency        delayed_imagery 20         9.65   7.890477  11.409523                  False
+ sensitivity:wait_if_uncertain:no_recency        delayed_imagery 20         5.40   3.924690   6.875310                  False
+                              no_severity          low_bandwidth 20         4.40   3.229718   5.570282                  False
+                         no_admissibility    misaligned_evidence 20        30.10  22.875197  37.324803                  False
+                               no_novelty             noisy_text 20         6.45   4.997726   7.902274                  False
+                               no_quality             noisy_text 20         9.90   7.710602  12.089398                  False
+                           no_reliability             noisy_text 20         6.00   4.543564   7.456436                  False
+                              no_severity                 normal 20         4.55   3.284356   5.815644                  False
+
+MANUSCRIPT: Table XVI and the ablation sentence of Section VI-C move to twenty seeds from these files.
+exit=0

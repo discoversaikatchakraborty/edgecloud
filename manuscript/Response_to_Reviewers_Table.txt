@@ -1,0 +1,165 @@
+RESPONSE TO REVIEWERS -- POINT-BY-POINT TABLE
+Manuscript : Evidence Budgeting for Edge AI under Degraded Connectivity (ICCA, camera-ready)
+Reviewed   : EdgeCloud_Merged_IEEE.pdf, 17 pages (byte-identical to manuscript/Original_Submission.pdf)
+Current    : manuscript/EdgeCloud_ICCA_Revised_IEEEA4.pdf, 12 pages
+Date       : 2026-10-08
+Status key : FIXED            the comment is closed in the current manuscript, with the location given
+             PARTIALLY FIXED  closed as far as the evidence or environment allows; what remains is stated
+             NOT FIXED        not addressed experimentally; the paper's claims were bounded instead
+Every "where" below was verified against the current rendered PDF today, not taken from the earlier
+response letter. Section numbers are those of the current manuscript.
+
+====================================================================================================
+REVIEWER 1  (Content: Weak Accept 4; English: Very Good 4; References: Good 3; Overall 70-80; Accept)
+====================================================================================================
+
+ #     Reviewer comment (condensed)              Status            What changed                                   Where / evidence
+ ----  ----------------------------------------  ----------------  ---------------------------------------------  ---------------------------------------------
+ R1.1  Gap between operational motivation and    FIXED             Every deployment statement bounded to           Sec. X: "There is no hardware testbed and no
+       validation; synthetic workloads and                         simulation scope. Section X names what is       energy measurement"; "there is no protocol
+       simulated comms; no edge hardware, radio                    absent: protocol stack, MAC, routing,           stack: no MAC layer, routing, contention
+       testbed, energy measurement or field                        contention, hardware, energy. Conclusion        between nodes, congestion control or
+       deployment; conclusions about deployment                    names field value as not established.           bidirectional traffic"; "Every statement in
+       should stay within those boundaries.                        I-A frames each contribution as a derivation,   this paper about edge deployment is
+                                                                   protocol or failure mode, never a deployment    therefore bounded by simulation on a
+                                                                   result.                                         workstation." Sec. XII: "Field value under a
+                                                                                                                   real protocol stack and on edge hardware
+                                                                                                                   remains to be established."
+
+ R1.2  A modality can score well on every        FIXED             Turned from an observation into a measured      Sec. VIII-A (twenty-five-cell diagnostic,
+       value-function criterion while carrying                     finding. A 25-cell diagnostic (five text         rule fixed before the run, "returns false,
+       little predictive information; deserves                     representations x class handlings x             passing in none of the seven rotations");
+       more attention.                                             classifiers, rule fixed in advance) attributes  Sec. I-A item 3; Sec. VIII-C: "none asks
+                                                                   the text pathway's majority-class output to     whether this modality has ever predicted
+                                                                   class imbalance, not to the reduction; no       this label, which a held-out estimate of
+                                                                   tested representation clears the bar. The       predictive contribution would"; Sec. IX
+                                                                   value function's blindness is now stated as     sixth check.
+                                                                   a limitation with evidence and a named remedy
+                                                                   (held-out predictive contribution).
+
+ R1.3  Dataset DOI placeholder should be          PARTIALLY FIXED   The red placeholder is gone. Section XI now       Sec. XI: repository URL, "at version 2.6.17,
+       resolved before the final version.                          states what a reader can verify today: the      the version behind every result reported
+                                                                   repository, the exact version (2.6.17), and     here, whose SHA256SUMS records a digest for
+                                                                   that SHA256SUMS digests 113 files. Both facts    each of its 113 files". Verified 2026-10-08
+                                                                   were verified against the archived repository   against the archived repo: CITATION.cff says
+                                                                   today. What remains is the deposit itself,      2.6.17; SHA256SUMS has exactly 113 lines.
+                                                                   which only the authors can perform. We did     AUTHOR ACTION: deposit the release and
+                                                                   not invent an identifier.                       insert the identifier into \archivedoi.
+                                                                                                                   Also: CITATION.cff author fields still read
+                                                                                                                   "[To be completed before deposit]" while the
+                                                                                                                   paper names five authors; reconcile before
+                                                                                                                   deposit.
+
+ R1.4  Validation on actual edge and             NOT FIXED         No edge hardware, radio testbed or emulator     Sec. X: "no hardware testbed"; Sec. XII names
+       communication hardware would                (bounded)        was available. The paper claims nothing that    it as the primary open item. The optional
+       significantly strengthen the work.                          would need one, and names this as the primary   emulator run (item F) needs Mahimahi link
+                                                                   open item. Added instead: packet loss with      shells, not installed on this machine.
+                                                                   retransmission and replayed measured LTE
+                                                                   capacity traces (Sec. VII), which narrow the
+                                                                   link model without claiming to close it.
+
+====================================================================================================
+REVIEWER 2  (Content: Accept 5; English: Good 3; References: Good 3; Overall 50-60; Accept)
+====================================================================================================
+
+ #     Reviewer comment (condensed)              Status            What changed                                   Where / evidence
+ ----  ----------------------------------------  ----------------  ---------------------------------------------  ---------------------------------------------
+ R2.1  Contribution thin and unclear; by the     FIXED             (a) Section I-A "What a Reader Gains" states    Sec. I-A: "Because the solver is not where
+       paper's own results the optimizer adds                      four things explicitly. (b) The threshold rule  the value lies, it is fair to ask what this
+       nothing; the threshold rule is never                        IS now tested on real data, in Section VIII-D,  paper offers beyond 'use simple rules and
+       tested on real data; state what a reader                    with a constructed arrival delay drawn from a   test them on your data'. Four things: ..."
+       gains beyond "use simple rules and test                     frozen protocol. The result is partly           Sec. VIII-D "The Constant Threshold on Real
+       them on your own data".                                     negative and is reported as such: latency       Data": tail latency 25.4 s against 1,833.9 s
+                                                                   carries over (67- to 74-fold across the seven   (factor 72 on rotation 0; 67 to 74 across the
+                                                                   splits) but accuracy reverses, so the           seven); errors 486.0 against 451.0 of 968;
+                                                                   pre-specified rule returns "does not carry      "The rule therefore returns does not carry
+                                                                   over". (c) Abstract and Conclusion now say      over." Abstract: "What survives is narrow
+                                                                   what survives is narrow and why.                and we state it as such."
+
+ R2.2  Key formulas missing: no equations for    FIXED             The original contained zero numbered            Sec. III, equations (1)-(10): admissibility
+       the utility, the knapsack objective or                      equations; the current manuscript has ten.     (1), knapsack objective with constraints (2),
+       the closed-form delay threshold, though                     Equation (4) was transcribed from the           latency with forecast delay (3), value
+       the threshold is the central                                reference implementation and checked by        function with every coefficient (4), novelty
+       contribution. Must be given and derived.                    recomputation; two errors in the earlier        (5), net-utility condition (6), closed-form
+                                                                   prose description were corrected and stated.   delay threshold (7), calibration median (8),
+                                                                   Every coefficient is printed: beta_0, beta_u,   opinion pool (9), conformal set (10).
+                                                                   beta_q, beta_n, lambda_b (added today from      Proposition 1 (feasibility and exactness),
+                                                                   config.json), lambda_ell, the recency time      Proposition 2 (coverage). The threshold is
+                                                                   constants and the fusion base weights (added    derived from (6) in the text between (6) and
+                                                                   today from core.py).                            (7).
+
+ R2.3  Real-data experiment too weak.                              Three of the five reruns answer this comment.
+       (a) Text classifier predicts the           FIXED             (a) Diagnosed, not assumed: 25 cells on the     Sec. VIII-A: majority-class output is "a
+           majority class; suggests a pipeline                      rotation-0 split, rule fixed in advance.        class-imbalance effect rather than an
+           or class-imbalance problem, not                          Attributed to class imbalance, not to the       artefact of the reduction"; best cell lifts
+           "text carries no signal".                                eight-component reduction. A TF-IDF control    macro-F1 0.219 -> 0.452 while accuracy stays
+                                                                    is reported honestly: one of six cells reaches  below the majority baseline in every
+                                                                    the baseline, five fall below it.               rotation.
+       (b) Handle class imbalance.                FIXED             (b) Balanced resampling applied to every        Sec. VIII-E: optimizer ahead in 14 of 21
+                                                                    per-modality model and the comparison rerun;   (against 15 unhandled); gap on rotation 0
+                                                                    unhandled column reproduces all ten methods    widens from -17.2 to -112.6; single-modality
+                                                                    exactly first. Direction survives, magnitudes   rules get worse, as do four fusing methods.
+                                                                    change; the single-modality rule wins partly    Reference [26] He and Garcia added for the
+                                                                    because imbalance was left in place.            handling and the metric reading.
+       (c) Use an established CrisisMMD task      PARTIALLY FIXED   (c) The humanitarian label, defined by the      Sec. VIII-F "A Label the Paper Did Not
+           and baseline.                                            dataset's annotators, was run (restricted to   Choose": 11 of 21 and 3 of 7 rather than 15 of
+                                                                    its three most frequent categories because     21 and 7 of 7. The published multimodal
+                                                                    the machinery is fixed at three). The result   baseline of [5] EXCLUDES the damage task
+                                                                    weakens the paper's headline and is reported.  ("damage severity was applied only on
+                                                                    The published-baseline reproduction cannot     images, we do not consider this task"),
+                                                                    run, and today the reason was established at   verified from the paper today; the official
+                                                                    source: no published multimodal baseline       split was obtained and inspected (3,526
+                                                                    exists for the damage task.                    records, 2,468/529/529); image files absent.
+                                                                                                                   Sec. X states this.
+       (d) 82% of the test set is one             FIXED             (d) Seven pre-specified event rotations; the    Sec. VIII-C: "the test set is dominated by
+           hurricane; severity fixed; no          (disclosed)       direction survives rotation, the per-           one hurricane, so we rotated the event list
+           sensor modality; only 3 of 9                             condition pattern does not. Severity, sensor   through seven pre-specified assignments";
+           conditions.                                              and the 3-of-9 reduction cannot be changed     Sec. VIII-B lists every reduction and why
+                                                                    by the corpus and are disclosed with the       ("CrisisMMD has no sensor stream";
+                                                                    reason for each.                               "severity is held constant"; "Three
+                                                                                                                   conditions carry over, not nine").
+
+ R2.4  Statistical weakness and post-hoc        FIXED             Twenty seeds on every main condition, every     Sec. V-C: "We report the mean of twenty seeds
+       analyses: synthetic data very easy                           column. First five reproduce the original      ... Three of the eight paired error
+       (<1% error); five seeds, four test                          means exactly, run halts on mismatch. Three     comparisons still include zero at twenty
+       events; many intervals include zero;                        of eight paired comparisons still include       seeds, so we treat those three as
+       later experiments designed after the                        zero and are called inconclusive, never         inconclusive rather than as equivalence."
+       main results. Increase seeds; separate                      equivalence (the abstract's "no accuracy        Sec. VI is titled CONFIRMATORY, Sec. VII
+       confirmatory from exploratory.                              cost" was corrected today for exactly this).    EXPLORATORY and opens "designed after the
+                                                                   Confirmatory (VI) and exploratory (VII, VIII)   confirmatory results". Sec. X: "synthetic and
+                                                                   are separate sections with the distinction      well separated, which explains error rates
+                                                                   stated. Easy data acknowledged.                 below 1%".
+
+ R2.5  Network model abstract: latency only,     PARTIALLY FIXED   Two experiments narrow the link model: packet   Sec. VII: loss at 10% takes the policy's tail
+       no protocol stack, contention or edge                       loss with retransmission, and replayed          0.57 -> 4.70 s against 0.09 -> 0.14 s for the
+       hardware. Scale back claims or                              measured LTE capacity traces. Deployment        fixed rule; measured traces inflate tail
+       validate with an emulator or testbed.                       claims scaled back everywhere. No emulator or   latency up to 8.7x. Sec. X: "no protocol
+                                                                   testbed was available; stated rather than       stack ... no hardware testbed". Emulator not
+                                                                   worked around.                                  available (see R1.4).
+
+ R2.6  Presentation: very long, a narrative      FIXED             17 pages -> 12. Every instance of the draft     "earlier version": 6 occurrences -> 0 (the
+       audit; internal and draft text                              text the reviewer quoted is gone, the last      last one removed today). "journal's
+       ("earlier version", "this journal's                         one today. Results reorganised around named     readership": 2 -> 0. DOI placeholder: 1 -> 0.
+       readership", DOI placeholder); shorten                      claims: I-A states four, VI carries one claim   Sec. I-A; subsection titles now state the
+       substantially, remove draft and audit                       per subsection title, VII and VIII are           claim ("When Bandwidth Is the Only
+       text, organise around a few clear                           explicitly exploratory. A mis-numbered          Constraint, a Fixed Rule Is Enough"; "The
+       claims.                                                     stray heading in the original ("I. A            Threshold Matters, the Solver Does Not").
+                                                                   Measured Link Is Not a Constant One") is gone.
+
+====================================================================================================
+SUMMARY
+====================================================================================================
+ FIXED            R1.1, R1.2, R2.1, R2.2, R2.3(a), R2.3(b), R2.3(d), R2.4, R2.6          9
+ PARTIALLY FIXED  R1.3 (deposit is the authors'), R2.3(c) (baseline does not exist at     3
+                  source; the task itself was run), R2.5 (narrowed, not closed)
+ NOT FIXED        R1.4 (no hardware; claims bounded instead)                              1
+
+Two outcomes go against the paper's own narrative and are reported rather than softened: the
+threshold rule does not carry over on accuracy (R2.1), and the real-data ranking depends on the
+label chosen (R2.3c). A reviewer who asked for honesty about negative results gets it.
+
+AUTHOR ACTIONS STILL OPEN
+ 1. Deposit the release and insert the identifier into \archivedoi (R1.3).
+ 2. Reconcile CITATION.cff author fields with the five authors named on the paper (R1.3).
+ 3. Paste the conference copyright line into \copyrightline, then run manuscript/latex/build.sh.
+ 4. Run an institutional iThenticate or Turnitin check (the one review item that cannot be done here).

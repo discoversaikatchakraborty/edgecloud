@@ -34,7 +34,7 @@ import pandas as pd
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
 RECORDS = os.path.join(ROOT, "upstream", "prototype_v2.3", "data", "crisismmd", "records.csv.gz")
-ANNOTATIONS = "/Users/arlina/Downloads/all_projects/12_edgewait/data_real/ex/CrisisMMD_v2.0/annotations"
+ANNOTATIONS = "/Users/arlina/Downloads/all_projects/Tier-Ready/12_edgewait/data_real/ex/CrisisMMD_v2.0/annotations"
 OUT = os.path.join(ROOT, "data", "crisismmd_text_full.npz")
 MANIFEST = os.path.join(ROOT, "data", "crisismmd_text_full_manifest.json")
 CLIP_MODEL = "openai/clip-vit-base-patch32"

@@ -1,0 +1,18 @@
+[protocol] froze itemB_protocol_rev1.json sha256=f8cd9ed81ed1ba2e41513b687379fb8624cacad38a053fd2e06b31c05a8f50aa
+[manifest] /Users/arlina/Downloads/all_projects/25_EDGECLOUD/results/itemB_manifest_rev1.json
+[item B] external label: text_human, top 3 categories, class handling from item A: resample
+[item B] categories kept: {'other_relevant_information': 0, 'infrastructure_and_utility_damage': 1, 'rescue_volunteering_or_donation_effort': 2}
+[item B] categories dropped: {'not_humanitarian': 398, 'injured_or_dead_people': 187, 'affected_individuals': 150, 'vehicle_damage': 21, 'missing_or_found_people': 7}
+[item B] rotation 0: 2763 of 3526 rows, test n=780
+[item B] rotation 1: 2763 of 3526 rows, test n=842
+[item B] rotation 2: 2763 of 3526 rows, test n=1362
+[item B] rotation 3: 2763 of 3526 rows, test n=1056
+[item B] rotation 4: 2763 of 3526 rows, test n=556
+[item B] rotation 5: 2763 of 3526 rows, test n=199
+[item B] rotation 6: 2763 of 3526 rows, test n=731
+[write] /Users/arlina/Downloads/all_projects/25_EDGECLOUD/results/crisismmd_humanitarian_rev1.csv (2100 rows)
+[write] /Users/arlina/Downloads/all_projects/25_EDGECLOUD/results/crisismmd_humanitarian_rotations_rev1.csv (42 rows)
+[item B] optimizer ahead of the fixed rule: current 11 of 21, handled 8 of 21
+[item B] step 1 (published baseline on the official split): BLOCKED, see results/itemB_decision_rev1.json
+MANUSCRIPT: Section VIII new table beside Table XIII; Section VIII-B first paragraph; Section X must carry the BLOCKED grounds.
+itemB exit=0
