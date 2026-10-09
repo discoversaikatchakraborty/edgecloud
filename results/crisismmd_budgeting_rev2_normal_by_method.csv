@@ -1,0 +1,11 @@
+method,current,handled,change
+Image only,420.0,466.6,46.6
+Text only,494.0,576.4,82.4
+Transmit all,435.8,377.8,-58.0
+Confidence gate,437.0,377.4,-59.6
+Fixed compression,483.0,502.2,19.2
+Fixed rule,464.2,498.2,34.0
+Random within budget,462.0,484.8,22.8
+Greedy by uncertainty,466.8,501.0,34.2
+"Greedy, proposed utility",447.0,385.6,-61.4
+Proposed (exact knapsack),447.0,385.6,-61.4

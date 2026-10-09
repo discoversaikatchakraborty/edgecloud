@@ -20,6 +20,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 TEX = ROOT / 'manuscript' / 'latex' / 'main.tex'
+SETUP = ROOT / 'manuscript' / 'latex' / 'camera_ready.tex'   # the two camera-ready slots
 PDF = ROOT / 'manuscript' / 'latex' / 'main.pdf'
 DELIVERED = ROOT / 'manuscript' / 'EdgeCloud_ICCA_Revised_IEEEA4.pdf'
 UPSTREAM = ROOT / 'upstream' / 'prototype_v2.3'
@@ -98,6 +99,11 @@ def main() -> int:
     qq = [i + 1 for i, pg in enumerate(doc) if '??' in pg.get_text()]
     check('no unresolved reference in the render', not qq,
           f"?? on page(s) {', '.join(map(str, qq))}" if qq else 'no "??" on any page')
+
+    # a dummy archival identifier (the setup placeholder) must never reach a submitted PDF
+    dummy = re.findall(r'zenodo\.(?:X{3,}|0{5,})|\bXXXX+\b', text)
+    check('no placeholder archival identifier in the render', not dummy,
+          f'{len(dummy)} occurrence(s)' + (f': {dummy[0]}' if dummy else ''))
 
     check('indicator function typesets', '\u22ae' not in text)
 
@@ -228,7 +234,7 @@ def main() -> int:
     has_cr = bool(_re.search(r'\u00a9\s*20\d\d IEEE|978-\d-\d{4}', text))
     print(f"  {'PASS' if has_cr else 'TODO'}  copyright line printed on page 1"
           + ('' if has_cr else '  [conference supplies it; paste into '
-                              '\\copyrightline in main.tex]'))
+                              '\\copyrightline in camera_ready.tex]'))
     if not has_cr:
         NOTES.append('camera-ready: the copyright line is still empty, so nothing prints. '
                      'It is not a FAIL because the paper renders cleanly without it, but it '
@@ -240,15 +246,18 @@ def main() -> int:
     # This builds the paper with representative values in both slots and reports that count.
     import subprocess, tempfile, shutil, os
     src = TEX.read_text()
-    probe = (src.replace('\\newcommand{\\copyrightline}{}',
-                 '\\newcommand{\\copyrightline}{978-1-0000-0000-0/26/\\$31.00~\\copyright 2026 IEEE}')
-                .replace('\\newcommand{\\archivedoi}{}',
-                 '\\newcommand{\\archivedoi}{10.5281/zenodo.0000000}'))
+    setup = SETUP.read_text()
+    filled = (re.sub(r'\\newcommand\{\\copyrightline\}\{[^}]*\}',
+                     r'\\newcommand{\\copyrightline}{978-1-0000-0000-0/26/\\$31.00~\\copyright 2026 IEEE}', setup))
+    filled = re.sub(r'\\newcommand\{\\archivedoi\}\{[^}]*\}',
+                    r'\\newcommand{\\archivedoi}{10.5281/zenodo.0000000}', filled)
+    probe = src
     tmp = Path(tempfile.mkdtemp())
     for f in TEX.parent.glob('*'):
         if f.is_file() and f.suffix in ('.cls', '.png', '.tex'):
             shutil.copy(f, tmp / f.name)
     (tmp / 'main.tex').write_text(probe)
+    (tmp / 'camera_ready.tex').write_text(filled)
     r = subprocess.run(['tectonic', '-X', 'compile', 'main.tex', '--outdir', '.'],
                        cwd=tmp, capture_output=True)
     if (tmp / 'main.pdf').exists():
@@ -264,9 +273,16 @@ def main() -> int:
     shutil.rmtree(tmp, ignore_errors=True)
 
     print('\noutstanding by design')
-    dep = 'archival identifier' in tex or 'not yet deposited' in tex
-    print(f"  NOTE  the release is not deposited, so no archival identifier is quoted "
-          f"({'stated in Section XI' if dep else 'NOT stated in the paper'})")
+    setup_code = '\n'.join(l for l in SETUP.read_text().splitlines() if not l.lstrip().startswith('%'))
+    m = re.search(r'\\newcommand\{\\archivedoi\}\{([^}]*)\}', setup_code)
+    doi = m.group(1) if m else ''
+    if doi:
+        print(f'  NOTE  archival identifier quoted in Section XI: {doi}'
+              + ('  (PLACEHOLDER, see the FAIL above)' if 'X' in doi else ''))
+    else:
+        dep = 'archival identifier' in tex or 'not yet deposited' in tex
+        print(f"  NOTE  the release is not deposited, so no archival identifier is quoted "
+              f"({'stated in Section XI' if dep else 'NOT stated in the paper'})")
     print('  NOTE  the venue page rule is UNVERIFIED: no official ICCA limit is held here, '
           f'so the {doc.page_count}-page count is reported without a compliance claim')
     return finish()

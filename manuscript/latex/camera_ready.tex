@@ -1,0 +1,17 @@
+% camera_ready.tex -- the two camera-ready slots, kept apart from main.tex so they can be
+% filled without touching the manuscript source. main.tex reads this file with \input.
+%
+% 1. Copyright line. Paste the exact string from the acceptance notice between the braces,
+%    for example
+%      \newcommand{\copyrightline}{978-1-xxxx-xxxx-x/26/\$31.00~\copyright 2026 IEEE}
+%    Nothing is printed while it is empty, so the paper never renders a placeholder;
+%    scripts/check_submission.py reports the gap instead.
+\newcommand{\copyrightline}{}
+%
+% 2. Archival identifier of the deposited release. The value below is a DUMMY so that the
+%    Section XI sentence prints during preparation; replace it with the version DOI that
+%    Zenodo (or the chosen repository) mints for release v2.6.18, for example
+%      \newcommand{\archivedoi}{10.5281/zenodo.1234567}
+%    scripts/check_submission.py FAILS while the dummy is in place, so it cannot reach a
+%    submission unnoticed. Set it to {} to print nothing at all.
+\newcommand{\archivedoi}{10.5281/zenodo.XXXXXXX}

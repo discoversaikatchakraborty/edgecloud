@@ -1,0 +1,1 @@
+The three evidence figures as included until 2026-10-09: the upstream renderings (5.8 to 7.2 in wide, 8 to 9 pt type) printed at column width, where their type fell to 4 to 5 pt. Replaced by column-width renderings from the same CSVs (scripts/make_column_figures.py). Plotted values identical.
