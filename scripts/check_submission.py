@@ -22,7 +22,7 @@ ROOT = Path(__file__).resolve().parents[1]
 TEX = ROOT / 'manuscript' / 'latex' / 'main.tex'
 SETUP = ROOT / 'manuscript' / 'latex' / 'camera_ready.tex'   # the two camera-ready slots
 PDF = ROOT / 'manuscript' / 'latex' / 'main.pdf'
-DELIVERED = ROOT / 'manuscript' / 'EdgeCloud_ICCA_Revised_IEEEA4.pdf'
+DELIVERED = ROOT / 'manuscript' / 'EdgeCloud_ICCA_v2_IEEEA4.pdf'
 UPSTREAM = ROOT / 'upstream' / 'prototype_v2.3'
 ARCHIVE = ROOT / 'archive' / 'superseded_2026-10-08'
 

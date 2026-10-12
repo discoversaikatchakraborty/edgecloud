@@ -177,3 +177,28 @@ AUTHOR ACTIONS STILL OPEN
  4. Run an institutional iThenticate or Turnitin check (the one review item that cannot be done here).
  5. Release v2.6.18 is assembled by scripts/build_deposit_v2.6.18.sh with the emulator, re-derivation and
     established-task materials inside; deposit it and paste the DOI into manuscript/latex/camera_ready.tex (R1.3).
+
+====================================================================================================
+ADDENDUM, 2026-10-12: VERSION 2 (final)
+====================================================================================================
+Current files : manuscript/EdgeCloud_ICCA_v2_IEEEA4.pdf (12 pages) and manuscript/EdgeCloud_master_v2.pdf
+                (16 pages), with editable DOCX copies of the same names. The v1 files named above are
+                retained unchanged as the record of the first revision.
+What changed for the reviewers' items (nothing reopened; two rows are sharpened):
+ R1.1 / R1.4  Sec. X now states the hardware gap as a named limitation: no testbed, no radio, no
+              energy measurement; the substitutes (TCP emulation, replayed LTE traces recorded for an
+              earlier study) do not stand in for a device; four claims are listed as untested on
+              hardware (sub-round-trip latencies, the loss term, the compute cost, the per-slot
+              coordination cost). Status stays PARTIALLY FIXED: the author chose to state the gap
+              rather than run further simulation, which would not close it.
+ R2.1         The master's Sec. I-A now claims five things, matching the submission (the held-out
+              contribution term was the fifth in the submission only).
+ R2.3(d)      The published-baseline sentence in Sec. VIII-F now gives text-alone against the
+              published text baselines (80.8%, 70.4%) and both-modality against the published
+              multimodal (84.4%, 78.4%), read from Tables 2 and 3 of Ofli, Alam and Imran (2020).
+ References   Four added and verified before insertion: Lin 1991 (Jensen-Shannon divergence),
+              Vovk, Gammerman and Shafer 2005 (conformal prediction), Winstein et al. NSDI 2013
+              (origin of the LTE traces), RFC 5681 (slow start). 31 references, all cited, in
+              first-citation order. The related-work scope sentence was corrected: CST runs across
+              several nodes and DAT across several streams, so "a single stream or device" was
+              replaced by "one inference pipeline".

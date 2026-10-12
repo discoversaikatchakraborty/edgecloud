@@ -17,6 +17,6 @@ build() {  # $1 = submissiontrue|submissionfalse   $2 = output name
 build submissiontrue  main.pdf
 build submissionfalse EdgeCloud_master.pdf
 rm -rf _build.tex _out _err.txt
-cp main.pdf ../EdgeCloud_ICCA_Revised_IEEEA4.pdf
-cp EdgeCloud_master.pdf ../EdgeCloud_master.pdf
-echo "delivered: manuscript/EdgeCloud_ICCA_Revised_IEEEA4.pdf and manuscript/EdgeCloud_master.pdf"
+cp main.pdf ../EdgeCloud_ICCA_v2_IEEEA4.pdf
+cp EdgeCloud_master.pdf ../EdgeCloud_master_v2.pdf
+echo "delivered: manuscript/EdgeCloud_ICCA_v2_IEEEA4.pdf and manuscript/EdgeCloud_master_v2.pdf"
