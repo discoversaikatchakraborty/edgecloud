@@ -23,6 +23,7 @@ TEX = ROOT / 'manuscript' / 'latex' / 'main.tex'
 SETUP = ROOT / 'manuscript' / 'latex' / 'camera_ready.tex'   # the two camera-ready slots
 PDF = ROOT / 'manuscript' / 'latex' / 'main.pdf'
 DELIVERED = ROOT / 'manuscript' / 'EdgeCloud_ICCA_v2_IEEEA4.pdf'
+SIXPP = ROOT / 'manuscript' / 'EdgeCloud_ICCA_v2_6pp_IEEEA4.pdf'   # six-page variant, same source
 UPSTREAM = ROOT / 'upstream' / 'prototype_v2.3'
 ARCHIVE = ROOT / 'archive' / 'superseded_2026-10-08'
 
@@ -175,6 +176,18 @@ def main() -> int:
                         f'length {len(sa)} against {len(sb)}')
             detail = diff
         check('delivered PDF text matches the compiled text', a == b, detail)
+
+    if SIXPP.exists():
+        six = fitz.open(SIXPP)
+        stext = '\n'.join(pg.get_text() for pg in six)
+        scut = stext.index(BIB_MARK) if BIB_MARK in stext else len(stext)
+        check('six-page variant is within six pages', six.page_count <= 6, f'{six.page_count} pages')
+        n6 = len(re.findall(r',\s+(?:and|or)\b', stext[:scut]))
+        check('six-page variant punctuation clean in extracted text', n6 == 0, f'{n6} occurrence(s)')
+        qq6 = [i + 1 for i, pg in enumerate(six) if '??' in pg.get_text()]
+        check('six-page variant has no unresolved reference', not qq6,
+              f"?? on page(s) {', '.join(map(str, qq6))}" if qq6 else 'no "??" on any page')
+        check('six-page variant carries a title', bool((six.metadata or {}).get('title')))
 
     print('\nreference package')
     sums = UPSTREAM / 'SHA256SUMS'

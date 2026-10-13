@@ -202,3 +202,8 @@ What changed for the reviewers' items (nothing reopened; two rows are sharpened)
               first-citation order. The related-work scope sentence was corrected: CST runs across
               several nodes and DAT across several streams, so "a single stream or device" was
               replaced by "one inference pipeline".
+
+SIX-PAGE VERSION, 2026-10-12
+  manuscript/EdgeCloud_ICCA_v2_6pp_IEEEA4.pdf (+ .docx), built from the same source with \sixpagetrue.
+  Every reviewer item is addressed in it at the locations listed in manuscript/EdgeCloud_Response_to_Reviewers_v2.docx
+  (summary table, column "Addressed in (six-page)"). Compression record: results/editorial/V2_SIXPAGE_FIDELITY_2026-10-12.txt.

@@ -30,6 +30,9 @@
 % in the package. Build the master with \submissionfalse.
 \newif\ifsubmission
 \submissiontrue
+% Six-page variant: built with \submissiontrue and \sixpagetrue; body from six_body.tex.
+\newif\ifsixpage
+\sixpagefalse
 \newcommand{\masteronly}[1]{\ifsubmission\else#1\fi}
 % Refer to a float that only the master prints. The submission names the package
 % instead, so no reference dangles and no number is lost: the prose beside each
@@ -42,6 +45,91 @@
 \makeatletter
 \def\@emptyarg{}
 \makeatother
+% Shared floats: the twelve-page body and the six-page body print the same verified tables and figures.
+\newcommand{\tablelowbw}{%
+\begin{table}[t]
+\caption{Low bandwidth (256~kbps, 4,000 bytes per window). Errors out of 720, mean of twenty seeds with 95\% intervals; every column, the queue share included, is from that run. *Ignores the budget.}
+\label{tab:lowbw}
+\centering\scriptsize\setlength{\tabcolsep}{3pt}
+\begin{tabular}{@{}lrrrr@{}}
+\toprule
+Method & Errors [95\% CI] & Bytes & p95 s & Queue \\
+\midrule
+Image only & 71.5 [59.1, 83.9] & 224 & 0.27 & 7\% \\
+Text only & 75.7 [63.9, 87.4] & 196 & 0.26 & 6\% \\
+Transmit all* & 4.3 [2.9, 5.7] & 423,502 & 84.64 & 33\% \\
+Confidence gate & 7.0 [5.0, 9.0] & 1,063 & 0.47 & 30\% \\
+Fixed compression & 4.4 [3.0, 5.8] & 3,840 & 0.95 & 32\% \\
+Fixed rule & 5.2 [3.6, 6.7] & 1,860 & 0.59 & 34\% \\
+Random within budget & 22.6 [18.5, 26.6] & 1,695 & 0.60 & 27\% \\
+Proposed & 4.4 [3.2, 5.6] & 3,604 & 0.92 & 32\% \\
+\bottomrule
+\end{tabular}
+\end{table}
+}
+\newcommand{\tabledelay}{%
+\begin{table}[t]
+\caption{Delayed imagery. Errors out of 720 with 95\% intervals, mean of twenty seeds; median and 95th-percentile modelled latency; share of images sent. *Ignores the budget.}
+\label{tab:delay}
+\centering\scriptsize\setlength{\tabcolsep}{3pt}
+\begin{tabular}{@{}lrrrr@{}}
+\toprule
+Method & Errors [95\% CI] & Median s & p95 s & Image sent \\
+\midrule
+Image only & 71.5 [59.1, 83.9] & 682.80 & 1,864.4 & 100\% \\
+Text only & 75.7 [63.9, 87.4] & 0.15 & 0.15 & 0\% \\
+Transmit all* & 19.2 [15.5, 23.0] & 688.69 & 1,869.5 & 100\% \\
+Confidence gate & 25.6 [21.1, 30.0] & 682.81 & 1,864.4 & 100\% \\
+Fixed compression & 18.9 [14.9, 23.0] & 682.84 & 1,864.4 & 100\% \\
+Fixed rule & 23.4 [18.7, 28.1] & 682.82 & 1,864.4 & 100\% \\
+Random within budget & 32.1 [28.1, 36.2] & 39.69 & 1,664.7 & 68\% \\
+Wait if uncertain & 16.0 [12.3, 19.7] & 42.56 & 1,562.3 & 53\% \\
+Derived threshold $T^\ast$ & 10.8 [8.6, 13.0] & 0.18 & 25.7 & 31\% \\
+Proposed, $\lambda_\ell=0.0004$ & 10.2 [8.3, 12.0] & 0.19 & 364.9 & 37\% \\
+\bottomrule
+\end{tabular}
+\end{table}
+}
+\newcommand{\figfrontier}{%
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{fig_delay_frontier.png}
+\caption{Delayed imagery: errors against 95th-percentile modelled latency. The solid line traces the policy across latency-penalty values; the dashed line traces the constant-threshold rule across $T$. The star marks $T^\ast$ derived from calibration events, not selected on test data. The sweep and the marked points are the twenty-seed run behind Table~\ref{tab:delay}.}
+\label{fig:frontier}
+\end{figure}
+}
+\newcommand{\tablereal}{%
+\begin{table}[t]
+\caption{All three real-data conditions. Errors out of 968; the majority-class baseline is 494. Bytes and tail latency are for low bandwidth. *Ignores the budget.}
+\label{tab:real}
+\centering\scriptsize
+\setlength{\tabcolsep}{2pt}
+\begin{tabular}{@{}p{2.25cm}rrrrr@{}}
+\toprule
+Method & Normal & Low bw. & Misaligned & Bytes & p95 s \\
+\midrule
+Image only & 420.0 & 420.0 & 420.0 & 224 & 0.27 \\
+Transmit all* & 435.8 & 435.6 & 447.4 & 129,728 & 30.71 \\
+Fixed rule & 464.2 & 465.4 & 473.4 & 342 & 0.29 \\
+Confidence gate & 437.0 & 465.8 & 474.4 & 1,390 & 0.56 \\
+Random within budget & 462.0 & 465.8 & 474.6 & 1,212 & 0.52 \\
+Greedy by uncertainty & 466.8 & 466.8 & 476.0 & 2,166 & 0.63 \\
+Greedy, proposed utility & 447.0 & 466.8 & 462.2 & 1,896 & 0.63 \\
+Proposed (exact knapsack) & 447.0 & 466.8 & 462.2 & 1,896 & 0.63 \\
+Fixed compression & 483.0 & 483.0 & 486.0 & 3,072 & 0.80 \\
+Text only & 494.0 & 494.0 & 494.0 & 196 & 0.26 \\
+\bottomrule
+\end{tabular}
+\end{table}
+}
+\newcommand{\figreal}{%
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{fig_real_scatter.png}
+\caption{Errors against bytes on real data under low bandwidth. Intervals are fitting jitter across five seeds on one fixed test set and are zero-width for the deterministic methods. The exact knapsack and the greedy heuristic over the same utility occupy the same point.}
+\label{fig:real}
+\end{figure}
+}
 \newtheorem{proposition}{Proposition}
 \newtheorem{remark}{Remark}
 
@@ -74,13 +162,20 @@
 \maketitle
 
 \begin{abstract}
+\ifsixpage
+Edge AI on degraded field networks must decide what evidence to move and when to stop waiting. We formulate this as evidence budgeting across concurrent incident windows: a multiple-choice knapsack over a shared byte budget whose latency term prices transfer time together with the forecast delay of late evidence, so that waiting is an explicit decision with a closed-form threshold; evidence is fused only when its location, time and hazard tag are admissible. The formulation is compared with budget-matched simple rules that receive the same information, across nine synthetic conditions at twenty seeds and a reduced CrisisMMD workload at five. A derived delay threshold cut 95th-percentile latency from 1{,}562.3~s to 25.7~s with the error difference spanning zero; the admissibility filter rather than the optimizer keeps misaligned reports out; forged metadata erases its protection; a reused conformal threshold drops coverage to 0.745 against a nominal 0.90; an emulated TCP path confirms the latency model's byte term. On real data the optimizer leads the fixed rule in 15 of 21 event-split comparisons on the damage label, 14 of 21 once class imbalance is handled and 11 of 21 on the annotators' own label; a held-out contribution term cuts its errors from 447.0 to 386.2. The formulation earns its place by naming the quantities that matter and supplying a threshold, never by the solver.
+\else
 Edge AI on degraded field networks must decide what evidence to move and when to stop waiting. We formulate this as evidence budgeting across concurrent incident windows: a multiple-choice knapsack over a shared byte budget whose latency term prices transfer time together with the forecast delay of late evidence, so that waiting becomes an explicit decision with a closed-form threshold. Evidence is fused only when its location, time and hazard tag are admissible; each decision carries a conformal set and a provenance record. The formulation is compared with budget-matched simple rules that receive the same information, across nine synthetic conditions at twenty seeds and a reduced CrisisMMD workload at five. On synthetic data a simple rule is indistinguishable from the optimizer wherever the budget alone binds and the admissibility filter rather than the optimizer does the work under misaligned reports. A derived delay threshold cut 95th-percentile latency from 1{,}562.3~s to 25.7~s with the error difference spanning zero. Forged metadata erases the filter's protection; a reused conformal threshold drops coverage to 0.745 against a nominal 0.90; measured LTE traces inflate tail latency by up to 8.7 times; an emulated TCP path confirms the latency model's byte term and finds its fixed overhead one round trip short; six uncoordinated controllers cost the exact knapsack 20.0 errors against 3.9 for a greedy ranking. On real data the optimizer leads the fixed rule in 15 of 21 event-split comparisons on the damage label this paper chose, in 14 of 21 once class imbalance is handled and in 11 of 21 on the annotators' own label. A twenty-five-cell diagnostic attributes the text pathway's majority-class output to class imbalance rather than to the reduction; a held-out contribution term removes that cost (447.0 to 386.2 errors) and on two published CrisisMMD tasks the pipeline exceeds the published baselines. The delay threshold keeps a 67- to 74-fold latency reduction in every split while its accuracy gain does not carry over, because that corpus does not decay evidence while a decision waits. The formulation earns its place by naming the quantities that matter and supplying a threshold, never by the solver, which did not reliably beat a greedy alternative; the direction of any real-data comparison is a property of the label as much as of the method.
+\fi
 \end{abstract}
 
 \begin{IEEEkeywords}
 edge AI, degraded connectivity, multimodal fusion, evidence admissibility, conformal prediction, adversarial metadata, disaster data
 \end{IEEEkeywords}
 
+\ifsixpage
+\input{six_body}
+\else
 \section{Introduction}
 A flood, a wildfire or an earthquake produces satellite imagery, field photographs, public reports, weather measurements and infrastructure alarms inside the same hour and almost none of it arrives together. The image waits for the next satellite pass. The network that would carry the raw upload is the network the event has just damaged. A system that waits for everything can be accurate and useless at once, because the decision it supports was needed an hour ago.
 
@@ -383,25 +478,7 @@ Among the general baselines only the proposed method applies the admissibility r
 \subsection{When Bandwidth Is the Only Constraint, a Fixed Rule Is Enough}
 Table~\ref{tab:lowbw} gives the low-bandwidth condition. Among budget-compliant methods the policy and the fixed rule made statistically indistinguishable numbers of errors, a paired difference of $-0.8$ $[-1.7, 0.2]$. At five seeds the fixed rule held a nominal $+0.2$; at twenty the sign reverses and the interval still spans zero, so neither method is ahead. The policy spent 1,745 more bytes per window $[1{,}732, 1{,}757]$ and added 0.33~s to tail latency $[0.330, 0.334]$, buying image features that do not change the decision under this byte model. Transmit-all reaches 84.6~s at the tail because six windows share one link. The same pattern holds wherever the byte budget is the only binding constraint: under normal connectivity, under an intermittent outage and with imagery missing, the paired difference spans zero in each case. It does not hold once the evidence itself degrades. With text missing the policy is ahead by 2.75 errors $[1.03, 4.47]$, under noisy text by 1.30 $[0.13, 2.47]$ and under contradictory evidence by 2.50 $[0.80, 4.20]$, all three excluding zero at twenty seeds where five seeds could not separate them (\mtab{tab:allcond}{every condition is tabulated in the package}). When no decision involves waiting, admissibility or degraded evidence, the optimizer adds cost rather than value. Section~\ref{sec:link} shows that the cost grows once the link is modelled with loss and measured variability.
 
-\begin{table}[t]
-\caption{Low bandwidth (256~kbps, 4,000 bytes per window). Errors out of 720, mean of twenty seeds with 95\% intervals; every column, the queue share included, is from that run. *Ignores the budget.}
-\label{tab:lowbw}
-\centering\scriptsize\setlength{\tabcolsep}{3pt}
-\begin{tabular}{@{}lrrrr@{}}
-\toprule
-Method & Errors [95\% CI] & Bytes & p95 s & Queue \\
-\midrule
-Image only & 71.5 [59.1, 83.9] & 224 & 0.27 & 7\% \\
-Text only & 75.7 [63.9, 87.4] & 196 & 0.26 & 6\% \\
-Transmit all* & 4.3 [2.9, 5.7] & 423,502 & 84.64 & 33\% \\
-Confidence gate & 7.0 [5.0, 9.0] & 1,063 & 0.47 & 30\% \\
-Fixed compression & 4.4 [3.0, 5.8] & 3,840 & 0.95 & 32\% \\
-Fixed rule & 5.2 [3.6, 6.7] & 1,860 & 0.59 & 34\% \\
-Random within budget & 22.6 [18.5, 26.6] & 1,695 & 0.60 & 27\% \\
-Proposed & 4.4 [3.2, 5.6] & 3,604 & 0.92 & 32\% \\
-\bottomrule
-\end{tabular}
-\end{table}
+\tablelowbw
 
 \masteronly{%
 \begin{table}[!t]
@@ -429,27 +506,7 @@ Misaligned & 13.9 & 35.0 & 30.8 & 3,448 & 1,860 & 0.23 & 0.19 \\
 \label{sec:delay}
 Table~\ref{tab:delay} gives the delayed-imagery condition. Methods that always wait paid a median latency near 682.8~s. The policy sent 37\% of images, those with short forecast delays or uncertain partial evidence as (\ref{eq:threshold}) predicts, holding its median latency at 0.19~s. Against the wait-if-uncertain rule, which ignores the forecast, it changed tail latency by $-1{,}197$~s $[-1{,}250, -1{,}145]$. Removing the latency penalty cost $9.1$ errors $[5.6, 12.5]$ and made it wait for every image, which confirms that the term is doing the work (\mtab{tab:ablation}{every ablation is tabulated in the package}).
 
-\begin{table}[t]
-\caption{Delayed imagery. Errors out of 720 with 95\% intervals, mean of twenty seeds; median and 95th-percentile modelled latency; share of images sent. *Ignores the budget.}
-\label{tab:delay}
-\centering\scriptsize\setlength{\tabcolsep}{3pt}
-\begin{tabular}{@{}lrrrr@{}}
-\toprule
-Method & Errors [95\% CI] & Median s & p95 s & Image sent \\
-\midrule
-Image only & 71.5 [59.1, 83.9] & 682.80 & 1,864.4 & 100\% \\
-Text only & 75.7 [63.9, 87.4] & 0.15 & 0.15 & 0\% \\
-Transmit all* & 19.2 [15.5, 23.0] & 688.69 & 1,869.5 & 100\% \\
-Confidence gate & 25.6 [21.1, 30.0] & 682.81 & 1,864.4 & 100\% \\
-Fixed compression & 18.9 [14.9, 23.0] & 682.84 & 1,864.4 & 100\% \\
-Fixed rule & 23.4 [18.7, 28.1] & 682.82 & 1,864.4 & 100\% \\
-Random within budget & 32.1 [28.1, 36.2] & 39.69 & 1,664.7 & 68\% \\
-Wait if uncertain & 16.0 [12.3, 19.7] & 42.56 & 1,562.3 & 53\% \\
-Derived threshold $T^\ast$ & 10.8 [8.6, 13.0] & 0.18 & 25.7 & 31\% \\
-Proposed, $\lambda_\ell=0.0004$ & 10.2 [8.3, 12.0] & 0.19 & 364.9 & 37\% \\
-\bottomrule
-\end{tabular}
-\end{table}
+\tabledelay
 
 \masteronly{%
 \begin{table}[!t]
@@ -477,12 +534,7 @@ Admissibility (misaligned) & $+16.20$ [11.07, 21.33] \\
 
 The latency reduction does not require the optimizer. The derived-threshold rule sends the fixed rule's image summary whenever the forecast delay falls below the calibration-derived constant $T^\ast$. It sent 31\% of images and made 10.8 errors at 25.7~s tail latency. Relative to it the policy changed errors by $-0.7$ $[-1.5, 0.2]$, tail latency by $+339.2$~s $[314.4, 363.9]$ and bytes by $+688$ $[670, 706]$. The error interval includes zero at twenty seeds as it did at five, which is the evidence for the claim in this subsection title. The policy's longer tail comes from per-window adaptivity: it waited more than 300~s for 5.9\% of windows against 0.5\% for the constant rule, when uncertain partial evidence raised the value of a late image. Fig.~\ref{fig:frontier} shows the two frontiers within one error of each other below 30~s of tail latency, the constant threshold on or slightly below the policy's there and up to 2.6 errors above it in the long-wait range where neither rule should be operated.
 
-\begin{figure}[t]
-\centering
-\includegraphics[width=\columnwidth]{fig_delay_frontier.png}
-\caption{Delayed imagery: errors against 95th-percentile modelled latency. The solid line traces the policy across latency-penalty values; the dashed line traces the constant-threshold rule across $T$. The star marks $T^\ast$ derived from calibration events, not selected on test data. The sweep and the marked points are the twenty-seed run behind Table~\ref{tab:delay}.}
-\label{fig:frontier}
-\end{figure}
+\figfrontier
 
 
 The accuracy comparison carries a caveat that changes the conclusion. The policy changed errors by $-13.3$ $[-17.3, -9.2]$ against the fixed rule and by $-5.9$ $[-8.5, -3.2]$ against wait-if-uncertain. Those gains exist because the benchmark decays the weight of text and sensor evidence while a decision waits. With that decay removed, the forecast-ignoring baselines improve by 10.6 to 18.3 errors while the two forecast-using rules change by at most 0.5, so the ordering reverses: the fixed rule reaches 5.2 errors and wait-if-uncertain 5.4 against 9.7 for the policy and 10.7 for the derived threshold (sensitivity rows of the twenty-seed ablation results). Without staleness, both forecast-using rules trade 4.5 to 5.6 errors for their latency reduction. Whether acting early also improves accuracy therefore depends on how fast real evidence goes stale, which this benchmark assumes rather than measures; Section~\ref{sec:realthreshold} tests that on a corpus with no decay.
@@ -724,28 +776,7 @@ Section~\ref{sec:adm} does. CrisisMMD carries no delayed imagery, so the derived
 wait threshold, the clearest positive result of Section~\ref{sec:results}, is tested on a constructed delay drawn per window from the same log-normal family as the synthetic condition, under a protocol frozen before the run; the delay is declared rather than observed while every other quantity stays real (Section~\ref{sec:realthreshold}).
 Five seeds vary model fitting only; the 968 test windows (795 from Hurricane Irma, 173 from the Iraq--Iran earthquake) are identical across them, so intervals bound fitting jitter rather than sampling error and several are zero-width because the method is deterministic given the data. Every published number from here on averages the same five seeds and the reruns below reproduce Table~\ref{tab:real} exactly before any new column is read.
 
-\begin{table}[t]
-\caption{All three real-data conditions. Errors out of 968; the majority-class baseline is 494. Bytes and tail latency are for low bandwidth. *Ignores the budget.}
-\label{tab:real}
-\centering\scriptsize
-\setlength{\tabcolsep}{2pt}
-\begin{tabular}{@{}p{2.25cm}rrrrr@{}}
-\toprule
-Method & Normal & Low bw. & Misaligned & Bytes & p95 s \\
-\midrule
-Image only & 420.0 & 420.0 & 420.0 & 224 & 0.27 \\
-Transmit all* & 435.8 & 435.6 & 447.4 & 129,728 & 30.71 \\
-Fixed rule & 464.2 & 465.4 & 473.4 & 342 & 0.29 \\
-Confidence gate & 437.0 & 465.8 & 474.4 & 1,390 & 0.56 \\
-Random within budget & 462.0 & 465.8 & 474.6 & 1,212 & 0.52 \\
-Greedy by uncertainty & 466.8 & 466.8 & 476.0 & 2,166 & 0.63 \\
-Greedy, proposed utility & 447.0 & 466.8 & 462.2 & 1,896 & 0.63 \\
-Proposed (exact knapsack) & 447.0 & 466.8 & 462.2 & 1,896 & 0.63 \\
-Fixed compression & 483.0 & 483.0 & 486.0 & 3,072 & 0.80 \\
-Text only & 494.0 & 494.0 & 494.0 & 196 & 0.26 \\
-\bottomrule
-\end{tabular}
-\end{table}
+\tablereal
 
 \subsection{Results}
 \label{sec:realresults}
@@ -772,12 +803,7 @@ Rot. & Test events & $n$ & Normal & Low bw. & Misaligned \\
 \end{table}}%
 The comparison that matters most is exact solver against greedy heuristic on the same utility: on real data the two are identical in errors, bytes and 95th-percentile latency in every condition and seed, a paired difference of exactly 0.0, while a greedy ranking by local uncertainty, which ignores the utility, makes 466.8 errors under normal connectivity against 447.0, so the utility works even though the solver does not (Fig.~\ref{fig:real}).
 
-\begin{figure}[t]
-\centering
-\includegraphics[width=\columnwidth]{fig_real_scatter.png}
-\caption{Errors against bytes on real data under low bandwidth. Intervals are fitting jitter across five seeds on one fixed test set and are zero-width for the deterministic methods. The exact knapsack and the greedy heuristic over the same utility occupy the same point.}
-\label{fig:real}
-\end{figure}
+\figreal
 
 
 What beats everything on errors is image-only, at 420.0 in every condition, ahead of the optimizer by 46.8 errors $[46.2, 47.4]$ under low bandwidth while sending 224 bytes. Its value cannot vary, because the conditions perturb text and bandwidth while image-only is sensitive to neither, so its constancy is not robustness; the same method makes 71.5 errors against the fixed rule's 5.2 on the synthetic benchmark, so a method near-worst on one workload and best on the other is telling us about the workloads. The reason is in the same table: text-only scores the majority-class count, 494.0, in every condition and everything fusing text pays for it. Severity, reliability, recency, fidelity, uncertainty, quality and disagreement are properties of the source or the signal; none asks whether this modality has ever predicted this label, which a held-out estimate of predictive contribution would. Transmit-all is also ahead on errors, by 31.2 $[30.2, 32.2]$, while sending 129,728 bytes against 1,896 at 30.7~s of tail latency against 0.63~s.
@@ -1028,11 +1054,13 @@ the solver.\masteronly{ Which simple rule to deploy has to be derived against th
 
 
 
+\fi
+
 \begin{thebibliography}{00}
 % A long unbreakable token such as an arXiv identifier cannot be hyphenated, so a narrow
 % column can force loose lines. A little extra stretch avoids that without touching the
 % prescribed fonts or margins.
-\setlength{\emergencystretch}{2em}
+\setlength{\emergencystretch}{2em}\sloppy
 \bibitem{xbd}
 R. Gupta et al., ``Creating xBD: A dataset for assessing building damage from satellite imagery,'' in \emph{Proc. IEEE/CVF Conf. Comput. Vis. Pattern Recognit. Workshops (CVPRW)}, 2019, pp. 10--17.
 \bibitem{floodnet}
