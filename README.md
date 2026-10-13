@@ -1,63 +1,64 @@
-# ICCA Revision Package: Edge evidence budgeting
+# EdgeCloud: Evidence Budgeting for Edge AI under Degraded Connectivity
 
-Everything needed to close the two reviews, in one place.
+Evidence selection across concurrent disaster incidents under a shared byte budget and
+forecast delay, compared against simple rules that receive the same information, on a
+synthetic benchmark (nine conditions, twenty seeds) and a reduced CrisisMMD workload.
+Revised for ICCA after two reviews.
 
-```
-manuscript/   revised paper (PDF, DOCX, LaTeX source + IEEEtran.cls + figures),
-              response letter, original review text
-Rerun_Spec.md the experiment plan behind scripts/ (read first)
-protocols/    frozen JSON protocols, one per item; a .sha256 sidecar is written
-              on first load and any later edit stops the run
-scripts/      runners for items A, C, D, E plus common.py and adapters.py
-results/      empty; every script writes here with a _rev1 suffix
-```
+## The manuscript
 
-## What needs you before anything runs
+The submission is the six-page version:
 
-`scripts/adapters.py` is the only file that touches the Edge repository. Its
-five functions raise `NotImplementedError` until wired to your loaders:
-
-| function | used by | needs |
+| File | Pages | Role |
 |---|---|---|
-| `load_crisismmd_rotation(rot)` | A, C, D | full-dimension CLIP text and image embeddings, labels, events, roles for rotations 0..6; rotation 0 must give n_test = 968 |
-| `edge_text_model(class_weight, seed)` | A | your edge text model factory (may return None to skip) |
-| `run_synthetic_condition(cond, seeds, methods)` | E | the benchmark runner that produced the paper's tables |
-| `run_real_budgeting(split, cond, seed, methods, ...)` | C, D | the real-data runner, with optional injected delays and class weighting |
-| `derive_wait_threshold(split, forecast)` | D | the package's T* derivation on calibration windows |
+| `manuscript/EdgeCloud_ICCA_v2_6pp_IEEEA4.pdf` | 6 | **Submission** (IEEE conference template, A4, references included in the count) |
+| `manuscript/EdgeCloud_ICCA_v2_6pp_IEEEA4.docx` | | editable copy of the submission |
+| `manuscript/EdgeCloud_ICCA_v2_IEEEA4.pdf` / `.docx` | 12 | full-length version of the same study |
+| `manuscript/EdgeCloud_master_v2.pdf` / `.docx` | 16 | master record with every table (notation, methods, conditions, ablations, all exploratory grids) |
+| `manuscript/EdgeCloud_Response_to_Reviewers_v2.docx` | | point-by-point response to both reviews, with the location of every change in the six-page and the twelve-page version |
 
-Every script checks reproduction of a published number before producing new
-ones and stops on a mismatch, so a wrong adapter cannot silently produce a
-plausible table.
-
-## Order
+All three versions are built from one source, `manuscript/latex/main.tex`
+(`six_body.tex` holds the six-page body; the tables and figures are shared macros, so
+the three versions print identical values):
 
 ```
-pip install numpy scipy scikit-learn
-python scripts/item_a_representation_diagnostics.py   # writes results/itemA_decision.json
-python scripts/item_c_real_class_handling.py          # needs itemA_decision.json
-# item B: follow protocols/itemB_protocol.json; no runner supplied (see note inside)
-python scripts/item_d_real_delay_threshold.py
-python scripts/item_e_more_seeds.py
+bash manuscript/latex/build.sh            # six-page, twelve-page and master PDFs
+python scripts/check_submission.py        # pre-submission gate (page counts, punctuation,
+                                          # references, package digests, camera-ready slots)
 ```
 
-Each script prints a `MANUSCRIPT:` line naming the sections and tables that
-its output changes. Do not edit the manuscript from a script that stopped at a
-reproduction gate.
+The camera-ready slots (copyright line, archival DOI) live in `manuscript/latex/camera_ready.tex`.
+The gate fails by design until the DOI is pasted in.
 
-## Two author actions that do not need the reruns
+## Layout
 
-1. Replace the red `AUTHOR CHECK` marker in Section III-B of the manuscript
-   with the value-function formula as implemented (`\authorcheck{...}` in
-   `manuscript/latex/main.tex`).
-2. Deposit the package and replace the DOI marker in Section XI.
+```
+manuscript/   the files above, LaTeX source, figures, original reviews and original submission
+results/      every result file behind the paper (twenty-seed synthetic runs, CrisisMMD
+              reruns and rotations, emulator transfers, established-task scores) and the
+              editorial record (citation register, review report, six-page fidelity check)
+scripts/      runners that regenerate the results, the figures and the deposit package
+protocols/    frozen JSON protocols with SHA-256 sidecars; an edit stops the run
+upstream/     the reference implementation (v2.3) behind the published numbers, unchanged
+work/         the v2.7 working copy that adds the held-out contribution term
+data/         derived CrisisMMD features, byte counts and labels (no posts or images)
+prompts/      the review protocols the manuscript was prepared under
+```
 
-## Known assumptions written into the protocols
+## Reproduction
 
-- `itemD_protocol.json`: `sigma_delay` is set to 0.4, equal to the forecast
-  error, because the manuscript did not record the synthetic delay spread
-  separately. If the package configuration differs, create a new protocol file
-  rather than editing this one.
-- `itemA_protocol.json`: the TF-IDF control is omitted because raw text is not
-  shipped with the package.
-- Reference values in the protocols are copied from the revised manuscript's
-  tables; they are the reproduction gates.
+Every script checks a published number before producing new ones and stops on a
+mismatch. Synthetic results reproduce byte for byte on one CPU architecture; the
+real-data pipeline depends on an unpinned pretrained encoder, so its image components
+are reproduced to within 0.13 and the reported tables to within 1.0 error with every sign
+preserved. CrisisMMD v2.0 is obtained from its authors under their terms and is not
+redistributed here.
+
+The release package (v2.6.18, 234 files with `SHA256SUMS`) is assembled by
+`scripts/build_deposit_v2.6.18.sh`.
+
+## Status
+
+Editorial checks complete. Open before upload: the archival DOI and the copyright line in
+`camera_ready.tex`, confirmation of the venue's page rule and review model, ORCIDs and an
+institutional similarity check.
