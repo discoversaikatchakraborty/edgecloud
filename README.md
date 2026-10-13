@@ -35,14 +35,12 @@ The gate fails by design until the DOI is pasted in.
 ```
 manuscript/   the files above, LaTeX source, figures, original reviews and original submission
 results/      every result file behind the paper (twenty-seed synthetic runs, CrisisMMD
-              reruns and rotations, emulator transfers, established-task scores) and the
-              editorial record (citation register, review report, six-page fidelity check)
+              reruns and rotations, emulator transfers, established-task scores)
 scripts/      runners that regenerate the results, the figures and the deposit package
 protocols/    frozen JSON protocols with SHA-256 sidecars; an edit stops the run
 upstream/     the reference implementation (v2.3) behind the published numbers, unchanged
 work/         the v2.7 working copy that adds the held-out contribution term
 data/         derived CrisisMMD features, byte counts and labels (no posts or images)
-prompts/      the review protocols the manuscript was prepared under
 ```
 
 ## Reproduction

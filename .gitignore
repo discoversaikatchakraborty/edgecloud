@@ -1,1 +1,8 @@
+# working notes and review records stay local
 prompts/
+ASSESSMENT.txt
+results/editorial/
+results/c2_*.json
+results/C2_FOUR_SEQUENCE_REPORT.txt
+results/LINE_BY_LINE_REVIEWER_REPORT.txt
+__pycache__/
