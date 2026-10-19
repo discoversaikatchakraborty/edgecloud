@@ -1,0 +1,10 @@
+scenario,off,on,bytes_off,bytes_on
+contradictory_evidence,13.75,13.75,3683.84,3683.84
+delayed_imagery,10.15,10.25,2393.31,2380.51
+image_missing,14.05,14.05,1635.84,1635.84
+intermittent_outage,4.45,4.45,3683.84,3683.84
+low_bandwidth,4.4,4.4,3604.42,3558.18
+misaligned_evidence,13.9,13.9,3448.07,3448.07
+noisy_text,6.45,6.45,3683.84,3683.84
+normal,4.55,4.55,50928.37,44146.03
+text_missing,17.2,17.2,2607.64,2607.64

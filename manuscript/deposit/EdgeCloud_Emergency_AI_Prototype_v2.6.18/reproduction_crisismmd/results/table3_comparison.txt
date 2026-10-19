@@ -1,0 +1,39 @@
+scenario     method                                  errors(pkg/new)          mean_bytes(pkg/new)       p95_latency_s(pkg/new)
+normal       image_only                           420.0/420.0                224.000/224.000                0.086/0.086       
+normal       text_only                            494.0/494.0                196.000/196.000                0.086/0.086       
+normal       cloud_transmit_all                   435.8/436.0             129727.940/129727.940             0.865/0.865       
+normal       fixed_confidence_gate                437.0/437.0              77374.419/77238.240              0.702/0.702       
+normal       fixed_compression                    483.0/483.0               3072.000/3072.000               0.100/0.100       
+normal       fixed_rule                           464.2/465.2                342.260/342.260                0.087/0.087       
+normal       random_within_budget                 462.0/461.8              32754.731/32754.731              0.410/0.410       
+normal       greedy_uncertainty                   466.8/467.0               2166.260/2166.260               0.095/0.095       
+normal       greedy_value                         447.0/448.0              99191.635/99220.069              0.689/0.689       
+normal       proposed                             447.0/448.0              99191.635/99220.069              0.689/0.689       
+low_bandwidth image_only                           420.0/420.0                224.000/224.000                0.267/0.267       
+low_bandwidth text_only                            494.0/494.0                196.000/196.000                0.262/0.262       
+low_bandwidth cloud_transmit_all                   435.6/436.0             129727.940/129727.940            30.710/30.710      
+low_bandwidth fixed_confidence_gate                465.8/466.0               1389.810/1387.926               0.564/0.563       
+low_bandwidth fixed_compression                    483.0/483.0               3072.000/3072.000               0.801/0.801       
+low_bandwidth fixed_rule                           465.4/466.0                342.260/342.260                0.290/0.290       
+low_bandwidth random_within_budget                 465.8/465.4               1212.337/1212.337               0.518/0.518       
+low_bandwidth greedy_uncertainty                   466.8/467.0               2166.260/2166.260               0.632/0.632       
+low_bandwidth greedy_value                         466.8/467.0               1896.004/1896.004               0.631/0.631       
+low_bandwidth proposed                             466.8/467.0               1896.004/1896.004               0.631/0.631       
+misaligned_evidence image_only                           420.0/420.0                224.000/224.000                0.150/0.150       
+misaligned_evidence text_only                            494.0/494.0                196.000/196.000                0.150/0.150       
+misaligned_evidence cloud_transmit_all                   447.4/447.8             129727.940/129727.940             4.047/4.047       
+misaligned_evidence fixed_confidence_gate                474.4/473.8               1628.148/1626.263               0.198/0.198       
+misaligned_evidence fixed_compression                    486.0/486.2               3072.000/3072.000               0.219/0.219       
+misaligned_evidence fixed_rule                           473.4/474.2                342.260/342.260                0.153/0.153       
+misaligned_evidence random_within_budget                 474.6/474.4               1373.341/1373.341               0.190/0.190       
+misaligned_evidence greedy_uncertainty                   476.0/475.4               2166.260/2166.260               0.197/0.197       
+misaligned_evidence greedy_value                         462.2/461.2               2495.153/2495.153               0.219/0.219       
+misaligned_evidence proposed                             462.2/461.2               2495.153/2495.153               0.219/0.219       
+
+errors: rows identical 9 of 30 | max |diff| 1.0 errors | out of 968
+ranking by errors identical under low_bandwidth: False
+ranking by errors identical under misaligned_evidence: False
+ranking by errors identical under normal: True
+
+paired file columns: ['scenario', 'comparison', 'metric', 'mean_difference', 'ci_low', 'ci_high']
+paired rows 81 | max |diff| across numeric columns: {'mean_difference': 164.614, 'ci_low': 105.289, 'ci_high': 223.939}

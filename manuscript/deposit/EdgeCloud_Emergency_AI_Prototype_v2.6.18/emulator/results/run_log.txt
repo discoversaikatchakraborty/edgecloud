@@ -1,0 +1,34 @@
+2026-10-09T00:01:32 start low_bandwidth_loss0
+2026-10-09T00:05:08 end low_bandwidth_loss0 rc=0
+2026-10-09T00:05:08 start low_bandwidth_loss0.01
+2026-10-09T00:08:49 end low_bandwidth_loss0.01 rc=0
+2026-10-09T00:08:49 start low_bandwidth_loss0.02
+2026-10-09T00:12:37 end low_bandwidth_loss0.02 rc=0
+2026-10-09T00:12:37 start low_bandwidth_loss0.05
+2026-10-09T00:17:13 end low_bandwidth_loss0.05 rc=0
+2026-10-09T00:17:13 start low_bandwidth_loss0.1
+2026-10-09T00:23:33 end low_bandwidth_loss0.1 rc=0
+2026-10-09T00:23:33 start normal_loss0
+2026-10-09T00:23:54 end normal_loss0 rc=0
+2026-10-09T00:23:54 start normal_loss0.01
+2026-10-09T00:24:23 end normal_loss0.01 rc=0
+2026-10-09T00:24:23 start normal_loss0.02
+2026-10-09T00:25:06 end normal_loss0.02 rc=0
+2026-10-09T00:25:06 start normal_loss0.05
+2026-10-09T00:26:13 end normal_loss0.05 rc=0
+2026-10-09T00:26:13 start normal_loss0.1
+2026-10-09T00:27:39 end normal_loss0.1 rc=0
+2026-10-09T00:27:39 start delayed_imagery_loss0
+2026-10-09T00:28:36 end delayed_imagery_loss0 rc=0
+2026-10-09T00:28:36 start trace_Verizon-LTE-short.up
+2026-10-09T00:29:59 end trace_Verizon-LTE-short.up rc=0
+2026-10-09T00:29:59 start constmatched_Verizon-LTE-short.up
+2026-10-09T00:31:15 end constmatched_Verizon-LTE-short.up rc=0
+2026-10-09T00:31:15 start trace_Verizon-LTE-driving.up
+2026-10-09T00:32:39 end trace_Verizon-LTE-driving.up rc=0
+2026-10-09T00:32:39 start constmatched_Verizon-LTE-driving.up
+2026-10-09T00:33:55 end constmatched_Verizon-LTE-driving.up rc=0
+2026-10-09T00:33:55 start trace_TMobile-LTE-driving.up
+2026-10-09T00:35:12 end trace_TMobile-LTE-driving.up rc=0
+2026-10-09T00:35:12 start constmatched_TMobile-LTE-driving.up
+2026-10-09T00:36:26 end constmatched_TMobile-LTE-driving.up rc=0

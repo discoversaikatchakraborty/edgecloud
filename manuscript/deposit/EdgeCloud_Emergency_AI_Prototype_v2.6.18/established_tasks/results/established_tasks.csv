@@ -1,0 +1,13 @@
+C,dev_accuracy,accuracy,precision_w,recall_w,f1_w,f1_macro,n_test,task,representation,modality,published_accuracy,accuracy_minus_published,n_classes
+0.01,86.6,87.9,87.8,87.9,87.8,86.0,1534,informative,full,text,80.8,7.1,2
+0.01,89.6,90.2,90.2,90.2,90.2,88.8,1534,informative,full,image,83.3,6.9,2
+0.01,92.6,93.7,93.6,93.7,93.6,92.7,1534,informative,full,text+image,84.4,9.3,2
+0.01,83.4,85.9,86.0,85.9,85.3,82.8,1534,informative,reduced_8_10,text,80.8,5.1,2
+1.0,89.4,89.0,89.0,89.0,89.0,87.4,1534,informative,reduced_8_10,image,83.3,5.7,2
+0.1,90.8,91.5,91.4,91.5,91.4,90.2,1534,informative,reduced_8_10,text+image,84.4,7.1,2
+0.01,82.1,83.4,83.3,83.4,83.3,75.5,955,humanitarian,full,text,70.4,13.0,5
+0.01,83.5,86.5,86.4,86.5,86.3,79.2,955,humanitarian,full,image,76.8,9.7,5
+0.01,87.3,88.9,88.9,88.9,88.8,82.7,955,humanitarian,full,text+image,78.4,10.5,5
+0.1,77.2,75.7,74.6,75.7,75.1,54.9,955,humanitarian,reduced_8_10,text,70.4,5.3,5
+0.01,81.6,85.4,84.7,85.4,84.7,65.9,955,humanitarian,reduced_8_10,image,76.8,8.6,5
+0.1,85.3,87.7,87.7,87.7,87.6,77.0,955,humanitarian,reduced_8_10,text+image,78.4,9.3,5

@@ -1,0 +1,67 @@
+cff-version: 1.2.0
+message: "If you use this software or its results, please cite the paper below."
+title: "EdgeCloud Emergency AI Prototype: evidence budgeting for edge AI under degraded connectivity"
+abstract: >-
+  Reference implementation, synthetic generator, real-data pipeline and frozen
+  result files for a validation study of evidence budgeting across concurrent
+  incident windows. Contains the nine-condition synthetic benchmark, the
+  adversarial-metadata sweeps, the packet-loss and measured-capacity experiments,
+  the decentralisation study, the compute-cost measurement, the CrisisMMD
+  real-data comparison with its split-robustness rotations, the Mahimahi emulator
+  check, the CrisisMMD re-derivation check and the established-task comparison.
+type: software
+version: 2.6.18
+date-released: "TBD"
+repository-code: "https://github.com/bdata-arindam/Edge"
+license:
+  - Apache-2.0        # the code; see LICENSE
+  - CC-BY-4.0        # the data and figures; see LICENSE-DATA
+authors:
+  - given-names: Sambit
+    family-names: Dhar
+    affiliation: "Independent Researcher, Little Rock, United States"
+    orcid: "TBD"
+  - given-names: Arindam
+    family-names: Chakraborty
+    affiliation: "Independent Researcher, Texas, United States"
+    orcid: "TBD"
+  - given-names: Soham
+    family-names: Marik
+    affiliation: "Independent Researcher, Texas, United States"
+    orcid: "TBD"
+  - given-names: Saikat
+    family-names: Chakraborty
+    affiliation: "Independent Researcher, Texas, United States"
+    orcid: "TBD"
+  - given-names: Surajit
+    family-names: Sinha
+    affiliation: "Independent Researcher, Texas, United States"
+    orcid: "TBD"
+keywords:
+  - edge AI
+  - degraded connectivity
+  - multimodal fusion
+  - evidence admissibility
+  - conformal prediction
+  - adversarial metadata
+  - disaster data
+preferred-citation:
+  type: conference-paper
+  title: >-
+    EdgeCloud: Evidence Budgeting for Edge AI under Degraded Connectivity: A
+    Validation Study of Adaptivity, Admissibility and Adversarial Metadata on
+    Synthetic and Real Disaster Data
+  conference:
+    name: "ICCA 2026 (full proceedings title TBD)"
+  year: 2026
+  authors:
+    - given-names: Sambit
+      family-names: Dhar
+    - given-names: Arindam
+      family-names: Chakraborty
+    - given-names: Soham
+      family-names: Marik
+    - given-names: Saikat
+      family-names: Chakraborty
+    - given-names: Surajit
+      family-names: Sinha

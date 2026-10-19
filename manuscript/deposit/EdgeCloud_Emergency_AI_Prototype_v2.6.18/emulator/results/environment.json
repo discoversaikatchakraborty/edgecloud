@@ -1,0 +1,26 @@
+{
+ "mahimahi": "0.98-1.1",
+ "kernel": "5.4.0-216-generic",
+ "python": "3.8.10",
+ "sizes": [
+  224,
+  196,
+  184,
+  2048,
+  1024,
+  768,
+  420000,
+  1075,
+  560
+ ],
+ "loss_rates": [
+  0.0,
+  0.01,
+  0.02,
+  0.05,
+  0.1
+ ],
+ "mtu": 1500,
+ "delay_rule": "mm-delay = base_latency_s/2 per direction, so RTT = base_latency_s",
+ "downlink": "constant 50 Mbps trace"
+}

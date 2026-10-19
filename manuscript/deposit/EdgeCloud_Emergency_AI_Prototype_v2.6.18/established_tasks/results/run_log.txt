@@ -1,0 +1,26 @@
+2026-10-09T01:07:09 text: 11400 unique, 11400 to encode
+2026-10-09T01:07:18 image: 12708 unique, 12708 to encode
+2026-10-09T01:07:26   images encoded: 1280
+2026-10-09T01:07:35   images encoded: 2560
+2026-10-09T01:07:43   images encoded: 3840
+2026-10-09T01:07:52   images encoded: 5120
+2026-10-09T01:08:01   images encoded: 6400
+2026-10-09T01:08:09   images encoded: 7680
+2026-10-09T01:08:17   images encoded: 8960
+2026-10-09T01:08:26   images encoded: 10240
+2026-10-09T01:08:34   images encoded: 11520
+2026-10-09T01:08:42 informative: classes ['informative', 'not_informative']; train 9601 dev 1573 test 1534 (images unreadable: 0)
+2026-10-09T01:08:42   full         text       acc  87.9 (published 80.8) f1w 87.8 f1m 86.0 C=0.01
+2026-10-09T01:08:42   full         image      acc  90.2 (published 83.3) f1w 90.2 f1m 88.8 C=0.01
+2026-10-09T01:08:43   full         text+image acc  93.7 (published 84.4) f1w 93.6 f1m 92.7 C=0.01
+2026-10-09T01:08:43   reduced_8_10 text       acc  85.9 (published 80.8) f1w 85.3 f1m 82.8 C=0.01
+2026-10-09T01:08:43   reduced_8_10 image      acc  89.0 (published 83.3) f1w 89.0 f1m 87.4 C=1.0
+2026-10-09T01:08:43   reduced_8_10 text+image acc  91.5 (published 84.4) f1w 91.4 f1m 90.2 C=0.1
+2026-10-09T01:08:43 humanitarian: classes ['affected_individuals', 'infrastructure_and_utility_damage', 'not_humanitarian', 'other_relevant_information', 'rescue_volunteering_or_donation_effort']; train 6126 dev 998 test 955 (images unreadable: 0)
+2026-10-09T01:08:45   full         text       acc  83.4 (published 70.4) f1w 83.3 f1m 75.5 C=0.01
+2026-10-09T01:08:46   full         image      acc  86.5 (published 76.8) f1w 86.3 f1m 79.2 C=0.01
+2026-10-09T01:08:47   full         text+image acc  88.9 (published 78.4) f1w 88.8 f1m 82.7 C=0.01
+2026-10-09T01:08:47   reduced_8_10 text       acc  75.7 (published 70.4) f1w 75.1 f1m 54.9 C=0.1
+2026-10-09T01:08:47   reduced_8_10 image      acc  85.4 (published 76.8) f1w 84.7 f1m 65.9 C=0.01
+2026-10-09T01:08:47   reduced_8_10 text+image acc  87.7 (published 78.4) f1w 87.6 f1m 77.0 C=0.1
+2026-10-09T01:08:47 done

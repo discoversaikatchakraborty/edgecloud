@@ -1,0 +1,155 @@
+{
+ "small_gap_s[low_bandwidth_loss0]": {
+  "rtt_s": 0.18,
+  "gap_mean_s": 0.217,
+  "gap_min_s": 0.199,
+  "gap_max_s": 0.235,
+  "ratio_min": 1.73,
+  "ratio_max": 2.01
+ },
+ "small_gap_s[delayed_imagery_loss0]": {
+  "rtt_s": 0.1,
+  "gap_mean_s": 0.079,
+  "gap_min_s": 0.076,
+  "gap_max_s": 0.081,
+  "ratio_min": 1.51,
+  "ratio_max": 1.55
+ },
+ "small_gap_s[normal_loss0]": {
+  "rtt_s": 0.04,
+  "gap_mean_s": 0.011,
+  "gap_min_s": 0.009,
+  "gap_max_s": 0.013,
+  "ratio_min": 1.1,
+  "ratio_max": 1.15
+ },
+ "raw[low_bandwidth_loss0]": {
+  "modelled_s": 13.35,
+  "measured_s": 14.054,
+  "ratio": 1.05
+ },
+ "raw[delayed_imagery_loss0]": {
+  "modelled_s": 1.825,
+  "measured_s": 2.017,
+  "ratio": 1.11
+ },
+ "raw[normal_loss0]": {
+  "modelled_s": 0.421,
+  "measured_s": 0.497,
+  "ratio": 1.18
+ },
+ "raw[constmatched_Verizon-LTE-short.up]": {
+  "modelled_s": 0.79,
+  "measured_s": 1.468,
+  "ratio": 1.86
+ },
+ "raw[constmatched_Verizon-LTE-driving.up]": {
+  "modelled_s": 0.764,
+  "measured_s": 1.487,
+  "ratio": 1.95
+ },
+ "raw[constmatched_TMobile-LTE-driving.up]": {
+  "modelled_s": 0.399,
+  "measured_s": 1.311,
+  "ratio": 3.29
+ },
+ "loss[low_bandwidth_loss0]": {
+  "raw_modelled_s": 13.35,
+  "raw_measured_s": 14.05,
+  "raw_ratio": 1.05,
+  "raw_p95_s": 14.07,
+  "small_p95_max_s": 0.53
+ },
+ "loss[low_bandwidth_loss0.01]": {
+  "raw_modelled_s": 14.05,
+  "raw_measured_s": 14.18,
+  "raw_ratio": 1.01,
+  "raw_p95_s": 14.25,
+  "small_p95_max_s": 1.47
+ },
+ "loss[low_bandwidth_loss0.02]": {
+  "raw_modelled_s": 14.76,
+  "raw_measured_s": 14.69,
+  "raw_ratio": 1.0,
+  "raw_p95_s": 15.99,
+  "small_p95_max_s": 1.5
+ },
+ "loss[low_bandwidth_loss0.05]": {
+  "raw_modelled_s": 16.99,
+  "raw_measured_s": 19.13,
+  "raw_ratio": 1.13,
+  "raw_p95_s": 23.26,
+  "small_p95_max_s": 1.41
+ },
+ "loss[low_bandwidth_loss0.1]": {
+  "raw_modelled_s": 21.03,
+  "raw_measured_s": 26.81,
+  "raw_ratio": 1.27,
+  "raw_p95_s": 28.75,
+  "small_p95_max_s": 2.16
+ },
+ "loss[normal_loss0]": {
+  "raw_modelled_s": 0.42,
+  "raw_measured_s": 0.5,
+  "raw_ratio": 1.18,
+  "raw_p95_s": 0.5,
+  "small_p95_max_s": 0.11
+ },
+ "loss[normal_loss0.01]": {
+  "raw_modelled_s": 0.99,
+  "raw_measured_s": 1.28,
+  "raw_ratio": 1.29,
+  "raw_p95_s": 1.82,
+  "small_p95_max_s": 0.13
+ },
+ "loss[normal_loss0.02]": {
+  "raw_modelled_s": 1.57,
+  "raw_measured_s": 2.31,
+  "raw_ratio": 1.47,
+  "raw_p95_s": 2.89,
+  "small_p95_max_s": 0.39
+ },
+ "loss[normal_loss0.05]": {
+  "raw_modelled_s": 3.39,
+  "raw_measured_s": 3.41,
+  "raw_ratio": 1.01,
+  "raw_p95_s": 4.39,
+  "small_p95_max_s": 1.12
+ },
+ "loss[normal_loss0.1]": {
+  "raw_modelled_s": 6.68,
+  "raw_measured_s": 5.46,
+  "raw_ratio": 0.82,
+  "raw_p95_s": 6.09,
+  "small_p95_max_s": 1.2
+ },
+ "trace_vs_const[Verizon-LTE-short.up]": {
+  "trace_mean_s": 1.8,
+  "const_mean_s": 1.47,
+  "mean_ratio": 1.23,
+  "trace_p95_s": 2.18,
+  "const_p95_s": 1.48,
+  "p95_ratio": 1.48
+ },
+ "trace_vs_const[Verizon-LTE-driving.up]": {
+  "trace_mean_s": 1.9,
+  "const_mean_s": 1.49,
+  "mean_ratio": 1.28,
+  "trace_p95_s": 3.1,
+  "const_p95_s": 1.53,
+  "p95_ratio": 2.03
+ },
+ "trace_vs_const[TMobile-LTE-driving.up]": {
+  "trace_mean_s": 1.33,
+  "const_mean_s": 1.31,
+  "mean_ratio": 1.01,
+  "trace_p95_s": 1.37,
+  "const_p95_s": 1.34,
+  "p95_ratio": 1.02
+ },
+ "totals": {
+  "transfers": 2890,
+  "failed": 0,
+  "cells": 17
+ }
+}

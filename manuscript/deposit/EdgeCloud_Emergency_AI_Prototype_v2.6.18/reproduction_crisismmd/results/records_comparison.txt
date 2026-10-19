@@ -1,0 +1,39 @@
+digest package b3e96ca8ad854da8 | rerun 2ba9ac47a9a4f4a8 | byte-identical: False
+shape package (3526, 31) rerun (3526, 31) | same columns: True
+row alignment: {'both': 3526, 'left_only': 0, 'right_only': 0}
+column             kind      n_diff      max_abs    max_rel  n_close(1e-4)
+event_id           text           0                                       
+split              text           0                                       
+y                  numeric        0            0          0           3526
+hazard             text           0                                       
+obs_time_s         numeric        0            0          0           3526
+image_path         text           0                                       
+text_quality       numeric        0            0          0           3526
+image_quality      numeric        0            0          0           3526
+text_raw_bytes     numeric        0            0          0           3526
+image_raw_bytes    numeric        0            0          0           3526
+image_available    text           0                                       
+text_x0            numeric        0            0          0           3526
+text_x1            numeric        0            0          0           3526
+text_x2            numeric        0            0          0           3526
+text_x3            numeric        0            0          0           3526
+text_x4            numeric        0            0          0           3526
+text_x5            numeric        0            0          0           3526
+text_x6            numeric        0            0          0           3526
+text_x7            numeric        0            0          0           3526
+image_x0           numeric     3519       0.0251        0.5            215
+image_x1           numeric     3524       0.0444       11.6             92
+image_x2           numeric     3525       0.0403       32.3             81
+image_x3           numeric     3524       0.0499       2.33             58
+image_x4           numeric     3525       0.0619       18.5             94
+image_x5           numeric     3525        0.035       16.4             60
+image_x6           numeric     3524       0.0632         15             34
+image_x7           numeric     3525       0.0438   3.06e+03             45
+image_x8           numeric     3525       0.0786        104             38
+image_x9           numeric     3525        0.127       28.1             29
+columns byte-identical as text: 19 of 29
+rows package 3526 | rerun 3526 | same: True
+events package 7 | rerun 7 | same: True
+class_counts package {'0': 2212, '1': 839, '2': 475} | rerun {'0': 2212, '1': 839, '2': 475} | same: True
+per_event package {'california_wildfires': 531, 'hurricane_harvey': 892, 'hurricane_irma': 795, 'hurricane_maria': 862, 'iraq_iran_earthquake': 173, 'mexico_earthquake': 178, 'srilanka_floods': 95} | rerun {'california_wildfires': 531, 'hurricane_harvey': 892, 'hurricane_irma': 795, 'hurricane_maria': 862, 'iraq_iran_earthquake': 173, 'mexico_earthquake': 178, 'srilanka_floods': 95} | same: True
+images_resolved package 3526 | rerun 3526 | same: True

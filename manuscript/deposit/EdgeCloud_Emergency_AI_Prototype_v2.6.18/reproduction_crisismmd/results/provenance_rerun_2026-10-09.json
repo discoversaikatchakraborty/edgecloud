@@ -1,0 +1,50 @@
+{
+  "dataset": "CrisisMMD v2.0",
+  "cite": "F. Alam, F. Ofli, M. Imran, CrisisMMD: multimodal Twitter datasets from natural disasters, in: Proc. 12th Int. AAAI Conf. Web and Social Media, 2018.",
+  "source_url": "https://crisisnlp.qcri.org/data/crisismmd/CrisisMMD_v2.0.tar.gz",
+  "redistributed": false,
+  "label": "image_damage, three classes: severe_damage, mild_damage, little_or_no_damage",
+  "rows": 3526,
+  "events": 7,
+  "class_counts": {
+    "0": 2212,
+    "1": 839,
+    "2": 475
+  },
+  "per_event": {
+    "california_wildfires": 531,
+    "hurricane_harvey": 892,
+    "hurricane_irma": 795,
+    "hurricane_maria": 862,
+    "iraq_iran_earthquake": 173,
+    "mexico_earthquake": 178,
+    "srilanka_floods": 95
+  },
+  "split": {
+    "train": [
+      "hurricane_harvey",
+      "hurricane_maria",
+      "california_wildfires"
+    ],
+    "calibration": [
+      "mexico_earthquake",
+      "srilanka_floods"
+    ],
+    "test": [
+      "hurricane_irma",
+      "iraq_iran_earthquake"
+    ]
+  },
+  "encoder": "openai/clip-vit-base-patch32",
+  "text_representation": "CLIP text embedding reduced by PCA to 8 components, PCA fitted on training events only",
+  "arrival_times": "recovered from the Twitter snowflake identifier; real, not synthesised",
+  "image_representation": "CLIP image embedding reduced by PCA to 10 components, PCA fitted on training events only",
+  "payload_sizes": "real: image byte sizes are the files on disk, text byte sizes are the UTF-8 length of the tweet. Neither is assumed.",
+  "images_resolved": 3526,
+  "not_modelled": [
+    "no sensor modality exists in CrisisMMD; the workload has two modalities",
+    "no geolocation in the annotations; spatial admissibility degrades to event identity",
+    "no severity field independent of the label; severity is held constant"
+  ],
+  "records_sha256": "2ba9ac47a9a4f4a8e4d872c5df296e3a0bba80276cd6fd7118264fd8a4c21dc4"
+}

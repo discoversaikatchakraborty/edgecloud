@@ -1,0 +1,16 @@
+EdgeCloud Emergency AI Prototype v2.6.18
+
+Adds to v2.6.17, without changing any result file of v2.6.17:
+  v2.7/                     copy of the package core generalised to N classes with the switchable held-out
+                            predictive-contribution term (off reproduces every v2.6.17 number exactly), the
+                            published-task records and every v2.7 result (real data, rotations, published
+                            tasks, twenty-seed synthetic benchmark with the term off and on)
+  emulator/                 Mahimahi TCP transfer check (rerun item F): driver, transfer server and client,
+                            model comparison, 2,890-transfer log, per-cell summary, environment record
+  reproduction_crisismmd/   re-derivation of the CrisisMMD records from the source archive with a later
+                            encoder stack, and the Table III rerun on those records, with comparisons
+  established_tasks/        the two published CrisisMMD tasks (Ofli, Alam, Imran 2020) scored on the
+                            published agreed-label splits with this package's representation
+  CITATION.cff              authors and preferred citation completed
+  SHA256SUMS                extended to the added files
+Every value cited in the paper traces to a file in this release.
